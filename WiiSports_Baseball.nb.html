@@ -1828,15 +1828,19 @@ run in the editor is displayed.</p>
 <h2>Let’s load in the Data</h2>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyB0ZWFtX2RmID0gcmVhZC5jc3YoXCIvVXNlcnMvYnJ5YW5tb25nZXNlcnJhbm8vRG9jdW1lbnRzL0hXIGZvciBSL0JyeWFuJ3MgUHJvamVjdC9NZXRzL01ldHNfMjAxNV8yMDIzLmNzdlwiLCBoZWFkZXIgPSBGQUxTRSApXG4jIHRlYW1fZGYgPSByZWFkLmNzdihcIi9Vc2Vycy9icnlhbm1vbmdlc2VycmFuby9Eb2N1bWVudHMvSFcgZm9yIFIvQnJ5YW4ncyBQcm9qZWN0L0RvZGdlcnMvRG9kZ2Vyc18yMDE1XzIwMjMuY3N2XCIsIGhlYWRlciA9IEZBTFNFIClcbiMgdGVhbV9kZiA9IHJlYWQuY3N2KFwiL1VzZXJzL2JyeWFubW9uZ2VzZXJyYW5vL0RvY3VtZW50cy9IVyBmb3IgUi9CcnlhbidzIFByb2plY3QvWWFua2Vlcy9ZYW5rZWVzXzIwMTVfMjAyMy5jc3ZcIiwgaGVhZGVyID0gRkFMU0UgKVxudGVhbV9kZiA9IHJlYWQuY3N2KFwiL1VzZXJzL2JyeWFubW9uZ2VzZXJyYW5vL0RvY3VtZW50cy9IVyBmb3IgUi9CcnlhbidzIFByb2plY3QvR2lhbnRzL0dpYW50c18yMDE1XzIwMjMuY3N2XCIsIGhlYWRlciA9IEZBTFNFIClcbmBgYCJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyB0ZWFtX2RmID0gcmVhZC5jc3YoXCIvVXNlcnMvYnJ5YW5tb25nZXNlcnJhbm8vRG9jdW1lbnRzL0hXIGZvciBSL0JyeWFuJ3MgUHJvamVjdC9NZXRzL01ldHNfMjAxNV8yMDIzLmNzdlwiLCBoZWFkZXIgPSBGQUxTRSApXG4jIHRlYW1fZGYgPSByZWFkLmNzdihcIi9Vc2Vycy9icnlhbm1vbmdlc2VycmFuby9Eb2N1bWVudHMvSFcgZm9yIFIvQnJ5YW4ncyBQcm9qZWN0L0RvZGdlcnMvRG9kZ2Vyc18yMDE1XzIwMjMuY3N2XCIsIGhlYWRlciA9IEZBTFNFIClcbiMgdGVhbV9kZiA9IHJlYWQuY3N2KFwiL1VzZXJzL2JyeWFubW9uZ2VzZXJyYW5vL0RvY3VtZW50cy9IVyBmb3IgUi9CcnlhbidzIFByb2plY3QvWWFua2Vlcy9ZYW5rZWVzXzIwMTVfMjAyMy5jc3ZcIiwgaGVhZGVyID0gRkFMU0UgKVxudGVhbV9kZiA9IHJlYWQuY3N2KFwiL1VzZXJzL2JyeWFubW9uZ2VzZXJyYW5vL0RvY3VtZW50cy9IVyBmb3IgUi9CcnlhbidzIFByb2plY3QvR2lhbnRzL0dpYW50c18yMDE1XzIwMjMuY3N2XCIsIGhlYWRlciA9IEZBTFNFIClcbmNvbG5hbWVzKHRlYW1fZGYpIDwtIHJldHJvX3NoZWV0X2NvbHVtbl9uYW1lc1xudGVhbV9kZiA8LSB0ZWFtX2RmWy0xLF0gI1JCSU5EIEFERElUSU9OXG50ZWFtX2RmJG91dHMgPC0gYXMuaW50ZWdlcih0ZWFtX2RmJG91dHMpI1JCSU5EIEFERElUSU9OXG50ZWFtX2RmJGV2ZW50X3R5cGUgPC0gYXMuaW50ZWdlcih0ZWFtX2RmJGV2ZW50X3R5cGUpI1JCSU5EIEFERElUSU9OXG5cbnRvdGFsX2V2ZW50cyA9IG5yb3codGVhbV9kZikgXG5WaWV3KHRlYW1fZGYpXG5gYGAifQ== -->
 <pre class="r"><code># team_df = read.csv(&quot;/Users/bryanmongeserrano/Documents/HW for R/Bryan&#39;s Project/Mets/Mets_2015_2023.csv&quot;, header = FALSE )
 # team_df = read.csv(&quot;/Users/bryanmongeserrano/Documents/HW for R/Bryan&#39;s Project/Dodgers/Dodgers_2015_2023.csv&quot;, header = FALSE )
 # team_df = read.csv(&quot;/Users/bryanmongeserrano/Documents/HW for R/Bryan&#39;s Project/Yankees/Yankees_2015_2023.csv&quot;, header = FALSE )
-team_df = read.csv(&quot;/Users/bryanmongeserrano/Documents/HW for R/Bryan&#39;s Project/Giants/Giants_2015_2023.csv&quot;, header = FALSE )</code></pre>
+team_df = read.csv(&quot;/Users/bryanmongeserrano/Documents/HW for R/Bryan&#39;s Project/Giants/Giants_2015_2023.csv&quot;, header = FALSE )
+colnames(team_df) &lt;- retro_sheet_column_names
+team_df &lt;- team_df[-1,] #RBIND ADDITION
+team_df$outs &lt;- as.integer(team_df$outs)#RBIND ADDITION
+team_df$event_type &lt;- as.integer(team_df$event_type)#RBIND ADDITION
+
+total_events = nrow(team_df) 
+View(team_df)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiV2FybmluZzogY2Fubm90IG9wZW4gZmlsZSAnL1VzZXJzL2JyeWFubW9uZ2VzZXJyYW5vL0RvY3VtZW50cy9IVyBmb3IgUi9CcnlhbidzIFByb2plY3QvR2lhbnRzL0dpYW50c18yMDE1XzIwMjMuY3N2JzogTm8gc3VjaCBmaWxlIG9yIGRpcmVjdG9yeUVycm9yIGluIGZpbGUoZmlsZSwgXCJydFwiKSA6IGNhbm5vdCBvcGVuIHRoZSBjb25uZWN0aW9uXG4ifQ== -->
-<pre><code>Warning: cannot open file &#39;/Users/bryanmongeserrano/Documents/HW for R/Bryan&#39;s Project/Giants/Giants_2015_2023.csv&#39;: No such file or directoryError in file(file, &quot;rt&quot;) : cannot open the connection</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
@@ -1844,10 +1848,31 @@ team_df = read.csv(&quot;/Users/bryanmongeserrano/Documents/HW for R/Bryan&#39;s
 <h2>Let’s Add in Our Assumptions:</h2>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBSZW1vdmUgQWxsIERvdWJsZSBQbGF5cyBhbmQgVHJpcGxlIFBsYXlzXG50ZWFtX2RmID0gdGVhbV9kZlt0ZWFtX2RmJG91dHNfb25fcGxheSA8IDIsXVxuIyBPbmx5IEhhdmUgV2Fsa3MsIFNpbmdsZSwgRG91YmxlcywgVHJpcGxlcywgYW5kIEhvbWVydW5zLCBHZW5lcmFsIE91dHMsIFN0cmlrZW91dHNcbnRlYW1fZGYgPC0gc3Vic2V0KHRlYW1fZGYsIHRlYW1fZGYkZXZlbnRfdHlwZSA9PSAyIHwgdGVhbV9kZiRldmVudF90eXBlID09IDMgfCB0ZWFtX2RmJGV2ZW50X3R5cGUgPT0gMTQgXG4gICAgICAgICAgICAgICAgICAgICAgIHwgdGVhbV9kZiRldmVudF90eXBlID09IDIwIHwgdGVhbV9kZiRldmVudF90eXBlID09IDIxIHwgdGVhbV9kZiRldmVudF90eXBlID09IDIyXG4gICAgICAgICAgICAgICAgICAgICAgIHwgdGVhbV9kZiRldmVudF90eXBlID09IDIzKVxuYGBgIn0= -->
+<pre class="r"><code># Remove All Double Plays and Triple Plays
+team_df = team_df[team_df$outs_on_play &lt; 2,]
+# Only Have Walks, Single, Doubles, Triples, and Homeruns, General Outs, Strikeouts
+team_df &lt;- subset(team_df, team_df$event_type == 2 | team_df$event_type == 3 | team_df$event_type == 14 
+                       | team_df$event_type == 20 | team_df$event_type == 21 | team_df$event_type == 22
+                       | team_df$event_type == 23)</code></pre>
+<!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBDYWxjdWxhdGUgVGhlIFRvdGFsIE51bWJlciBvZiBIb21lcnVuc1xudG90YWxfaHJzID0gMFxuZm9yIChpIGluIDE6bnJvdyh0ZWFtX2RmKSkge1xuICBpZiAodGVhbV9kZiRldmVudF90eXBlW2ldID09IDIzKSB7XG4gICAgdG90YWxfaHJzIDwtIHRvdGFsX2hycyArIDFcbiAgfVxufVxudG90YWxfaHJzXG5gYGAifQ== -->
+<pre class="r"><code># Calculate The Total Number of Homeruns
+total_hrs = 0
+for (i in 1:nrow(team_df)) {
+  if (team_df$event_type[i] == 23) {
+    total_hrs &lt;- total_hrs + 1
+  }
+}
+total_hrs</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDExODJcbiJ9 -->
+<pre><code>[1] 1182</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
@@ -1856,6 +1881,10 @@ team_df = read.csv(&quot;/Users/bryanmongeserrano/Documents/HW for R/Bryan&#39;s
 denominator</h2>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudG90YWxfZXZlbnRzID0gbnJvdyh0ZWFtX2RmKVxudG90YWxfZXZlbnRzXG5gYGAifQ== -->
+<pre class="r"><code>total_events = nrow(team_df)
+total_events</code></pre>
+<!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
@@ -1863,6 +1892,67 @@ denominator</h2>
 <h2>Let’s Set Up the Wii Sports Baseball Matrix</h2>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBCZWZvcmVcbiMgYmFzZWJhbGxfbWF0cml4PC0gbWF0cml4KDAsIG5yb3cgPSAyNSwgbmNvbCA9IDI1KVxuIyBBZnRlclxuYmFzZWJhbGxfbWF0cml4PC0gbWF0cml4KDAsIG5yb3cgPSAyNSwgbmNvbCA9IDI1KVxuYmFzZWJhbGxfbWF0cml4XG5gYGAifQ== -->
+<pre class="r"><code># Before
+# baseball_matrix&lt;- matrix(0, nrow = 25, ncol = 25)
+# After
+baseball_matrix&lt;- matrix(0, nrow = 25, ncol = 25)
+baseball_matrix</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiICAgICAgWywxXSBbLDJdIFssM10gWyw0XSBbLDVdIFssNl0gWyw3XSBbLDhdIFssOV0gWywxMF0gWywxMV0gWywxMl0gWywxM10gWywxNF0gWywxNV0gWywxNl0gWywxN10gWywxOF1cbiBbMSxdICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwXG4gWzIsXSAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMFxuIFszLF0gICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDBcbiBbNCxdICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwXG4gWzUsXSAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMFxuIFs2LF0gICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDBcbiBbNyxdICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwXG4gWzgsXSAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMFxuIFs5LF0gICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDBcblsxMCxdICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwXG5bMTEsXSAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMFxuWzEyLF0gICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDBcblsxMyxdICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwXG5bMTQsXSAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMFxuWzE1LF0gICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDBcblsxNixdICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwXG5bMTcsXSAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMFxuWzE4LF0gICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDBcblsxOSxdICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwXG5bMjAsXSAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMFxuWzIxLF0gICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDBcblsyMixdICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwXG5bMjMsXSAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMFxuWzI0LF0gICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDBcblsyNSxdICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwXG4gICAgICBbLDE5XSBbLDIwXSBbLDIxXSBbLDIyXSBbLDIzXSBbLDI0XSBbLDI1XVxuIFsxLF0gICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDBcbiBbMixdICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwXG4gWzMsXSAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMFxuIFs0LF0gICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDBcbiBbNSxdICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwXG4gWzYsXSAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMFxuIFs3LF0gICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDBcbiBbOCxdICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwXG4gWzksXSAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMFxuWzEwLF0gICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDBcblsxMSxdICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwXG5bMTIsXSAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMFxuWzEzLF0gICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDBcblsxNCxdICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwXG5bMTUsXSAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMFxuWzE2LF0gICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDBcblsxNyxdICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwXG5bMTgsXSAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMFxuWzE5LF0gICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDBcblsyMCxdICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwXG5bMjEsXSAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMFxuWzIyLF0gICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDBcblsyMyxdICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwXG5bMjQsXSAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMFxuWzI1LF0gICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDBcbiJ9 -->
+<pre><code>      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10] [,11] [,12] [,13] [,14] [,15] [,16] [,17] [,18]
+ [1,]    0    0    0    0    0    0    0    0    0     0     0     0     0     0     0     0     0     0
+ [2,]    0    0    0    0    0    0    0    0    0     0     0     0     0     0     0     0     0     0
+ [3,]    0    0    0    0    0    0    0    0    0     0     0     0     0     0     0     0     0     0
+ [4,]    0    0    0    0    0    0    0    0    0     0     0     0     0     0     0     0     0     0
+ [5,]    0    0    0    0    0    0    0    0    0     0     0     0     0     0     0     0     0     0
+ [6,]    0    0    0    0    0    0    0    0    0     0     0     0     0     0     0     0     0     0
+ [7,]    0    0    0    0    0    0    0    0    0     0     0     0     0     0     0     0     0     0
+ [8,]    0    0    0    0    0    0    0    0    0     0     0     0     0     0     0     0     0     0
+ [9,]    0    0    0    0    0    0    0    0    0     0     0     0     0     0     0     0     0     0
+[10,]    0    0    0    0    0    0    0    0    0     0     0     0     0     0     0     0     0     0
+[11,]    0    0    0    0    0    0    0    0    0     0     0     0     0     0     0     0     0     0
+[12,]    0    0    0    0    0    0    0    0    0     0     0     0     0     0     0     0     0     0
+[13,]    0    0    0    0    0    0    0    0    0     0     0     0     0     0     0     0     0     0
+[14,]    0    0    0    0    0    0    0    0    0     0     0     0     0     0     0     0     0     0
+[15,]    0    0    0    0    0    0    0    0    0     0     0     0     0     0     0     0     0     0
+[16,]    0    0    0    0    0    0    0    0    0     0     0     0     0     0     0     0     0     0
+[17,]    0    0    0    0    0    0    0    0    0     0     0     0     0     0     0     0     0     0
+[18,]    0    0    0    0    0    0    0    0    0     0     0     0     0     0     0     0     0     0
+[19,]    0    0    0    0    0    0    0    0    0     0     0     0     0     0     0     0     0     0
+[20,]    0    0    0    0    0    0    0    0    0     0     0     0     0     0     0     0     0     0
+[21,]    0    0    0    0    0    0    0    0    0     0     0     0     0     0     0     0     0     0
+[22,]    0    0    0    0    0    0    0    0    0     0     0     0     0     0     0     0     0     0
+[23,]    0    0    0    0    0    0    0    0    0     0     0     0     0     0     0     0     0     0
+[24,]    0    0    0    0    0    0    0    0    0     0     0     0     0     0     0     0     0     0
+[25,]    0    0    0    0    0    0    0    0    0     0     0     0     0     0     0     0     0     0
+      [,19] [,20] [,21] [,22] [,23] [,24] [,25]
+ [1,]     0     0     0     0     0     0     0
+ [2,]     0     0     0     0     0     0     0
+ [3,]     0     0     0     0     0     0     0
+ [4,]     0     0     0     0     0     0     0
+ [5,]     0     0     0     0     0     0     0
+ [6,]     0     0     0     0     0     0     0
+ [7,]     0     0     0     0     0     0     0
+ [8,]     0     0     0     0     0     0     0
+ [9,]     0     0     0     0     0     0     0
+[10,]     0     0     0     0     0     0     0
+[11,]     0     0     0     0     0     0     0
+[12,]     0     0     0     0     0     0     0
+[13,]     0     0     0     0     0     0     0
+[14,]     0     0     0     0     0     0     0
+[15,]     0     0     0     0     0     0     0
+[16,]     0     0     0     0     0     0     0
+[17,]     0     0     0     0     0     0     0
+[18,]     0     0     0     0     0     0     0
+[19,]     0     0     0     0     0     0     0
+[20,]     0     0     0     0     0     0     0
+[21,]     0     0     0     0     0     0     0
+[22,]     0     0     0     0     0     0     0
+[23,]     0     0     0     0     0     0     0
+[24,]     0     0     0     0     0     0     0
+[25,]     0     0     0     0     0     0     0</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
@@ -1875,6 +1965,44 @@ through the dataframe on the next cell. This function will handle all
 the events where there are no runners on base</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubm9fcnVubmVyc19vbiA8LSBmdW5jdGlvbihvdXRzLCBldmVudCwgb3V0c19vbl9wbGF5KSB7XG4gICMgRXZlbnQgRm9yIEhvbWVydW5cbiAgZnJvbV9pbmRleCA9IDEgKyAoOCAqIG91dHMpXG4gICMgRXZlbnQgRm9yIFNpbmdsZVxuICBpZiAoZXZlbnQgPT0gMjAgfHwgZXZlbnQgPT0gMTQpIHtcbiAgICByZXR1cm4gKGMoZnJvbV9pbmRleCwgZnJvbV9pbmRleCArIDEpKVxuICB9XG4gICMgRXZlbnQgRm9yIERvdWJsZVxuICBpZiAoZXZlbnQgPT0gMjEpIHtcbiAgICByZXR1cm4gKGMoZnJvbV9pbmRleCwgZnJvbV9pbmRleCArIDIpKVxuICB9XG4gICMgRXZlbnQgRm9yIFRyaXBsZVxuICBpZiAoZXZlbnQgPT0gMjIpIHtcbiAgICByZXR1cm4gKGMoZnJvbV9pbmRleCwgZnJvbV9pbmRleCArIDMpKVxuICB9XG4gICMgRXZlbnQgRm9yIEhvbWVydW5cbiAgaWYgKGV2ZW50ID09IDIzKSB7XG4gICAgcmV0dXJuIChjKGZyb21faW5kZXgsIGZyb21faW5kZXgpKVxuICB9XG4gICMgMCBPdXRzIC0+IDEgT3V0XG4gIGlmIChldmVudCA9PSAyIHx8IGV2ZW50ID09IDMgJiYgb3V0cyA9PSAwICYmIG91dHNfb25fcGxheSA9PSAxKSB7XG4gICAgcmV0dXJuKGMoZnJvbV9pbmRleCwgZnJvbV9pbmRleCArIDgpKVxuICB9XG4gICMgMSBPdXQgLT4gMiBPdXRzXG4gIGlmIChldmVudCA9PSAyIHx8IGV2ZW50ID09IDMgJiYgb3V0cyA9PSAxICYmIG91dHNfb25fcGxheSA9PSAxKSB7XG4gICAgcmV0dXJuKGMoZnJvbV9pbmRleCwgZnJvbV9pbmRleCArIDgpKVxuICB9XG4gICAgIyBXaWxsIEhhbmRsZSAyIE91dHMgLT4gMyBPdXRzIExhdGVyICB7V09VTEQgIFJFQ0NPTUVORCBQVVRUSU5HIFRIRSAyIE9VVFMgLT4gMyBPVVRTIFNUQVRFTUVOVCBBQk9WRX1cbiAgIyAyIE91dHMgLT4gMyBPdXRzXG4gIGlmICgoZXZlbnQgPT0gMiB8fCBldmVudCA9PSAzKSAmJiBvdXRzID09IDIgJiYgb3V0c19vbl9wbGF5ID09IDEpIHtcbiAgICByZXR1cm4oYygxNywgMjUpKVxuICB9XG5cbiAgI0VkZ2UgQ2FzZSAtPiBUaGVyZSBhcmUgT3V0c19vbl9QbGF5ID0gMCBKdXN0IFJldHVybiBbMCwgMF1cbiAgcmV0dXJuKGMoMCwgMCkpXG59XG5gYGAifQ== -->
+<pre class="r"><code>no_runners_on &lt;- function(outs, event, outs_on_play) {
+  # Event For Homerun
+  from_index = 1 + (8 * outs)
+  # Event For Single
+  if (event == 20 || event == 14) {
+    return (c(from_index, from_index + 1))
+  }
+  # Event For Double
+  if (event == 21) {
+    return (c(from_index, from_index + 2))
+  }
+  # Event For Triple
+  if (event == 22) {
+    return (c(from_index, from_index + 3))
+  }
+  # Event For Homerun
+  if (event == 23) {
+    return (c(from_index, from_index))
+  }
+  # 0 Outs -&gt; 1 Out
+  if (event == 2 || event == 3 &amp;&amp; outs == 0 &amp;&amp; outs_on_play == 1) {
+    return(c(from_index, from_index + 8))
+  }
+  # 1 Out -&gt; 2 Outs
+  if (event == 2 || event == 3 &amp;&amp; outs == 1 &amp;&amp; outs_on_play == 1) {
+    return(c(from_index, from_index + 8))
+  }
+    # Will Handle 2 Outs -&gt; 3 Outs Later  {WOULD  RECCOMEND PUTTING THE 2 OUTS -&gt; 3 OUTS STATEMENT ABOVE}
+  # 2 Outs -&gt; 3 Outs
+  if ((event == 2 || event == 3) &amp;&amp; outs == 2 &amp;&amp; outs_on_play == 1) {
+    return(c(17, 25))
+  }
+
+  #Edge Case -&gt; There are Outs_on_Play = 0 Just Return [0, 0]
+  return(c(0, 0))
+}</code></pre>
+<!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>This function will return a list that will contain the row and col
@@ -1883,6 +2011,43 @@ iterating through the dataframe on the next cell. This function will
 handle all the events where there are runners on first base</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucnVubmVyX29uX2ZpcnN0IDwtIGZ1bmN0aW9uKG91dHMsIGV2ZW50LCBvdXRzX29uX3BsYXkpIHtcbiAgIyBFdmVudCBGb3IgSG9tZXJ1blxuICBmcm9tX2luZGV4ID0gMiArICg4ICogb3V0cylcbiAgIyBFdmVudCBGb3IgU2luZ2xlXG4gIGlmIChldmVudCA9PSAyMCB8fCBldmVudCA9PSAxNCkge1xuICAgIHJldHVybiAoYyhmcm9tX2luZGV4LCBmcm9tX2luZGV4ICsgMykpXG4gIH1cbiAgIyBFdmVudCBGb3IgRG91YmxlXG4gIGlmIChldmVudCA9PSAyMSkge1xuICAgIHJldHVybiAoYyhmcm9tX2luZGV4LCBmcm9tX2luZGV4ICsgNSkpXG4gIH1cbiAgIyBFdmVudCBGb3IgVHJpcGxlXG4gIGlmIChldmVudCA9PSAyMikge1xuICAgIHJldHVybiAoYyhmcm9tX2luZGV4LCBmcm9tX2luZGV4ICsgMikpXG4gIH1cbiAgIyBFdmVudCBGb3IgSG9tZXJ1blxuICBpZiAoZXZlbnQgPT0gMjMpIHtcbiAgICByZXR1cm4gKGMoZnJvbV9pbmRleCwgZnJvbV9pbmRleCAtIDEpKVxuICB9XG4gICMgMCBPdXRzIC0+IDEgT3V0XG4gIGlmIChldmVudCA9PSAyIHx8IGV2ZW50ID09IDMgJiYgb3V0cyA9PSAwICYmIG91dHNfb25fcGxheSA9PSAxKSB7XG4gICAgcmV0dXJuKGMoZnJvbV9pbmRleCwgZnJvbV9pbmRleCArIDgpKVxuICB9XG4gICMgMSBPdXQgLT4gMiBPdXRzXG4gIGlmIChldmVudCA9PSAyIHx8IGV2ZW50ID09IDMgJiYgb3V0cyA9PSAxICYmIG91dHNfb25fcGxheSA9PSAxKSB7XG4gICAgcmV0dXJuKGMoZnJvbV9pbmRleCwgZnJvbV9pbmRleCArIDgpKVxuICB9XG4gICMgV2lsbCBIYW5kbGUgMiBPdXRzIC0+IDMgT3V0cyBMYXRlciAge1dPVUxEICBSRUNDT01FTkQgUFVUVElORyBUSEUgMiBPVVRTIC0+IDMgT1VUUyBTVEFURU1FTlQgQUJPVkV9XG4gICMgMiBPdXRzIC0+IDMgT3V0c1xuICBpZiAoKGV2ZW50ID09IDIgfHwgZXZlbnQgPT0gMykgJiYgb3V0cyA9PSAyICYmIG91dHNfb25fcGxheSA9PSAxKSB7XG4gICAgcmV0dXJuKGMoMTgsIDI1KSlcbiAgfVxuICAjRWRnZSBDYXNlIC0+IFRoZXJlIGFyZSBPdXRzX29uX1BsYXkgPSAwIEp1c3QgUmV0dXJuIFswLCAwXVxuICByZXR1cm4oYygwLCAwKSlcbn1cbmBgYCJ9 -->
+<pre class="r"><code>runner_on_first &lt;- function(outs, event, outs_on_play) {
+  # Event For Homerun
+  from_index = 2 + (8 * outs)
+  # Event For Single
+  if (event == 20 || event == 14) {
+    return (c(from_index, from_index + 3))
+  }
+  # Event For Double
+  if (event == 21) {
+    return (c(from_index, from_index + 5))
+  }
+  # Event For Triple
+  if (event == 22) {
+    return (c(from_index, from_index + 2))
+  }
+  # Event For Homerun
+  if (event == 23) {
+    return (c(from_index, from_index - 1))
+  }
+  # 0 Outs -&gt; 1 Out
+  if (event == 2 || event == 3 &amp;&amp; outs == 0 &amp;&amp; outs_on_play == 1) {
+    return(c(from_index, from_index + 8))
+  }
+  # 1 Out -&gt; 2 Outs
+  if (event == 2 || event == 3 &amp;&amp; outs == 1 &amp;&amp; outs_on_play == 1) {
+    return(c(from_index, from_index + 8))
+  }
+  # Will Handle 2 Outs -&gt; 3 Outs Later  {WOULD  RECCOMEND PUTTING THE 2 OUTS -&gt; 3 OUTS STATEMENT ABOVE}
+  # 2 Outs -&gt; 3 Outs
+  if ((event == 2 || event == 3) &amp;&amp; outs == 2 &amp;&amp; outs_on_play == 1) {
+    return(c(18, 25))
+  }
+  #Edge Case -&gt; There are Outs_on_Play = 0 Just Return [0, 0]
+  return(c(0, 0))
+}</code></pre>
+<!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>This function will return a list that will contain the row and col
@@ -1891,6 +2056,42 @@ iterating through the dataframe on the next cell. This function will
 handle all the events where there are runners on second base</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucnVubmVyX29uX3NlY29uZCA8LSBmdW5jdGlvbihvdXRzLCBldmVudCwgb3V0c19vbl9wbGF5KSB7XG4gIGZyb21faW5kZXggPSAzICsgKDggKiBvdXRzKVxuICAjIEV2ZW50IEZvciBTaW5nbGVcbiAgaWYgKGV2ZW50ID09IDIwIHx8IGV2ZW50ID09IDE0KSB7XG4gICAgcmV0dXJuIChjKGZyb21faW5kZXgsIGZyb21faW5kZXggKyAyKSlcbiAgfVxuICAjIEV2ZW50IEZvciBEb3VibGVcbiAgaWYgKGV2ZW50ID09IDIxKSB7XG4gICAgcmV0dXJuIChjKGZyb21faW5kZXgsIGZyb21faW5kZXgpKVxuICB9XG4gICMgRXZlbnQgRm9yIFRyaXBsZVxuICBpZiAoZXZlbnQgPT0gMjIpIHtcbiAgICByZXR1cm4gKGMoZnJvbV9pbmRleCwgZnJvbV9pbmRleCArIDEpKVxuICB9XG4gICMgRXZlbnQgRm9yIEhvbWVydW5cbiAgaWYgKGV2ZW50ID09IDIzKSB7XG4gICAgcmV0dXJuIChjKGZyb21faW5kZXgsIGZyb21faW5kZXggLSAyKSlcbiAgfVxuICAjIDAgT3V0cyAtPiAxIE91dFxuICBpZiAoZXZlbnQgPT0gMiB8fCBldmVudCA9PSAzICYmIG91dHMgPT0gMCAmJiBvdXRzX29uX3BsYXkgPT0gMSkge1xuICAgIHJldHVybihjKGZyb21faW5kZXgsIGZyb21faW5kZXggKyA4KSlcbiAgfVxuICAjIDEgT3V0IC0+IDIgT3V0c1xuICBpZiAoZXZlbnQgPT0gMiB8fCBldmVudCA9PSAzICYmIG91dHMgPT0gMSAmJiBvdXRzX29uX3BsYXkgPT0gMSkge1xuICAgIHJldHVybihjKGZyb21faW5kZXgsIGZyb21faW5kZXggKyA4KSlcbiAgfVxuICAjIFdpbGwgSGFuZGxlIDIgT3V0cyAtPiAzIE91dHMgTGF0ZXIgIHtXT1VMRCAgUkVDQ09NRU5EIFBVVFRJTkcgVEhFIDIgT1VUUyAtPiAzIE9VVFMgU1RBVEVNRU5UIEFCT1ZFfVxuICAjIDIgT3V0cyAtPiAzIE91dHNcbiAgaWYgKChldmVudCA9PSAyIHx8IGV2ZW50ID09IDMpICYmIG91dHMgPT0gMiAmJiBvdXRzX29uX3BsYXkgPT0gMSkge1xuICAgIHJldHVybihjKDE5LCAyNSkpXG4gIH1cbiAgI0VkZ2UgQ2FzZSAtPiBUaGVyZSBhcmUgT3V0c19vbl9QbGF5ID0gMCBKdXN0IFJldHVybiBbMCwgMF1cbiAgcmV0dXJuKGMoMCwgMCkpXG59XG5gYGAifQ== -->
+<pre class="r"><code>runner_on_second &lt;- function(outs, event, outs_on_play) {
+  from_index = 3 + (8 * outs)
+  # Event For Single
+  if (event == 20 || event == 14) {
+    return (c(from_index, from_index + 2))
+  }
+  # Event For Double
+  if (event == 21) {
+    return (c(from_index, from_index))
+  }
+  # Event For Triple
+  if (event == 22) {
+    return (c(from_index, from_index + 1))
+  }
+  # Event For Homerun
+  if (event == 23) {
+    return (c(from_index, from_index - 2))
+  }
+  # 0 Outs -&gt; 1 Out
+  if (event == 2 || event == 3 &amp;&amp; outs == 0 &amp;&amp; outs_on_play == 1) {
+    return(c(from_index, from_index + 8))
+  }
+  # 1 Out -&gt; 2 Outs
+  if (event == 2 || event == 3 &amp;&amp; outs == 1 &amp;&amp; outs_on_play == 1) {
+    return(c(from_index, from_index + 8))
+  }
+  # Will Handle 2 Outs -&gt; 3 Outs Later  {WOULD  RECCOMEND PUTTING THE 2 OUTS -&gt; 3 OUTS STATEMENT ABOVE}
+  # 2 Outs -&gt; 3 Outs
+  if ((event == 2 || event == 3) &amp;&amp; outs == 2 &amp;&amp; outs_on_play == 1) {
+    return(c(19, 25))
+  }
+  #Edge Case -&gt; There are Outs_on_Play = 0 Just Return [0, 0]
+  return(c(0, 0))
+}</code></pre>
+<!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>This function will return a list that will contain the row and col
@@ -1899,6 +2100,47 @@ iterating through the dataframe on the next cell. This function will
 handle all the events where there are runners on third base</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucnVubmVyX29uX3RoaXJkIDwtIGZ1bmN0aW9uKG91dHMsIGV2ZW50LCBvdXRzX29uX3BsYXkpIHtcbiAgZnJvbV9pbmRleCA9IDQgKyAoOCAqIG91dHMpXG4gICMgRXZlbnQgRm9yIGEgV2Fsa1xuICBpZiAoZXZlbnQgPT0gMTQpIHtcbiAgICByZXR1cm4gKGMoZnJvbV9pbmRleCwgZnJvbV9pbmRleCArIDIpKVxuICB9XG4gICMgRXZlbnQgRm9yIGEgU2luZ2xlXG4gIGlmIChldmVudCA9PSAyMCkge1xuICAgIHJldHVybiAoYyhmcm9tX2luZGV4LCBmcm9tX2luZGV4IC0gMikpXG4gIH1cblxuICAjIEV2ZW50IEZvciBEb3VibGVcbiAgaWYgKGV2ZW50ID09IDIxKSB7XG4gICAgcmV0dXJuIChjKGZyb21faW5kZXgsIGZyb21faW5kZXggLSAxKSlcbiAgfVxuICAjIEV2ZW50IEZvciBUcmlwbGVcbiAgaWYgKGV2ZW50ID09IDIyKSB7XG4gICAgcmV0dXJuIChjKGZyb21faW5kZXgsIGZyb21faW5kZXgpKVxuICB9XG4gICMgRXZlbnQgRm9yIEhvbWVydW5cbiAgaWYgKGV2ZW50ID09IDIzKSB7XG4gICAgcmV0dXJuIChjKGZyb21faW5kZXgsIGZyb21faW5kZXggLSAzKSlcbiAgfVxuICAjIDAgT3V0cyAtPiAxIE91dFxuICBpZiAoZXZlbnQgPT0gMiB8fCBldmVudCA9PSAzICYmIG91dHMgPT0gMCAmJiBvdXRzX29uX3BsYXkgPT0gMSkge1xuICAgIHJldHVybihjKGZyb21faW5kZXgsIGZyb21faW5kZXggKyA4KSlcbiAgfVxuICAjIDEgT3V0IC0+IDIgT3V0c1xuICBpZiAoZXZlbnQgPT0gMiB8fCBldmVudCA9PSAzICYmIG91dHMgPT0gMSAmJiBvdXRzX29uX3BsYXkgPT0gMSkge1xuICAgIHJldHVybihjKGZyb21faW5kZXgsIGZyb21faW5kZXggKyA4KSlcbiAgfVxuICAjIFdpbGwgSGFuZGxlIDIgT3V0cyAtPiAzIE91dHMgTGF0ZXIgIHtXT1VMRCAgUkVDQ09NRU5EIFBVVFRJTkcgVEhFIDIgT1VUUyAtPiAzIE9VVFMgU1RBVEVNRU5UIEFCT1ZFfVxuICAjIDIgT3V0cyAtPiAzIE91dHNcbiAgaWYgKChldmVudCA9PSAyIHx8IGV2ZW50ID09IDMpICYmIG91dHMgPT0gMiAmJiBvdXRzX29uX3BsYXkgPT0gMSkge1xuICAgIHJldHVybihjKDIwLCAyNSkpXG4gIH1cbiAgI0VkZ2UgQ2FzZSAtPiBUaGVyZSBhcmUgT3V0c19vbl9QbGF5ID0gMCBKdXN0IFJldHVybiBbMCwgMF1cbiAgcmV0dXJuKGMoMCwgMCkpXG59XG5gYGAifQ== -->
+<pre class="r"><code>runner_on_third &lt;- function(outs, event, outs_on_play) {
+  from_index = 4 + (8 * outs)
+  # Event For a Walk
+  if (event == 14) {
+    return (c(from_index, from_index + 2))
+  }
+  # Event For a Single
+  if (event == 20) {
+    return (c(from_index, from_index - 2))
+  }
+
+  # Event For Double
+  if (event == 21) {
+    return (c(from_index, from_index - 1))
+  }
+  # Event For Triple
+  if (event == 22) {
+    return (c(from_index, from_index))
+  }
+  # Event For Homerun
+  if (event == 23) {
+    return (c(from_index, from_index - 3))
+  }
+  # 0 Outs -&gt; 1 Out
+  if (event == 2 || event == 3 &amp;&amp; outs == 0 &amp;&amp; outs_on_play == 1) {
+    return(c(from_index, from_index + 8))
+  }
+  # 1 Out -&gt; 2 Outs
+  if (event == 2 || event == 3 &amp;&amp; outs == 1 &amp;&amp; outs_on_play == 1) {
+    return(c(from_index, from_index + 8))
+  }
+  # Will Handle 2 Outs -&gt; 3 Outs Later  {WOULD  RECCOMEND PUTTING THE 2 OUTS -&gt; 3 OUTS STATEMENT ABOVE}
+  # 2 Outs -&gt; 3 Outs
+  if ((event == 2 || event == 3) &amp;&amp; outs == 2 &amp;&amp; outs_on_play == 1) {
+    return(c(20, 25))
+  }
+  #Edge Case -&gt; There are Outs_on_Play = 0 Just Return [0, 0]
+  return(c(0, 0))
+}</code></pre>
+<!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>This function will return a list that will contain the row and col
@@ -1908,6 +2150,45 @@ handle all the events where there are runners on first and second
 base</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucnVubmVyX29uX2ZpcnN0X3NlY29uZCA8LSBmdW5jdGlvbihvdXRzLCBldmVudCwgb3V0c19vbl9wbGF5KSB7XG4gICMgRXZlbnQgRm9yIEhvbWVydW5cbiAgZnJvbV9pbmRleCA9IDUgKyAoOCAqIG91dHMpXG4gICMgRXZlbnQgRm9yIFNpbmdsZVxuICBpZiAoZXZlbnQgPT0gMjAgfHwgZXZlbnQgPT0gMTQpIHtcbiAgICByZXR1cm4gKGMoZnJvbV9pbmRleCwgZnJvbV9pbmRleCArIDMpKVxuICB9XG4gICMgRXZlbnQgRm9yIERvdWJsZVxuICBpZiAoZXZlbnQgPT0gMjEpIHtcbiAgICByZXR1cm4gKGMoZnJvbV9pbmRleCwgZnJvbV9pbmRleCArIDIpKVxuICB9XG4gICMgRXZlbnQgRm9yIFRyaXBsZVxuICBpZiAoZXZlbnQgPT0gMjIpIHtcbiAgICByZXR1cm4gKGMoZnJvbV9pbmRleCwgZnJvbV9pbmRleCAtIDEpKVxuICB9XG4gICMgRXZlbnQgRm9yIEhvbWVydW5cbiAgaWYgKGV2ZW50ID09IDIzKSB7XG4gICAgcmV0dXJuIChjKGZyb21faW5kZXgsIGZyb21faW5kZXggLSA0KSlcbiAgfVxuICAjIEkgUkVDQ09NRU5EIElUIEhFUkUhXG4gICMgMCBPdXRzIC0+IDEgT3V0XG4gIGlmICgoZXZlbnQgPT0gMiB8fCBldmVudCA9PSAzKSAmJiBvdXRzID09IDAgJiYgb3V0c19vbl9wbGF5ID09IDEpIHtcbiAgICByZXR1cm4oYyhmcm9tX2luZGV4LCBmcm9tX2luZGV4ICsgOCkpXG4gIH1cbiAgIyAxIE91dHMgLT4gMiBPdXRzXG4gIGlmICgoZXZlbnQgPT0gMiB8fCBldmVudCA9PSAzKSAmJiBvdXRzID09IDEgJiYgb3V0c19vbl9wbGF5ID09IDEpIHtcbiAgICByZXR1cm4oYyhmcm9tX2luZGV4LCBmcm9tX2luZGV4ICsgOCkpXG4gIH1cbiAgXG4gICMgV2lsbCBIYW5kbGUgMiBPdXRzIC0+IDMgT3V0cyBMYXRlciAge1dPVUxEICBSRUNDT01FTkQgUFVUVElORyBUSEUgMiBPVVRTIC0+IDMgT1VUUyBTVEFURU1FTlQgQUJPVkV9XG4gICMgMiBPdXRzIC0+IDMgT3V0c1xuICBpZiAoKGV2ZW50ID09IDIgfHwgZXZlbnQgPT0gMykgJiYgb3V0cyA9PSAyICYmIG91dHNfb25fcGxheSA9PSAxKSB7XG4gICAgcmV0dXJuKGMoMjEsIDI1KSlcbiAgfVxuICAjRWRnZSBDYXNlIC0+IFRoZXJlIGFyZSBPdXRzX29uX1BsYXkgPSAwIEp1c3QgUmV0dXJuIFswLCAwXVxuICByZXR1cm4oYygwLCAwKSlcbn1cbmBgYCJ9 -->
+<pre class="r"><code>runner_on_first_second &lt;- function(outs, event, outs_on_play) {
+  # Event For Homerun
+  from_index = 5 + (8 * outs)
+  # Event For Single
+  if (event == 20 || event == 14) {
+    return (c(from_index, from_index + 3))
+  }
+  # Event For Double
+  if (event == 21) {
+    return (c(from_index, from_index + 2))
+  }
+  # Event For Triple
+  if (event == 22) {
+    return (c(from_index, from_index - 1))
+  }
+  # Event For Homerun
+  if (event == 23) {
+    return (c(from_index, from_index - 4))
+  }
+  # I RECCOMEND IT HERE!
+  # 0 Outs -&gt; 1 Out
+  if ((event == 2 || event == 3) &amp;&amp; outs == 0 &amp;&amp; outs_on_play == 1) {
+    return(c(from_index, from_index + 8))
+  }
+  # 1 Outs -&gt; 2 Outs
+  if ((event == 2 || event == 3) &amp;&amp; outs == 1 &amp;&amp; outs_on_play == 1) {
+    return(c(from_index, from_index + 8))
+  }
+  
+  # Will Handle 2 Outs -&gt; 3 Outs Later  {WOULD  RECCOMEND PUTTING THE 2 OUTS -&gt; 3 OUTS STATEMENT ABOVE}
+  # 2 Outs -&gt; 3 Outs
+  if ((event == 2 || event == 3) &amp;&amp; outs == 2 &amp;&amp; outs_on_play == 1) {
+    return(c(21, 25))
+  }
+  #Edge Case -&gt; There are Outs_on_Play = 0 Just Return [0, 0]
+  return(c(0, 0))
+}</code></pre>
+<!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>This function will return a list that will contain the row and col
@@ -1917,6 +2198,48 @@ handle all the events where there are runners on first and third
 base</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucnVubmVyX29uX2ZpcnN0X3RoaXJkIDwtIGZ1bmN0aW9uKG91dHMsIGV2ZW50LCBvdXRzX29uX3BsYXkpIHtcbiAgIyBFdmVudCBGb3IgSG9tZXJ1blxuICBmcm9tX2luZGV4ID0gNiArICg4ICogb3V0cylcbiAgIyBFdmVudCBGb3IgV2Fsa1xuICBpZiAoZXZlbnQgPT0gMTQpIHtcbiAgICByZXR1cm4gKGMoZnJvbV9pbmRleCwgZnJvbV9pbmRleCArIDIpKVxuICB9XG4gICMgRXZlbnQgRm9yIFNpbmdsZVxuICBpZiAoZXZlbnQgPT0gMjApIHtcbiAgICByZXR1cm4gKGMoZnJvbV9pbmRleCwgZnJvbV9pbmRleCAtIDEpKVxuICB9XG4gICMgRXZlbnQgRm9yIERvdWJsZVxuICBpZiAoZXZlbnQgPT0gMjEpIHtcbiAgICByZXR1cm4gKGMoZnJvbV9pbmRleCwgZnJvbV9pbmRleCArIDEpKVxuICB9XG4gICMgRXZlbnQgRm9yIFRyaXBsZVxuICBpZiAoZXZlbnQgPT0gMjIpIHtcbiAgICByZXR1cm4gKGMoZnJvbV9pbmRleCwgZnJvbV9pbmRleCAtIDIpKVxuICB9XG4gICMgRXZlbnQgRm9yIEhvbWVydW5cbiAgaWYgKGV2ZW50ID09IDIzKSB7XG4gICAgcmV0dXJuIChjKGZyb21faW5kZXgsIGZyb21faW5kZXggLSA1KSlcbiAgfVxuICAjIDAgT3V0cyAtPiAxIE91dFxuICBpZiAoKGV2ZW50ID09IDIgfHwgZXZlbnQgPT0gMykgJiYgb3V0cyA9PSAwICYmIG91dHNfb25fcGxheSA9PSAxKSB7XG4gICAgcmV0dXJuKGMoZnJvbV9pbmRleCwgZnJvbV9pbmRleCArIDgpKVxuICB9XG4gICMgMSBPdXQgLT4gMiBPdXRzXG4gIGlmICgoZXZlbnQgPT0gMiB8fCBldmVudCA9PSAzKSAmJiBvdXRzID09IDEgJiYgb3V0c19vbl9wbGF5ID09IDEpIHtcbiAgICByZXR1cm4oYyhmcm9tX2luZGV4LCBmcm9tX2luZGV4ICsgOCkpXG4gIH1cbiAgXG4gICMgV2lsbCBIYW5kbGUgMiBPdXRzIC0+IDMgT3V0cyBMYXRlciBcbiAgaWYgKChldmVudCA9PSAyIHx8IGV2ZW50ID09IDMpICYmIG91dHMgPT0gMiAmJiBvdXRzX29uX3BsYXkgPT0gMSkge1xuICAgIHJldHVybihjKDIyLCAyNSkpXG4gIH1cblxuICAjRWRnZSBDYXNlIC0+IFRoZXJlIGFyZSBPdXRzX29uX1BsYXkgPSAwIEp1c3QgUmV0dXJuIFswLCAwXVxuICByZXR1cm4oYygwLCAwKSlcbn1cbmBgYCJ9 -->
+<pre class="r"><code>runner_on_first_third &lt;- function(outs, event, outs_on_play) {
+  # Event For Homerun
+  from_index = 6 + (8 * outs)
+  # Event For Walk
+  if (event == 14) {
+    return (c(from_index, from_index + 2))
+  }
+  # Event For Single
+  if (event == 20) {
+    return (c(from_index, from_index - 1))
+  }
+  # Event For Double
+  if (event == 21) {
+    return (c(from_index, from_index + 1))
+  }
+  # Event For Triple
+  if (event == 22) {
+    return (c(from_index, from_index - 2))
+  }
+  # Event For Homerun
+  if (event == 23) {
+    return (c(from_index, from_index - 5))
+  }
+  # 0 Outs -&gt; 1 Out
+  if ((event == 2 || event == 3) &amp;&amp; outs == 0 &amp;&amp; outs_on_play == 1) {
+    return(c(from_index, from_index + 8))
+  }
+  # 1 Out -&gt; 2 Outs
+  if ((event == 2 || event == 3) &amp;&amp; outs == 1 &amp;&amp; outs_on_play == 1) {
+    return(c(from_index, from_index + 8))
+  }
+  
+  # Will Handle 2 Outs -&gt; 3 Outs Later 
+  if ((event == 2 || event == 3) &amp;&amp; outs == 2 &amp;&amp; outs_on_play == 1) {
+    return(c(22, 25))
+  }
+
+  #Edge Case -&gt; There are Outs_on_Play = 0 Just Return [0, 0]
+  return(c(0, 0))
+}</code></pre>
+<!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>This function will return a list that will contain the row and col
@@ -1926,6 +2249,43 @@ handle all the events where there are runners on second and third
 base</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucnVubmVyX29uX3NlY29uZF90aGlyZCA8LSBmdW5jdGlvbihvdXRzLCBldmVudCwgb3V0c19vbl9wbGF5KSB7XG4gIGZyb21faW5kZXggPSA3ICsgKDggKiBvdXRzKVxuICAjIEV2ZW50IEZvciBTaW5nbGUgb3IgV2Fsa1xuICBpZiAoZXZlbnQgPT0gMjAgfHwgZXZlbnQgPT0gMTQpIHtcbiAgICByZXR1cm4gKGMoZnJvbV9pbmRleCwgZnJvbV9pbmRleCAtIDEpKVxuICB9XG4gICMgRXZlbnQgRm9yIERvdWJsZVxuICBpZiAoZXZlbnQgPT0gMjEpIHtcbiAgICByZXR1cm4gKGMoZnJvbV9pbmRleCwgZnJvbV9pbmRleCAtIDQpKVxuICB9XG4gICMgRXZlbnQgRm9yIFRyaXBsZVxuICBpZiAoZXZlbnQgPT0gMjIpIHtcbiAgICByZXR1cm4gKGMoZnJvbV9pbmRleCwgZnJvbV9pbmRleCAtIDMpKVxuICB9XG4gICMgRXZlbnQgRm9yIEhvbWVydW5cbiAgaWYgKGV2ZW50ID09IDIzKSB7XG4gICAgcmV0dXJuIChjKGZyb21faW5kZXgsIGZyb21faW5kZXggLSA2KSlcbiAgfVxuICAjIDAgT3V0cyAtPiAxIE91dFxuICBpZiAoKGV2ZW50ID09IDIgfHwgZXZlbnQgPT0gMykgJiYgb3V0cyA9PSAwICYmIG91dHNfb25fcGxheSA9PSAxKSB7XG4gICAgcmV0dXJuKGMoZnJvbV9pbmRleCwgZnJvbV9pbmRleCArIDgpKVxuICB9XG4gICMgMSBPdXQgLT4gMiBPdXRzXG4gIGlmICgoZXZlbnQgPT0gMiB8fCBldmVudCA9PSAzKSAmJiBvdXRzID09IDEgJiYgb3V0c19vbl9wbGF5ID09IDEpIHtcbiAgICByZXR1cm4oYyhmcm9tX2luZGV4LCBmcm9tX2luZGV4ICsgOCkpXG4gIH1cbiAgXG4gICMgV2lsbCBIYW5kbGUgMiBPdXRzIC0+IDMgT3V0cyBMYXRlclxuICBpZiAoKGV2ZW50ID09IDIgfHwgZXZlbnQgPT0gMykgJiYgb3V0cyA9PSAyICYmIG91dHNfb25fcGxheSA9PSAxKSB7XG4gICAgcmV0dXJuKGMoMjMsIDI1KSlcbiAgfVxuXG4gICNFZGdlIENhc2UgLT4gVGhlcmUgYXJlIE91dHNfb25fUGxheSA9IDAgSnVzdCBSZXR1cm4gWzAsIDBdXG4gIHJldHVybihjKDAsIDApKVxufVxuYGBgIn0= -->
+<pre class="r"><code>runner_on_second_third &lt;- function(outs, event, outs_on_play) {
+  from_index = 7 + (8 * outs)
+  # Event For Single or Walk
+  if (event == 20 || event == 14) {
+    return (c(from_index, from_index - 1))
+  }
+  # Event For Double
+  if (event == 21) {
+    return (c(from_index, from_index - 4))
+  }
+  # Event For Triple
+  if (event == 22) {
+    return (c(from_index, from_index - 3))
+  }
+  # Event For Homerun
+  if (event == 23) {
+    return (c(from_index, from_index - 6))
+  }
+  # 0 Outs -&gt; 1 Out
+  if ((event == 2 || event == 3) &amp;&amp; outs == 0 &amp;&amp; outs_on_play == 1) {
+    return(c(from_index, from_index + 8))
+  }
+  # 1 Out -&gt; 2 Outs
+  if ((event == 2 || event == 3) &amp;&amp; outs == 1 &amp;&amp; outs_on_play == 1) {
+    return(c(from_index, from_index + 8))
+  }
+  
+  # Will Handle 2 Outs -&gt; 3 Outs Later
+  if ((event == 2 || event == 3) &amp;&amp; outs == 2 &amp;&amp; outs_on_play == 1) {
+    return(c(23, 25))
+  }
+
+  #Edge Case -&gt; There are Outs_on_Play = 0 Just Return [0, 0]
+  return(c(0, 0))
+}</code></pre>
+<!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>This function will return a list that will contain the row and col
@@ -1935,6 +2295,43 @@ handle all the events where there are runners on first, second, and
 third base</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucnVubmVyX29uX2ZpcnN0X3NlY29uZF90aGlyZCA8LSBmdW5jdGlvbihvdXRzLCBldmVudCwgb3V0c19vbl9wbGF5KSB7XG4gICMgRXZlbnQgRm9yIEhvbWVydW5cbiAgZnJvbV9pbmRleCA9IDggKyAoOCAqIG91dHMpXG4gICMgRXZlbnQgRm9yIFNpbmdsZVxuICBpZiAoZXZlbnQgPT0gMjAgfHwgZXZlbnQgPT0gMTQpIHtcbiAgICByZXR1cm4gKGMoZnJvbV9pbmRleCwgZnJvbV9pbmRleCkpXG4gIH1cbiAgIyBFdmVudCBGb3IgRG91YmxlXG4gIGlmIChldmVudCA9PSAyMSkge1xuICAgIHJldHVybiAoYyhmcm9tX2luZGV4LCBmcm9tX2luZGV4IC0gMSkpXG4gIH1cbiAgIyBFdmVudCBGb3IgVHJpcGxlXG4gIGlmIChldmVudCA9PSAyMikge1xuICAgIHJldHVybiAoYyhmcm9tX2luZGV4LCBmcm9tX2luZGV4IC0gNCkpXG4gIH1cbiAgIyBFdmVudCBGb3IgSG9tZXJ1blxuICBpZiAoZXZlbnQgPT0gMjMpIHtcbiAgICByZXR1cm4gKGMoZnJvbV9pbmRleCwgZnJvbV9pbmRleCAtIDcpKVxuICB9XG4gICMgMCBPdXRzIC0+IDEgT3V0XG4gIGlmICgoZXZlbnQgPT0gMiB8fCBldmVudCA9PSAzKSAmJiBvdXRzID09IDAgJiYgb3V0c19vbl9wbGF5ID09IDEpIHtcbiAgICByZXR1cm4oYyhmcm9tX2luZGV4LCBmcm9tX2luZGV4ICsgOCkpXG4gIH1cbiAgIyAxIE91dCAtPiAyIE91dHNcbiAgaWYgKChldmVudCA9PSAyIHx8IGV2ZW50ID09IDMpICYmIG91dHMgPT0gMSAmJiBvdXRzX29uX3BsYXkgPT0gMSkge1xuICAgIHJldHVybihjKGZyb21faW5kZXgsIGZyb21faW5kZXggKyA4KSlcbiAgfVxuICAjIFdpbGwgSGFuZGxlIDIgT3V0cyAtPiAzIE91dHMgTGF0ZXJcbiAgI0JyeWFuJ3MgQXR0ZW1wdFxuICBpZiAoKGV2ZW50ID09IDIgfHwgZXZlbnQgPT0gMykgJiYgb3V0cyA9PSAyICYmIG91dHNfb25fcGxheSA9PSAxKSB7XG4gICAgcmV0dXJuKGMoMjQsIDI1KSlcbiAgfVxuICAjRWRnZSBDYXNlIC0+IFRoZXJlIGFyZSBPdXRzX29uX1BsYXkgPSAwIEp1c3QgUmV0dXJuIFswLCAwXVxuICByZXR1cm4oYygwLCAwKSlcbn1cbmBgYCJ9 -->
+<pre class="r"><code>runner_on_first_second_third &lt;- function(outs, event, outs_on_play) {
+  # Event For Homerun
+  from_index = 8 + (8 * outs)
+  # Event For Single
+  if (event == 20 || event == 14) {
+    return (c(from_index, from_index))
+  }
+  # Event For Double
+  if (event == 21) {
+    return (c(from_index, from_index - 1))
+  }
+  # Event For Triple
+  if (event == 22) {
+    return (c(from_index, from_index - 4))
+  }
+  # Event For Homerun
+  if (event == 23) {
+    return (c(from_index, from_index - 7))
+  }
+  # 0 Outs -&gt; 1 Out
+  if ((event == 2 || event == 3) &amp;&amp; outs == 0 &amp;&amp; outs_on_play == 1) {
+    return(c(from_index, from_index + 8))
+  }
+  # 1 Out -&gt; 2 Outs
+  if ((event == 2 || event == 3) &amp;&amp; outs == 1 &amp;&amp; outs_on_play == 1) {
+    return(c(from_index, from_index + 8))
+  }
+  # Will Handle 2 Outs -&gt; 3 Outs Later
+  #Bryan&#39;s Attempt
+  if ((event == 2 || event == 3) &amp;&amp; outs == 2 &amp;&amp; outs_on_play == 1) {
+    return(c(24, 25))
+  }
+  #Edge Case -&gt; There are Outs_on_Play = 0 Just Return [0, 0]
+  return(c(0, 0))
+}</code></pre>
+<!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>This function will return a list that will contain the row and col
@@ -1947,6 +2344,107 @@ base</p>
 <h2>Populate Baseball Matrix</h2>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZm9yIChpIGluIDE6bnJvdyh0ZWFtX2RmKSkge1xuICAjIE5vIFJ1bm5lcnMgb24gQmFzZVxuICBpZiAodGVhbV9kZiRmaXJzdF9ydW5uZXJbaV0gPT0gJydcbiAgICAgICYmIHRlYW1fZGYkc2Vjb25kX3J1bm5lcltpXSA9PSAnJ1xuICAgICAgJiYgdGVhbV9kZiR0aGlyZF9ydW5uZXJbaV0gPT0gJycpIHtcbiAgICByb3dfY29sID0gbm9fcnVubmVyc19vbih0ZWFtX2RmJG91dHNbaV0sIHRlYW1fZGYkZXZlbnRfdHlwZVtpXSwgXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgdGVhbV9kZiRvdXRzX29uX3BsYXlbaV0pXG4gICAgcm93ID0gcm93X2NvbFsxXVxuICAgIGNvbCA9IHJvd19jb2xbMl1cbiAgICBpZiAocm93ICE9IDAgJiYgY29sICE9IDAgJiYgcm93IDw9IG5yb3coYmFzZWJhbGxfbWF0cml4KSAmJiBjb2wgPD0gbmNvbChiYXNlYmFsbF9tYXRyaXgpKSB7ICAgICAgXG4gICAgICBiYXNlYmFsbF9tYXRyaXhbcm93LCBjb2xdIDwtIGJhc2ViYWxsX21hdHJpeFtyb3csIGNvbF0gKyAxXG4gICAgfVxuICB9XG4gICMgUnVubmVyIG9uIEZpcnN0IEJhc2VcbiAgaWYgKHRlYW1fZGYkZmlyc3RfcnVubmVyW2ldICE9ICcnXG4gICAgICAmJiB0ZWFtX2RmJHNlY29uZF9ydW5uZXJbaV0gPT0gJydcbiAgICAgICYmIHRlYW1fZGYkdGhpcmRfcnVubmVyW2ldID09ICcnKSB7XG4gICAgcm93X2NvbCA9IHJ1bm5lcl9vbl9maXJzdCh0ZWFtX2RmJG91dHNbaV0sIHRlYW1fZGYkZXZlbnRfdHlwZVtpXSxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHRlYW1fZGYkb3V0c19vbl9wbGF5W2ldKVxuICAgIHJvdyA9IHJvd19jb2xbMV1cbiAgICBjb2wgPSByb3dfY29sWzJdXG4gICAgaWYgKHJvdyAhPSAwICYmIGNvbCAhPSAwICYmIHJvdyA8PSBucm93KGJhc2ViYWxsX21hdHJpeCkgJiYgY29sIDw9IG5jb2woYmFzZWJhbGxfbWF0cml4KSkgeyAgICAgIFxuICAgICAgYmFzZWJhbGxfbWF0cml4W3JvdywgY29sXSA8LSBiYXNlYmFsbF9tYXRyaXhbcm93LCBjb2xdICsgMVxuICAgIH1cbiAgfVxuICAjIFJ1bm5lciBvbiBTZWNvbmQgQmFzZVxuICBpZiAodGVhbV9kZiRmaXJzdF9ydW5uZXJbaV0gPT0gJydcbiAgICAgICYmIHRlYW1fZGYkc2Vjb25kX3J1bm5lcltpXSAhPSAnJ1xuICAgICAgJiYgdGVhbV9kZiR0aGlyZF9ydW5uZXJbaV0gPT0gJycpIHtcbiAgICByb3dfY29sID0gcnVubmVyX29uX3NlY29uZCh0ZWFtX2RmJG91dHNbaV0sIHRlYW1fZGYkZXZlbnRfdHlwZVtpXSxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB0ZWFtX2RmJG91dHNfb25fcGxheVtpXSlcbiAgICByb3cgPSByb3dfY29sWzFdXG4gICAgY29sID0gcm93X2NvbFsyXVxuICAgIGlmIChyb3cgIT0gMCAmJiBjb2wgIT0gMCAmJiByb3cgPD0gbnJvdyhiYXNlYmFsbF9tYXRyaXgpICYmIGNvbCA8PSBuY29sKGJhc2ViYWxsX21hdHJpeCkpIHsgICAgICBcbiAgICAgIGJhc2ViYWxsX21hdHJpeFtyb3csIGNvbF0gPC0gYmFzZWJhbGxfbWF0cml4W3JvdywgY29sXSArIDFcbiAgICB9XG4gIH1cbiAgIyBSdW5uZXIgb24gVGhpcmRcbiAgaWYgKHRlYW1fZGYkZmlyc3RfcnVubmVyW2ldID09ICcnXG4gICAgICAmJiB0ZWFtX2RmJHNlY29uZF9ydW5uZXJbaV0gPT0gJydcbiAgICAgICYmIHRlYW1fZGYkdGhpcmRfcnVubmVyW2ldICE9ICcnKSB7XG4gICAgcm93X2NvbCA9IHJ1bm5lcl9vbl90aGlyZCh0ZWFtX2RmJG91dHNbaV0sIHRlYW1fZGYkZXZlbnRfdHlwZVtpXSxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHRlYW1fZGYkb3V0c19vbl9wbGF5W2ldKVxuICAgIHJvdyA9IHJvd19jb2xbMV1cbiAgICBjb2wgPSByb3dfY29sWzJdXG4gICAgaWYgKHJvdyAhPSAwICYmIGNvbCAhPSAwICYmIHJvdyA8PSBucm93KGJhc2ViYWxsX21hdHJpeCkgJiYgY29sIDw9IG5jb2woYmFzZWJhbGxfbWF0cml4KSkgeyAgICAgIFxuICAgICAgYmFzZWJhbGxfbWF0cml4W3JvdywgY29sXSA8LSBiYXNlYmFsbF9tYXRyaXhbcm93LCBjb2xdICsgMVxuICAgIH1cbiAgfVxuICAjIFJ1bm5lciBvbiBGaXJzdCAmIFNlY29uZFxuICBpZiAodGVhbV9kZiRmaXJzdF9ydW5uZXJbaV0gIT0gJydcbiAgICAgICYmIHRlYW1fZGYkc2Vjb25kX3J1bm5lcltpXSAhPSAnJ1xuICAgICAgJiYgdGVhbV9kZiR0aGlyZF9ydW5uZXJbaV0gPT0gJycpIHtcbiAgICByb3dfY29sID0gcnVubmVyX29uX2ZpcnN0X3NlY29uZCh0ZWFtX2RmJG91dHNbaV0sIHRlYW1fZGYkZXZlbnRfdHlwZVtpXSxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHRlYW1fZGYkb3V0c19vbl9wbGF5W2ldKVxuICAgIHJvdyA9IHJvd19jb2xbMV1cbiAgICBjb2wgPSByb3dfY29sWzJdXG4gICAgaWYgKHJvdyAhPSAwICYmIGNvbCAhPSAwICYmIHJvdyA8PSBucm93KGJhc2ViYWxsX21hdHJpeCkgJiYgY29sIDw9IG5jb2woYmFzZWJhbGxfbWF0cml4KSkgeyAgICAgIFxuICAgICAgYmFzZWJhbGxfbWF0cml4W3JvdywgY29sXSA8LSBiYXNlYmFsbF9tYXRyaXhbcm93LCBjb2xdICsgMVxuICAgIH1cbiAgfVxuICAjIFJ1bm5lciBvbiBGaXJzdCAmIFRoaXJkXG4gIGlmICh0ZWFtX2RmJGZpcnN0X3J1bm5lcltpXSAhPSAnJ1xuICAgICAgJiYgdGVhbV9kZiRzZWNvbmRfcnVubmVyW2ldID09ICcnXG4gICAgICAmJiB0ZWFtX2RmJHRoaXJkX3J1bm5lcltpXSAhPSAnJykge1xuICAgIHJvd19jb2wgPSBydW5uZXJfb25fZmlyc3RfdGhpcmQodGVhbV9kZiRvdXRzW2ldLCB0ZWFtX2RmJGV2ZW50X3R5cGVbaV0sXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICB0ZWFtX2RmJG91dHNfb25fcGxheVtpXSlcbiAgICByb3cgPSByb3dfY29sWzFdXG4gICAgY29sID0gcm93X2NvbFsyXVxuICAgIGlmIChyb3cgIT0gMCAmJiBjb2wgIT0gMCAmJiByb3cgPD0gbnJvdyhiYXNlYmFsbF9tYXRyaXgpICYmIGNvbCA8PSBuY29sKGJhc2ViYWxsX21hdHJpeCkpIHsgICAgICBcbiAgICAgIGJhc2ViYWxsX21hdHJpeFtyb3csIGNvbF0gPC0gYmFzZWJhbGxfbWF0cml4W3JvdywgY29sXSArIDFcbiAgICB9XG4gIH1cbiAgIyBSdW5uZXIgb24gU2Vjb25kICYgVGhpcmRcbiAgaWYgKHRlYW1fZGYkZmlyc3RfcnVubmVyW2ldID09ICcnXG4gICAgICAmJiB0ZWFtX2RmJHNlY29uZF9ydW5uZXJbaV0gIT0gJydcbiAgICAgICYmIHRlYW1fZGYkdGhpcmRfcnVubmVyW2ldICE9ICcnKSB7XG4gICAgcm93X2NvbCA9IHJ1bm5lcl9vbl9zZWNvbmRfdGhpcmQodGVhbV9kZiRvdXRzW2ldLCB0ZWFtX2RmJGV2ZW50X3R5cGVbaV0sXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICB0ZWFtX2RmJG91dHNfb25fcGxheVtpXSlcbiAgICByb3cgPSByb3dfY29sWzFdXG4gICAgY29sID0gcm93X2NvbFsyXVxuICAgIGlmIChyb3cgIT0gMCAmJiBjb2wgIT0gMCAmJiByb3cgPD0gbnJvdyhiYXNlYmFsbF9tYXRyaXgpICYmIGNvbCA8PSBuY29sKGJhc2ViYWxsX21hdHJpeCkpIHsgICAgICBcbiAgICAgIGJhc2ViYWxsX21hdHJpeFtyb3csIGNvbF0gPC0gYmFzZWJhbGxfbWF0cml4W3JvdywgY29sXSArIDFcbiAgICB9XG4gIH1cbiAgIyBSdW5uZXIgb24gRmlyc3QsIFNlY29uZCwgJiBUaGlyZFxuICBpZiAodGVhbV9kZiRmaXJzdF9ydW5uZXJbaV0gIT0gJydcbiAgICAgICYmIHRlYW1fZGYkc2Vjb25kX3J1bm5lcltpXSAhPSAnJ1xuICAgICAgJiYgdGVhbV9kZiR0aGlyZF9ydW5uZXJbaV0gIT0gJycpIHtcbiAgICByb3dfY29sID0gcnVubmVyX29uX2ZpcnN0X3NlY29uZF90aGlyZCh0ZWFtX2RmJG91dHNbaV0sIHRlYW1fZGYkZXZlbnRfdHlwZVtpXSxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHRlYW1fZGYkb3V0c19vbl9wbGF5W2ldKVxuICAgIHJvdyA9IHJvd19jb2xbMV1cbiAgICBjb2wgPSByb3dfY29sWzJdXG4gICAgaWYgKHJvdyAhPSAwICYmIGNvbCAhPSAwICYmIHJvdyA8PSBucm93KGJhc2ViYWxsX21hdHJpeCkgJiYgY29sIDw9IG5jb2woYmFzZWJhbGxfbWF0cml4KSkgeyAgICAgIFxuICAgICAgYmFzZWJhbGxfbWF0cml4W3JvdywgY29sXSA8LSBiYXNlYmFsbF9tYXRyaXhbcm93LCBjb2xdICsgMVxuICAgIH1cbiAgfVxufVxuXG5cbmBgYCJ9 -->
+<pre class="r"><code>for (i in 1:nrow(team_df)) {
+  # No Runners on Base
+  if (team_df$first_runner[i] == &#39;&#39;
+      &amp;&amp; team_df$second_runner[i] == &#39;&#39;
+      &amp;&amp; team_df$third_runner[i] == &#39;&#39;) {
+    row_col = no_runners_on(team_df$outs[i], team_df$event_type[i], 
+                            team_df$outs_on_play[i])
+    row = row_col[1]
+    col = row_col[2]
+    if (row != 0 &amp;&amp; col != 0 &amp;&amp; row &lt;= nrow(baseball_matrix) &amp;&amp; col &lt;= ncol(baseball_matrix)) {      
+      baseball_matrix[row, col] &lt;- baseball_matrix[row, col] + 1
+    }
+  }
+  # Runner on First Base
+  if (team_df$first_runner[i] != &#39;&#39;
+      &amp;&amp; team_df$second_runner[i] == &#39;&#39;
+      &amp;&amp; team_df$third_runner[i] == &#39;&#39;) {
+    row_col = runner_on_first(team_df$outs[i], team_df$event_type[i],
+                              team_df$outs_on_play[i])
+    row = row_col[1]
+    col = row_col[2]
+    if (row != 0 &amp;&amp; col != 0 &amp;&amp; row &lt;= nrow(baseball_matrix) &amp;&amp; col &lt;= ncol(baseball_matrix)) {      
+      baseball_matrix[row, col] &lt;- baseball_matrix[row, col] + 1
+    }
+  }
+  # Runner on Second Base
+  if (team_df$first_runner[i] == &#39;&#39;
+      &amp;&amp; team_df$second_runner[i] != &#39;&#39;
+      &amp;&amp; team_df$third_runner[i] == &#39;&#39;) {
+    row_col = runner_on_second(team_df$outs[i], team_df$event_type[i],
+                               team_df$outs_on_play[i])
+    row = row_col[1]
+    col = row_col[2]
+    if (row != 0 &amp;&amp; col != 0 &amp;&amp; row &lt;= nrow(baseball_matrix) &amp;&amp; col &lt;= ncol(baseball_matrix)) {      
+      baseball_matrix[row, col] &lt;- baseball_matrix[row, col] + 1
+    }
+  }
+  # Runner on Third
+  if (team_df$first_runner[i] == &#39;&#39;
+      &amp;&amp; team_df$second_runner[i] == &#39;&#39;
+      &amp;&amp; team_df$third_runner[i] != &#39;&#39;) {
+    row_col = runner_on_third(team_df$outs[i], team_df$event_type[i],
+                              team_df$outs_on_play[i])
+    row = row_col[1]
+    col = row_col[2]
+    if (row != 0 &amp;&amp; col != 0 &amp;&amp; row &lt;= nrow(baseball_matrix) &amp;&amp; col &lt;= ncol(baseball_matrix)) {      
+      baseball_matrix[row, col] &lt;- baseball_matrix[row, col] + 1
+    }
+  }
+  # Runner on First &amp; Second
+  if (team_df$first_runner[i] != &#39;&#39;
+      &amp;&amp; team_df$second_runner[i] != &#39;&#39;
+      &amp;&amp; team_df$third_runner[i] == &#39;&#39;) {
+    row_col = runner_on_first_second(team_df$outs[i], team_df$event_type[i],
+                              team_df$outs_on_play[i])
+    row = row_col[1]
+    col = row_col[2]
+    if (row != 0 &amp;&amp; col != 0 &amp;&amp; row &lt;= nrow(baseball_matrix) &amp;&amp; col &lt;= ncol(baseball_matrix)) {      
+      baseball_matrix[row, col] &lt;- baseball_matrix[row, col] + 1
+    }
+  }
+  # Runner on First &amp; Third
+  if (team_df$first_runner[i] != &#39;&#39;
+      &amp;&amp; team_df$second_runner[i] == &#39;&#39;
+      &amp;&amp; team_df$third_runner[i] != &#39;&#39;) {
+    row_col = runner_on_first_third(team_df$outs[i], team_df$event_type[i],
+                              team_df$outs_on_play[i])
+    row = row_col[1]
+    col = row_col[2]
+    if (row != 0 &amp;&amp; col != 0 &amp;&amp; row &lt;= nrow(baseball_matrix) &amp;&amp; col &lt;= ncol(baseball_matrix)) {      
+      baseball_matrix[row, col] &lt;- baseball_matrix[row, col] + 1
+    }
+  }
+  # Runner on Second &amp; Third
+  if (team_df$first_runner[i] == &#39;&#39;
+      &amp;&amp; team_df$second_runner[i] != &#39;&#39;
+      &amp;&amp; team_df$third_runner[i] != &#39;&#39;) {
+    row_col = runner_on_second_third(team_df$outs[i], team_df$event_type[i],
+                              team_df$outs_on_play[i])
+    row = row_col[1]
+    col = row_col[2]
+    if (row != 0 &amp;&amp; col != 0 &amp;&amp; row &lt;= nrow(baseball_matrix) &amp;&amp; col &lt;= ncol(baseball_matrix)) {      
+      baseball_matrix[row, col] &lt;- baseball_matrix[row, col] + 1
+    }
+  }
+  # Runner on First, Second, &amp; Third
+  if (team_df$first_runner[i] != &#39;&#39;
+      &amp;&amp; team_df$second_runner[i] != &#39;&#39;
+      &amp;&amp; team_df$third_runner[i] != &#39;&#39;) {
+    row_col = runner_on_first_second_third(team_df$outs[i], team_df$event_type[i],
+                              team_df$outs_on_play[i])
+    row = row_col[1]
+    col = row_col[2]
+    if (row != 0 &amp;&amp; col != 0 &amp;&amp; row &lt;= nrow(baseball_matrix) &amp;&amp; col &lt;= ncol(baseball_matrix)) {      
+      baseball_matrix[row, col] &lt;- baseball_matrix[row, col] + 1
+    }
+  }
+}
+</code></pre>
+<!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
@@ -1954,6 +2452,63 @@ base</p>
 <h2>Display Matrix with Event Counts</h2>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYmFzZWJhbGxfbWF0cml4XG5gYGAifQ== -->
+<pre class="r"><code>baseball_matrix</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiICAgICAgWywxXSBbLDJdIFssM10gWyw0XSBbLDVdIFssNl0gWyw3XSBbLDhdIFssOV0gWywxMF0gWywxMV0gWywxMl0gWywxM10gWywxNF0gWywxNV0gWywxNl0gWywxN10gWywxOF1cbiBbMSxdICAzMjMgMjc5MSAgNTU1ICAgOTggICAgMCAgICAwICAgIDAgICAgMCA4NjMzICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwXG4gWzIsXSAgIDc3ICAgIDAgICAgMCAgIDE4ICA2MTIgICAgMCAgMTQxICAgIDAgICAgMCAgMTU5NyAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMFxuIFszLF0gICAyMCAgICAwICAgMzkgICAgMSAgMTk5ICAgIDAgICAgMCAgICAwICAgIDAgICAgIDAgICA1NzMgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDBcbiBbNCxdICAgIDMgICAzOSAgICA2ICAgIDEgICAgMCAgIDExICAgIDAgICAgMCAgICAwICAgICAwICAgICAwICAgMTExICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwXG4gWzUsXSAgIDEyICAgIDAgICAgMCAgICA2ICAgIDAgICAgMCAgIDM0ICAxNjIgICAgMCAgICAgMCAgICAgMCAgICAgMCAgIDQwMiAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMFxuIFs2LF0gICAgNSAgICAwICAgIDAgICAgNSAgIDMzICAgIDAgICAgOSAgIDEyICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAxMjYgICAgIDAgICAgIDAgICAgIDAgICAgIDBcbiBbNyxdICAgIDIgICAgMCAgICA4ICAgIDEgICAgMCAgIDQzICAgIDAgICAgMCAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgMTE4ICAgICAwICAgICAwICAgICAwXG4gWzgsXSAgICAyICAgIDAgICAgMCAgICAxICAgIDAgICAgMCAgICA5ICAgNDIgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgIDEwOSAgICAgMCAgICAgMFxuIFs5LF0gICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAyMDAgIDIwMTIgICAzOTQgICAgNDggICAgIDAgICAgIDAgICAgIDAgICAgIDAgIDYzMjggICAgIDBcblsxMCxdICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgIDgyICAgICAwICAgICAwICAgIDE2ICAgNzY2ICAgICAwICAgMTc2ICAgICAwICAgICAwICAxODkzXG5bMTEsXSAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAzNyAgICAgMCAgICA2MCAgICAgNyAgIDM2NiAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMFxuWzEyLF0gICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgMTAgICAgNzkgICAgMjYgICAgIDQgICAgIDAgICAgNDkgICAgIDAgICAgIDAgICAgIDAgICAgIDBcblsxMyxdICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgIDI3ICAgICAwICAgICAwICAgICA0ICAgICAwICAgICAwICAgIDM5ICAgMjc5ICAgICAwICAgICAwXG5bMTQsXSAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAxNSAgICAgMCAgICAgMCAgICAgNiAgICA5NyAgICAgMCAgICAyMSAgICAyOSAgICAgMCAgICAgMFxuWzE1LF0gICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDcgICAgIDAgICAgMjIgICAgIDUgICAgIDAgICAxMDQgICAgIDAgICAgIDAgICAgIDAgICAgIDBcblsxNixdICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgIDEzICAgICAwICAgICAwICAgICA1ICAgICAwICAgICAwICAgIDI1ICAgMTAwICAgICAwICAgICAwXG5bMTcsXSAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgIDE1MCAgMTU4M1xuWzE4LF0gICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgODEgICAgIDBcblsxOSxdICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgIDMzICAgICAwXG5bMjAsXSAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAxMiAgICA5M1xuWzIxLF0gICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgMzcgICAgIDBcblsyMixdICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgIDE2ICAgICAwXG5bMjMsXSAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAxMiAgICAgMFxuWzI0LF0gICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDYgICAgIDBcblsyNSxdICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwXG4gICAgICBbLDE5XSBbLDIwXSBbLDIxXSBbLDIyXSBbLDIzXSBbLDI0XSBbLDI1XVxuIFsxLF0gICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDBcbiBbMixdICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwXG4gWzMsXSAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMFxuIFs0LF0gICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDBcbiBbNSxdICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwXG4gWzYsXSAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMFxuIFs3LF0gICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDBcbiBbOCxdICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwXG4gWzksXSAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMFxuWzEwLF0gICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDBcblsxMSxdICAgODgwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwICAgICAwXG5bMTIsXSAgICAgMCAgIDI5NSAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgICAgMFxuWzEzLF0gICAgIDAgICAgIDAgICA2ODQgICAgIDAgICAgIDAgICAgIDAgICAgIDBcblsxNCxdICAgICAwICAgICAwICAgICAwICAgMjgxICAgICAwICAgICAwICAgICAwXG5bMTUsXSAgICAgMCAgICAgMCAgICAgMCAgICAgMCAgIDIzNCAgICAgMCAgICAgMFxuWzE2LF0gICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAyMzIgICAgIDBcblsxNyxdICAgMzEyICAgIDQ0ICAgICAwICAgICAwICAgICAwICAgICAwICA1MDA3XG5bMTgsXSAgICAgMCAgICAxOSAgIDczOCAgICAgMCAgIDE1OSAgICAgMCAgIDY3M1xuWzE5LF0gICAgNzUgICAgMjAgICA0MzcgICAgIDAgICAgIDAgICAgIDAgICA0MTFcblsyMCxdICAgIDM3ICAgICA0ICAgICAwICAgIDkxICAgICAwICAgICAwICAgMTk1XG5bMjEsXSAgICAgMCAgICAxMiAgICAgMCAgICAgMCAgICA2NSAgIDMyMSAgMTA1MVxuWzIyLF0gICAgIDAgICAgIDQgICAxMTEgICAgIDAgICAgMjkgICAgNDEgICA0NjJcblsyMyxdICAgIDE2ICAgICAyICAgICAwICAgMTI3ICAgICAwICAgICAwICAgMzUzXG5bMjQsXSAgICAgMCAgICAgMyAgICAgMCAgICAgMCAgICAxNCAgIDEyNSAgIDM4MlxuWzI1LF0gICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDAgICAgIDBcbiJ9 -->
+<pre><code>      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10] [,11] [,12] [,13] [,14] [,15] [,16] [,17] [,18]
+ [1,]  323 2791  555   98    0    0    0    0 8633     0     0     0     0     0     0     0     0     0
+ [2,]   77    0    0   18  612    0  141    0    0  1597     0     0     0     0     0     0     0     0
+ [3,]   20    0   39    1  199    0    0    0    0     0   573     0     0     0     0     0     0     0
+ [4,]    3   39    6    1    0   11    0    0    0     0     0   111     0     0     0     0     0     0
+ [5,]   12    0    0    6    0    0   34  162    0     0     0     0   402     0     0     0     0     0
+ [6,]    5    0    0    5   33    0    9   12    0     0     0     0     0   126     0     0     0     0
+ [7,]    2    0    8    1    0   43    0    0    0     0     0     0     0     0   118     0     0     0
+ [8,]    2    0    0    1    0    0    9   42    0     0     0     0     0     0     0   109     0     0
+ [9,]    0    0    0    0    0    0    0    0  200  2012   394    48     0     0     0     0  6328     0
+[10,]    0    0    0    0    0    0    0    0   82     0     0    16   766     0   176     0     0  1893
+[11,]    0    0    0    0    0    0    0    0   37     0    60     7   366     0     0     0     0     0
+[12,]    0    0    0    0    0    0    0    0   10    79    26     4     0    49     0     0     0     0
+[13,]    0    0    0    0    0    0    0    0   27     0     0     4     0     0    39   279     0     0
+[14,]    0    0    0    0    0    0    0    0   15     0     0     6    97     0    21    29     0     0
+[15,]    0    0    0    0    0    0    0    0    7     0    22     5     0   104     0     0     0     0
+[16,]    0    0    0    0    0    0    0    0   13     0     0     5     0     0    25   100     0     0
+[17,]    0    0    0    0    0    0    0    0    0     0     0     0     0     0     0     0   150  1583
+[18,]    0    0    0    0    0    0    0    0    0     0     0     0     0     0     0     0    81     0
+[19,]    0    0    0    0    0    0    0    0    0     0     0     0     0     0     0     0    33     0
+[20,]    0    0    0    0    0    0    0    0    0     0     0     0     0     0     0     0    12    93
+[21,]    0    0    0    0    0    0    0    0    0     0     0     0     0     0     0     0    37     0
+[22,]    0    0    0    0    0    0    0    0    0     0     0     0     0     0     0     0    16     0
+[23,]    0    0    0    0    0    0    0    0    0     0     0     0     0     0     0     0    12     0
+[24,]    0    0    0    0    0    0    0    0    0     0     0     0     0     0     0     0     6     0
+[25,]    0    0    0    0    0    0    0    0    0     0     0     0     0     0     0     0     0     0
+      [,19] [,20] [,21] [,22] [,23] [,24] [,25]
+ [1,]     0     0     0     0     0     0     0
+ [2,]     0     0     0     0     0     0     0
+ [3,]     0     0     0     0     0     0     0
+ [4,]     0     0     0     0     0     0     0
+ [5,]     0     0     0     0     0     0     0
+ [6,]     0     0     0     0     0     0     0
+ [7,]     0     0     0     0     0     0     0
+ [8,]     0     0     0     0     0     0     0
+ [9,]     0     0     0     0     0     0     0
+[10,]     0     0     0     0     0     0     0
+[11,]   880     0     0     0     0     0     0
+[12,]     0   295     0     0     0     0     0
+[13,]     0     0   684     0     0     0     0
+[14,]     0     0     0   281     0     0     0
+[15,]     0     0     0     0   234     0     0
+[16,]     0     0     0     0     0   232     0
+[17,]   312    44     0     0     0     0  5007
+[18,]     0    19   738     0   159     0   673
+[19,]    75    20   437     0     0     0   411
+[20,]    37     4     0    91     0     0   195
+[21,]     0    12     0     0    65   321  1051
+[22,]     0     4   111     0    29    41   462
+[23,]    16     2     0   127     0     0   353
+[24,]     0     3     0     0    14   125   382
+[25,]     0     0     0     0     0     0     0</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
@@ -1961,6 +2516,9 @@ base</p>
 <h2>Obtain Probabilites</h2>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3VtX3Jvd18xIDwtIHJvd1N1bXMoYmFzZWJhbGxfbWF0cml4WzEsICwgZHJvcCA9IEZBTFNFXSlcbmBgYCJ9 -->
+<pre class="r"><code>sum_row_1 &lt;- rowSums(baseball_matrix[1, , drop = FALSE])</code></pre>
+<!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
@@ -1968,14 +2526,111 @@ base</p>
 <h2>Display Baseball Matrix With Probabilities</h2>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZmluYWxfYmFzZWJhbGxfbWF0cml4ID0gYmFzZWJhbGxfbWF0cml4XG5mb3IgKGkgaW4gMTpucm93KGJhc2ViYWxsX21hdHJpeCkpIHtcbiAgY3VycmVudF9yb3dfc3VtIDwtIHJvd1N1bXMoYmFzZWJhbGxfbWF0cml4W2ksICwgZHJvcCA9IEZBTFNFXSlcbiAgZmluYWxfYmFzZWJhbGxfbWF0cml4W2ksIF0gPC0gZmluYWxfYmFzZWJhbGxfbWF0cml4W2ksIF0gLyBjdXJyZW50X3Jvd19zdW1cbn1cbmZpbmFsX2Jhc2ViYWxsX21hdHJpeFxuYGBgIn0= -->
+<pre class="r"><code>final_baseball_matrix = baseball_matrix
+for (i in 1:nrow(baseball_matrix)) {
+  current_row_sum &lt;- rowSums(baseball_matrix[i, , drop = FALSE])
+  final_baseball_matrix[i, ] &lt;- final_baseball_matrix[i, ] / current_row_sum
+}
+final_baseball_matrix</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiICAgICAgICAgICAgWywxXSAgICAgIFssMl0gICAgICAgWywzXSAgICAgICAgWyw0XSAgICAgIFssNV0gICAgICAgWyw2XSAgICAgICBbLDddICAgICAgIFssOF0gICAgICAgWyw5XVxuIFsxLF0gMC4wMjYwNDgzOSAwLjIyNTA4MDYgMC4wNDQ3NTgwNiAwLjAwNzkwMzIyNiAwLjAwMDAwMDAgMC4wMDAwMDAwMCAwLjAwMDAwMDAwIDAuMDAwMDAwMDAgMC42OTYyMDk2OFxuIFsyLF0gMC4wMzE0OTI4NCAwLjAwMDAwMDAgMC4wMDAwMDAwMCAwLjAwNzM2MTk2MyAwLjI1MDMwNjcgMC4wMDAwMDAwMCAwLjA1NzY2ODcxIDAuMDAwMDAwMDAgMC4wMDAwMDAwMFxuIFszLF0gMC4wMjQwMzg0NiAwLjAwMDAwMDAgMC4wNDY4NzUwMCAwLjAwMTIwMTkyMyAwLjIzOTE4MjcgMC4wMDAwMDAwMCAwLjAwMDAwMDAwIDAuMDAwMDAwMDAgMC4wMDAwMDAwMFxuIFs0LF0gMC4wMTc1NDM4NiAwLjIyODA3MDIgMC4wMzUwODc3MiAwLjAwNTg0Nzk1MyAwLjAwMDAwMDAgMC4wNjQzMjc0OSAwLjAwMDAwMDAwIDAuMDAwMDAwMDAgMC4wMDAwMDAwMFxuIFs1LF0gMC4wMTk0ODA1MiAwLjAwMDAwMDAgMC4wMDAwMDAwMCAwLjAwOTc0MDI2MCAwLjAwMDAwMDAgMC4wMDAwMDAwMCAwLjA1NTE5NDgxIDAuMjYyOTg3MDEgMC4wMDAwMDAwMFxuIFs2LF0gMC4wMjYzMTU3OSAwLjAwMDAwMDAgMC4wMDAwMDAwMCAwLjAyNjMxNTc4OSAwLjE3MzY4NDIgMC4wMDAwMDAwMCAwLjA0NzM2ODQyIDAuMDYzMTU3ODkgMC4wMDAwMDAwMFxuIFs3LF0gMC4wMTE2Mjc5MSAwLjAwMDAwMDAgMC4wNDY1MTE2MyAwLjAwNTgxMzk1MyAwLjAwMDAwMDAgMC4yNTAwMDAwMCAwLjAwMDAwMDAwIDAuMDAwMDAwMDAgMC4wMDAwMDAwMFxuIFs4LF0gMC4wMTIyNjk5NCAwLjAwMDAwMDAgMC4wMDAwMDAwMCAwLjAwNjEzNDk2OSAwLjAwMDAwMDAgMC4wMDAwMDAwMCAwLjA1NTIxNDcyIDAuMjU3NjY4NzEgMC4wMDAwMDAwMFxuIFs5LF0gMC4wMDAwMDAwMCAwLjAwMDAwMDAgMC4wMDAwMDAwMCAwLjAwMDAwMDAwMCAwLjAwMDAwMDAgMC4wMDAwMDAwMCAwLjAwMDAwMDAwIDAuMDAwMDAwMDAgMC4wMjIyNjY3NlxuWzEwLF0gMC4wMDAwMDAwMCAwLjAwMDAwMDAgMC4wMDAwMDAwMCAwLjAwMDAwMDAwMCAwLjAwMDAwMDAgMC4wMDAwMDAwMCAwLjAwMDAwMDAwIDAuMDAwMDAwMDAgMC4wMjc5NTc3MlxuWzExLF0gMC4wMDAwMDAwMCAwLjAwMDAwMDAgMC4wMDAwMDAwMCAwLjAwMDAwMDAwMCAwLjAwMDAwMDAgMC4wMDAwMDAwMCAwLjAwMDAwMDAwIDAuMDAwMDAwMDAgMC4wMjc0MDc0MVxuWzEyLF0gMC4wMDAwMDAwMCAwLjAwMDAwMDAgMC4wMDAwMDAwMCAwLjAwMDAwMDAwMCAwLjAwMDAwMDAgMC4wMDAwMDAwMCAwLjAwMDAwMDAwIDAuMDAwMDAwMDAgMC4wMjE1OTgyN1xuWzEzLF0gMC4wMDAwMDAwMCAwLjAwMDAwMDAgMC4wMDAwMDAwMCAwLjAwMDAwMDAwMCAwLjAwMDAwMDAgMC4wMDAwMDAwMCAwLjAwMDAwMDAwIDAuMDAwMDAwMDAgMC4wMjYxMzc0NlxuWzE0LF0gMC4wMDAwMDAwMCAwLjAwMDAwMDAgMC4wMDAwMDAwMCAwLjAwMDAwMDAwMCAwLjAwMDAwMDAgMC4wMDAwMDAwMCAwLjAwMDAwMDAwIDAuMDAwMDAwMDAgMC4wMzM0MDc1N1xuWzE1LF0gMC4wMDAwMDAwMCAwLjAwMDAwMDAgMC4wMDAwMDAwMCAwLjAwMDAwMDAwMCAwLjAwMDAwMDAgMC4wMDAwMDAwMCAwLjAwMDAwMDAwIDAuMDAwMDAwMDAgMC4wMTg4MTcyMFxuWzE2LF0gMC4wMDAwMDAwMCAwLjAwMDAwMDAgMC4wMDAwMDAwMCAwLjAwMDAwMDAwMCAwLjAwMDAwMDAgMC4wMDAwMDAwMCAwLjAwMDAwMDAwIDAuMDAwMDAwMDAgMC4wMzQ2NjY2N1xuWzE3LF0gMC4wMDAwMDAwMCAwLjAwMDAwMDAgMC4wMDAwMDAwMCAwLjAwMDAwMDAwMCAwLjAwMDAwMDAgMC4wMDAwMDAwMCAwLjAwMDAwMDAwIDAuMDAwMDAwMDAgMC4wMDAwMDAwMFxuWzE4LF0gMC4wMDAwMDAwMCAwLjAwMDAwMDAgMC4wMDAwMDAwMCAwLjAwMDAwMDAwMCAwLjAwMDAwMDAgMC4wMDAwMDAwMCAwLjAwMDAwMDAwIDAuMDAwMDAwMDAgMC4wMDAwMDAwMFxuWzE5LF0gMC4wMDAwMDAwMCAwLjAwMDAwMDAgMC4wMDAwMDAwMCAwLjAwMDAwMDAwMCAwLjAwMDAwMDAgMC4wMDAwMDAwMCAwLjAwMDAwMDAwIDAuMDAwMDAwMDAgMC4wMDAwMDAwMFxuWzIwLF0gMC4wMDAwMDAwMCAwLjAwMDAwMDAgMC4wMDAwMDAwMCAwLjAwMDAwMDAwMCAwLjAwMDAwMDAgMC4wMDAwMDAwMCAwLjAwMDAwMDAwIDAuMDAwMDAwMDAgMC4wMDAwMDAwMFxuWzIxLF0gMC4wMDAwMDAwMCAwLjAwMDAwMDAgMC4wMDAwMDAwMCAwLjAwMDAwMDAwMCAwLjAwMDAwMDAgMC4wMDAwMDAwMCAwLjAwMDAwMDAwIDAuMDAwMDAwMDAgMC4wMDAwMDAwMFxuWzIyLF0gMC4wMDAwMDAwMCAwLjAwMDAwMDAgMC4wMDAwMDAwMCAwLjAwMDAwMDAwMCAwLjAwMDAwMDAgMC4wMDAwMDAwMCAwLjAwMDAwMDAwIDAuMDAwMDAwMDAgMC4wMDAwMDAwMFxuWzIzLF0gMC4wMDAwMDAwMCAwLjAwMDAwMDAgMC4wMDAwMDAwMCAwLjAwMDAwMDAwMCAwLjAwMDAwMDAgMC4wMDAwMDAwMCAwLjAwMDAwMDAwIDAuMDAwMDAwMDAgMC4wMDAwMDAwMFxuWzI0LF0gMC4wMDAwMDAwMCAwLjAwMDAwMDAgMC4wMDAwMDAwMCAwLjAwMDAwMDAwMCAwLjAwMDAwMDAgMC4wMDAwMDAwMCAwLjAwMDAwMDAwIDAuMDAwMDAwMDAgMC4wMDAwMDAwMFxuWzI1LF0gICAgICAgIE5hTiAgICAgICBOYU4gICAgICAgIE5hTiAgICAgICAgIE5hTiAgICAgICBOYU4gICAgICAgIE5hTiAgICAgICAgTmFOICAgICAgICBOYU4gICAgICAgIE5hTlxuICAgICAgICAgIFssMTBdICAgICAgWywxMV0gICAgICAgWywxMl0gICAgIFssMTNdICAgICBbLDE0XSAgICAgIFssMTVdICAgICAgWywxNl0gICAgICBbLDE3XSAgICAgWywxOF1cbiBbMSxdIDAuMDAwMDAwMCAwLjAwMDAwMDAwIDAuMDAwMDAwMDAwIDAuMDAwMDAwMCAwLjAwMDAwMDAgMC4wMDAwMDAwMCAwLjAwMDAwMDAwIDAuMDAwMDAwMDAgMC4wMDAwMDAwXG4gWzIsXSAwLjY1MzE2OTcgMC4wMDAwMDAwMCAwLjAwMDAwMDAwMCAwLjAwMDAwMDAgMC4wMDAwMDAwIDAuMDAwMDAwMDAgMC4wMDAwMDAwMCAwLjAwMDAwMDAwIDAuMDAwMDAwMFxuIFszLF0gMC4wMDAwMDAwIDAuNjg4NzAxOTIgMC4wMDAwMDAwMDAgMC4wMDAwMDAwIDAuMDAwMDAwMCAwLjAwMDAwMDAwIDAuMDAwMDAwMDAgMC4wMDAwMDAwMCAwLjAwMDAwMDBcbiBbNCxdIDAuMDAwMDAwMCAwLjAwMDAwMDAwIDAuNjQ5MTIyODA3IDAuMDAwMDAwMCAwLjAwMDAwMDAgMC4wMDAwMDAwMCAwLjAwMDAwMDAwIDAuMDAwMDAwMDAgMC4wMDAwMDAwXG4gWzUsXSAwLjAwMDAwMDAgMC4wMDAwMDAwMCAwLjAwMDAwMDAwMCAwLjY1MjU5NzQgMC4wMDAwMDAwIDAuMDAwMDAwMDAgMC4wMDAwMDAwMCAwLjAwMDAwMDAwIDAuMDAwMDAwMFxuIFs2LF0gMC4wMDAwMDAwIDAuMDAwMDAwMDAgMC4wMDAwMDAwMDAgMC4wMDAwMDAwIDAuNjYzMTU3OSAwLjAwMDAwMDAwIDAuMDAwMDAwMDAgMC4wMDAwMDAwMCAwLjAwMDAwMDBcbiBbNyxdIDAuMDAwMDAwMCAwLjAwMDAwMDAwIDAuMDAwMDAwMDAwIDAuMDAwMDAwMCAwLjAwMDAwMDAgMC42ODYwNDY1MSAwLjAwMDAwMDAwIDAuMDAwMDAwMDAgMC4wMDAwMDAwXG4gWzgsXSAwLjAwMDAwMDAgMC4wMDAwMDAwMCAwLjAwMDAwMDAwMCAwLjAwMDAwMDAgMC4wMDAwMDAwIDAuMDAwMDAwMDAgMC42Njg3MTE2NiAwLjAwMDAwMDAwIDAuMDAwMDAwMFxuIFs5LF0gMC4yMjQwMDM2IDAuMDQzODY1NTEgMC4wMDUzNDQwMjEgMC4wMDAwMDAwIDAuMDAwMDAwMCAwLjAwMDAwMDAwIDAuMDAwMDAwMDAgMC43MDQ1MjAxNSAwLjAwMDAwMDBcblsxMCxdIDAuMDAwMDAwMCAwLjAwMDAwMDAwIDAuMDA1NDU1MTY1IDAuMjYxMTY2MCAwLjAwMDAwMDAgMC4wNjAwMDY4MiAwLjAwMDAwMDAwIDAuMDAwMDAwMDAgMC42NDU0MTQzXG5bMTEsXSAwLjAwMDAwMDAgMC4wNDQ0NDQ0NCAwLjAwNTE4NTE4NSAwLjI3MTExMTEgMC4wMDAwMDAwIDAuMDAwMDAwMDAgMC4wMDAwMDAwMCAwLjAwMDAwMDAwIDAuMDAwMDAwMFxuWzEyLF0gMC4xNzA2MjYzIDAuMDU2MTU1NTEgMC4wMDg2MzkzMDkgMC4wMDAwMDAwIDAuMTA1ODMxNSAwLjAwMDAwMDAwIDAuMDAwMDAwMDAgMC4wMDAwMDAwMCAwLjAwMDAwMDBcblsxMyxdIDAuMDAwMDAwMCAwLjAwMDAwMDAwIDAuMDAzODcyMjE3IDAuMDAwMDAwMCAwLjAwMDAwMDAgMC4wMzc3NTQxMSAwLjI3MDA4NzEyIDAuMDAwMDAwMDAgMC4wMDAwMDAwXG5bMTQsXSAwLjAwMDAwMDAgMC4wMDAwMDAwMCAwLjAxMzM2MzAyOSAwLjIxNjAzNTYgMC4wMDAwMDAwIDAuMDQ2NzcwNjAgMC4wNjQ1ODc5NyAwLjAwMDAwMDAwIDAuMDAwMDAwMFxuWzE1LF0gMC4wMDAwMDAwIDAuMDU5MTM5NzggMC4wMTM0NDA4NjAgMC4wMDAwMDAwIDAuMjc5NTY5OSAwLjAwMDAwMDAwIDAuMDAwMDAwMDAgMC4wMDAwMDAwMCAwLjAwMDAwMDBcblsxNixdIDAuMDAwMDAwMCAwLjAwMDAwMDAwIDAuMDEzMzMzMzMzIDAuMDAwMDAwMCAwLjAwMDAwMDAgMC4wNjY2NjY2NyAwLjI2NjY2NjY3IDAuMDAwMDAwMDAgMC4wMDAwMDAwXG5bMTcsXSAwLjAwMDAwMDAgMC4wMDAwMDAwMCAwLjAwMDAwMDAwMCAwLjAwMDAwMDAgMC4wMDAwMDAwIDAuMDAwMDAwMDAgMC4wMDAwMDAwMCAwLjAyMTEzODY3IDAuMjIzMDgzNFxuWzE4LF0gMC4wMDAwMDAwIDAuMDAwMDAwMDAgMC4wMDAwMDAwMDAgMC4wMDAwMDAwIDAuMDAwMDAwMCAwLjAwMDAwMDAwIDAuMDAwMDAwMDAgMC4wNDg1MDI5OSAwLjAwMDAwMDBcblsxOSxdIDAuMDAwMDAwMCAwLjAwMDAwMDAwIDAuMDAwMDAwMDAwIDAuMDAwMDAwMCAwLjAwMDAwMDAgMC4wMDAwMDAwMCAwLjAwMDAwMDAwIDAuMDMzODExNDggMC4wMDAwMDAwXG5bMjAsXSAwLjAwMDAwMDAgMC4wMDAwMDAwMCAwLjAwMDAwMDAwMCAwLjAwMDAwMDAgMC4wMDAwMDAwIDAuMDAwMDAwMDAgMC4wMDAwMDAwMCAwLjAyNzc3Nzc4IDAuMjE1Mjc3OFxuWzIxLF0gMC4wMDAwMDAwIDAuMDAwMDAwMDAgMC4wMDAwMDAwMDAgMC4wMDAwMDAwIDAuMDAwMDAwMCAwLjAwMDAwMDAwIDAuMDAwMDAwMDAgMC4wMjQ4OTkwNiAwLjAwMDAwMDBcblsyMixdIDAuMDAwMDAwMCAwLjAwMDAwMDAwIDAuMDAwMDAwMDAwIDAuMDAwMDAwMCAwLjAwMDAwMDAgMC4wMDAwMDAwMCAwLjAwMDAwMDAwIDAuMDI0MTMyNzMgMC4wMDAwMDAwXG5bMjMsXSAwLjAwMDAwMDAgMC4wMDAwMDAwMCAwLjAwMDAwMDAwMCAwLjAwMDAwMDAgMC4wMDAwMDAwIDAuMDAwMDAwMDAgMC4wMDAwMDAwMCAwLjAyMzUyOTQxIDAuMDAwMDAwMFxuWzI0LF0gMC4wMDAwMDAwIDAuMDAwMDAwMDAgMC4wMDAwMDAwMDAgMC4wMDAwMDAwIDAuMDAwMDAwMCAwLjAwMDAwMDAwIDAuMDAwMDAwMDAgMC4wMTEzMjA3NSAwLjAwMDAwMDBcblsyNSxdICAgICAgIE5hTiAgICAgICAgTmFOICAgICAgICAgTmFOICAgICAgIE5hTiAgICAgICBOYU4gICAgICAgIE5hTiAgICAgICAgTmFOICAgICAgICBOYU4gICAgICAgTmFOXG4gICAgICAgICAgIFssMTldICAgICAgIFssMjBdICAgICBbLDIxXSAgICAgWywyMl0gICAgICBbLDIzXSAgICAgIFssMjRdICAgICBbLDI1XVxuIFsxLF0gMC4wMDAwMDAwMCAwLjAwMDAwMDAwMCAwLjAwMDAwMDAgMC4wMDAwMDAwIDAuMDAwMDAwMDAgMC4wMDAwMDAwMCAwLjAwMDAwMDBcbiBbMixdIDAuMDAwMDAwMDAgMC4wMDAwMDAwMDAgMC4wMDAwMDAwIDAuMDAwMDAwMCAwLjAwMDAwMDAwIDAuMDAwMDAwMDAgMC4wMDAwMDAwXG4gWzMsXSAwLjAwMDAwMDAwIDAuMDAwMDAwMDAwIDAuMDAwMDAwMCAwLjAwMDAwMDAgMC4wMDAwMDAwMCAwLjAwMDAwMDAwIDAuMDAwMDAwMFxuIFs0LF0gMC4wMDAwMDAwMCAwLjAwMDAwMDAwMCAwLjAwMDAwMDAgMC4wMDAwMDAwIDAuMDAwMDAwMDAgMC4wMDAwMDAwMCAwLjAwMDAwMDBcbiBbNSxdIDAuMDAwMDAwMDAgMC4wMDAwMDAwMDAgMC4wMDAwMDAwIDAuMDAwMDAwMCAwLjAwMDAwMDAwIDAuMDAwMDAwMDAgMC4wMDAwMDAwXG4gWzYsXSAwLjAwMDAwMDAwIDAuMDAwMDAwMDAwIDAuMDAwMDAwMCAwLjAwMDAwMDAgMC4wMDAwMDAwMCAwLjAwMDAwMDAwIDAuMDAwMDAwMFxuIFs3LF0gMC4wMDAwMDAwMCAwLjAwMDAwMDAwMCAwLjAwMDAwMDAgMC4wMDAwMDAwIDAuMDAwMDAwMDAgMC4wMDAwMDAwMCAwLjAwMDAwMDBcbiBbOCxdIDAuMDAwMDAwMDAgMC4wMDAwMDAwMDAgMC4wMDAwMDAwIDAuMDAwMDAwMCAwLjAwMDAwMDAwIDAuMDAwMDAwMDAgMC4wMDAwMDAwXG4gWzksXSAwLjAwMDAwMDAwIDAuMDAwMDAwMDAwIDAuMDAwMDAwMCAwLjAwMDAwMDAgMC4wMDAwMDAwMCAwLjAwMDAwMDAwIDAuMDAwMDAwMFxuWzEwLF0gMC4wMDAwMDAwMCAwLjAwMDAwMDAwMCAwLjAwMDAwMDAgMC4wMDAwMDAwIDAuMDAwMDAwMDAgMC4wMDAwMDAwMCAwLjAwMDAwMDBcblsxMSxdIDAuNjUxODUxODUgMC4wMDAwMDAwMDAgMC4wMDAwMDAwIDAuMDAwMDAwMCAwLjAwMDAwMDAwIDAuMDAwMDAwMDAgMC4wMDAwMDAwXG5bMTIsXSAwLjAwMDAwMDAwIDAuNjM3MTQ5MDI4IDAuMDAwMDAwMCAwLjAwMDAwMDAgMC4wMDAwMDAwMCAwLjAwMDAwMDAwIDAuMDAwMDAwMFxuWzEzLF0gMC4wMDAwMDAwMCAwLjAwMDAwMDAwMCAwLjY2MjE0OTEgMC4wMDAwMDAwIDAuMDAwMDAwMDAgMC4wMDAwMDAwMCAwLjAwMDAwMDBcblsxNCxdIDAuMDAwMDAwMDAgMC4wMDAwMDAwMDAgMC4wMDAwMDAwIDAuNjI1ODM1MiAwLjAwMDAwMDAwIDAuMDAwMDAwMDAgMC4wMDAwMDAwXG5bMTUsXSAwLjAwMDAwMDAwIDAuMDAwMDAwMDAwIDAuMDAwMDAwMCAwLjAwMDAwMDAgMC42MjkwMzIyNiAwLjAwMDAwMDAwIDAuMDAwMDAwMFxuWzE2LF0gMC4wMDAwMDAwMCAwLjAwMDAwMDAwMCAwLjAwMDAwMDAgMC4wMDAwMDAwIDAuMDAwMDAwMDAgMC42MTg2NjY2NyAwLjAwMDAwMDBcblsxNyxdIDAuMDQzOTY4NDMgMC4wMDYyMDA2NzYgMC4wMDAwMDAwIDAuMDAwMDAwMCAwLjAwMDAwMDAwIDAuMDAwMDAwMDAgMC43MDU2MDg4XG5bMTgsXSAwLjAwMDAwMDAwIDAuMDExMzc3MjQ2IDAuNDQxOTE2MiAwLjAwMDAwMDAgMC4wOTUyMDk1OCAwLjAwMDAwMDAwIDAuNDAyOTk0MFxuWzE5LF0gMC4wNzY4NDQyNiAwLjAyMDQ5MTgwMyAwLjQ0Nzc0NTkgMC4wMDAwMDAwIDAuMDAwMDAwMDAgMC4wMDAwMDAwMCAwLjQyMTEwNjZcblsyMCxdIDAuMDg1NjQ4MTUgMC4wMDkyNTkyNTkgMC4wMDAwMDAwIDAuMjEwNjQ4MSAwLjAwMDAwMDAwIDAuMDAwMDAwMDAgMC40NTEzODg5XG5bMjEsXSAwLjAwMDAwMDAwIDAuMDA4MDc1MzcwIDAuMDAwMDAwMCAwLjAwMDAwMDAgMC4wNDM3NDE1OSAwLjIxNjAxNjE1IDAuNzA3MjY3OFxuWzIyLF0gMC4wMDAwMDAwMCAwLjAwNjAzMzE4MyAwLjE2NzQyMDggMC4wMDAwMDAwIDAuMDQzNzQwNTcgMC4wNjE4NDAxMiAwLjY5NjgzMjZcblsyMyxdIDAuMDMxMzcyNTUgMC4wMDM5MjE1NjkgMC4wMDAwMDAwIDAuMjQ5MDE5NiAwLjAwMDAwMDAwIDAuMDAwMDAwMDAgMC42OTIxNTY5XG5bMjQsXSAwLjAwMDAwMDAwIDAuMDA1NjYwMzc3IDAuMDAwMDAwMCAwLjAwMDAwMDAgMC4wMjY0MTUwOSAwLjIzNTg0OTA2IDAuNzIwNzU0N1xuWzI1LF0gICAgICAgIE5hTiAgICAgICAgIE5hTiAgICAgICBOYU4gICAgICAgTmFOICAgICAgICBOYU4gICAgICAgIE5hTiAgICAgICBOYU5cbiJ9 -->
+<pre><code>            [,1]      [,2]       [,3]        [,4]      [,5]       [,6]       [,7]       [,8]       [,9]
+ [1,] 0.02604839 0.2250806 0.04475806 0.007903226 0.0000000 0.00000000 0.00000000 0.00000000 0.69620968
+ [2,] 0.03149284 0.0000000 0.00000000 0.007361963 0.2503067 0.00000000 0.05766871 0.00000000 0.00000000
+ [3,] 0.02403846 0.0000000 0.04687500 0.001201923 0.2391827 0.00000000 0.00000000 0.00000000 0.00000000
+ [4,] 0.01754386 0.2280702 0.03508772 0.005847953 0.0000000 0.06432749 0.00000000 0.00000000 0.00000000
+ [5,] 0.01948052 0.0000000 0.00000000 0.009740260 0.0000000 0.00000000 0.05519481 0.26298701 0.00000000
+ [6,] 0.02631579 0.0000000 0.00000000 0.026315789 0.1736842 0.00000000 0.04736842 0.06315789 0.00000000
+ [7,] 0.01162791 0.0000000 0.04651163 0.005813953 0.0000000 0.25000000 0.00000000 0.00000000 0.00000000
+ [8,] 0.01226994 0.0000000 0.00000000 0.006134969 0.0000000 0.00000000 0.05521472 0.25766871 0.00000000
+ [9,] 0.00000000 0.0000000 0.00000000 0.000000000 0.0000000 0.00000000 0.00000000 0.00000000 0.02226676
+[10,] 0.00000000 0.0000000 0.00000000 0.000000000 0.0000000 0.00000000 0.00000000 0.00000000 0.02795772
+[11,] 0.00000000 0.0000000 0.00000000 0.000000000 0.0000000 0.00000000 0.00000000 0.00000000 0.02740741
+[12,] 0.00000000 0.0000000 0.00000000 0.000000000 0.0000000 0.00000000 0.00000000 0.00000000 0.02159827
+[13,] 0.00000000 0.0000000 0.00000000 0.000000000 0.0000000 0.00000000 0.00000000 0.00000000 0.02613746
+[14,] 0.00000000 0.0000000 0.00000000 0.000000000 0.0000000 0.00000000 0.00000000 0.00000000 0.03340757
+[15,] 0.00000000 0.0000000 0.00000000 0.000000000 0.0000000 0.00000000 0.00000000 0.00000000 0.01881720
+[16,] 0.00000000 0.0000000 0.00000000 0.000000000 0.0000000 0.00000000 0.00000000 0.00000000 0.03466667
+[17,] 0.00000000 0.0000000 0.00000000 0.000000000 0.0000000 0.00000000 0.00000000 0.00000000 0.00000000
+[18,] 0.00000000 0.0000000 0.00000000 0.000000000 0.0000000 0.00000000 0.00000000 0.00000000 0.00000000
+[19,] 0.00000000 0.0000000 0.00000000 0.000000000 0.0000000 0.00000000 0.00000000 0.00000000 0.00000000
+[20,] 0.00000000 0.0000000 0.00000000 0.000000000 0.0000000 0.00000000 0.00000000 0.00000000 0.00000000
+[21,] 0.00000000 0.0000000 0.00000000 0.000000000 0.0000000 0.00000000 0.00000000 0.00000000 0.00000000
+[22,] 0.00000000 0.0000000 0.00000000 0.000000000 0.0000000 0.00000000 0.00000000 0.00000000 0.00000000
+[23,] 0.00000000 0.0000000 0.00000000 0.000000000 0.0000000 0.00000000 0.00000000 0.00000000 0.00000000
+[24,] 0.00000000 0.0000000 0.00000000 0.000000000 0.0000000 0.00000000 0.00000000 0.00000000 0.00000000
+[25,]        NaN       NaN        NaN         NaN       NaN        NaN        NaN        NaN        NaN
+          [,10]      [,11]       [,12]     [,13]     [,14]      [,15]      [,16]      [,17]     [,18]
+ [1,] 0.0000000 0.00000000 0.000000000 0.0000000 0.0000000 0.00000000 0.00000000 0.00000000 0.0000000
+ [2,] 0.6531697 0.00000000 0.000000000 0.0000000 0.0000000 0.00000000 0.00000000 0.00000000 0.0000000
+ [3,] 0.0000000 0.68870192 0.000000000 0.0000000 0.0000000 0.00000000 0.00000000 0.00000000 0.0000000
+ [4,] 0.0000000 0.00000000 0.649122807 0.0000000 0.0000000 0.00000000 0.00000000 0.00000000 0.0000000
+ [5,] 0.0000000 0.00000000 0.000000000 0.6525974 0.0000000 0.00000000 0.00000000 0.00000000 0.0000000
+ [6,] 0.0000000 0.00000000 0.000000000 0.0000000 0.6631579 0.00000000 0.00000000 0.00000000 0.0000000
+ [7,] 0.0000000 0.00000000 0.000000000 0.0000000 0.0000000 0.68604651 0.00000000 0.00000000 0.0000000
+ [8,] 0.0000000 0.00000000 0.000000000 0.0000000 0.0000000 0.00000000 0.66871166 0.00000000 0.0000000
+ [9,] 0.2240036 0.04386551 0.005344021 0.0000000 0.0000000 0.00000000 0.00000000 0.70452015 0.0000000
+[10,] 0.0000000 0.00000000 0.005455165 0.2611660 0.0000000 0.06000682 0.00000000 0.00000000 0.6454143
+[11,] 0.0000000 0.04444444 0.005185185 0.2711111 0.0000000 0.00000000 0.00000000 0.00000000 0.0000000
+[12,] 0.1706263 0.05615551 0.008639309 0.0000000 0.1058315 0.00000000 0.00000000 0.00000000 0.0000000
+[13,] 0.0000000 0.00000000 0.003872217 0.0000000 0.0000000 0.03775411 0.27008712 0.00000000 0.0000000
+[14,] 0.0000000 0.00000000 0.013363029 0.2160356 0.0000000 0.04677060 0.06458797 0.00000000 0.0000000
+[15,] 0.0000000 0.05913978 0.013440860 0.0000000 0.2795699 0.00000000 0.00000000 0.00000000 0.0000000
+[16,] 0.0000000 0.00000000 0.013333333 0.0000000 0.0000000 0.06666667 0.26666667 0.00000000 0.0000000
+[17,] 0.0000000 0.00000000 0.000000000 0.0000000 0.0000000 0.00000000 0.00000000 0.02113867 0.2230834
+[18,] 0.0000000 0.00000000 0.000000000 0.0000000 0.0000000 0.00000000 0.00000000 0.04850299 0.0000000
+[19,] 0.0000000 0.00000000 0.000000000 0.0000000 0.0000000 0.00000000 0.00000000 0.03381148 0.0000000
+[20,] 0.0000000 0.00000000 0.000000000 0.0000000 0.0000000 0.00000000 0.00000000 0.02777778 0.2152778
+[21,] 0.0000000 0.00000000 0.000000000 0.0000000 0.0000000 0.00000000 0.00000000 0.02489906 0.0000000
+[22,] 0.0000000 0.00000000 0.000000000 0.0000000 0.0000000 0.00000000 0.00000000 0.02413273 0.0000000
+[23,] 0.0000000 0.00000000 0.000000000 0.0000000 0.0000000 0.00000000 0.00000000 0.02352941 0.0000000
+[24,] 0.0000000 0.00000000 0.000000000 0.0000000 0.0000000 0.00000000 0.00000000 0.01132075 0.0000000
+[25,]       NaN        NaN         NaN       NaN       NaN        NaN        NaN        NaN       NaN
+           [,19]       [,20]     [,21]     [,22]      [,23]      [,24]     [,25]
+ [1,] 0.00000000 0.000000000 0.0000000 0.0000000 0.00000000 0.00000000 0.0000000
+ [2,] 0.00000000 0.000000000 0.0000000 0.0000000 0.00000000 0.00000000 0.0000000
+ [3,] 0.00000000 0.000000000 0.0000000 0.0000000 0.00000000 0.00000000 0.0000000
+ [4,] 0.00000000 0.000000000 0.0000000 0.0000000 0.00000000 0.00000000 0.0000000
+ [5,] 0.00000000 0.000000000 0.0000000 0.0000000 0.00000000 0.00000000 0.0000000
+ [6,] 0.00000000 0.000000000 0.0000000 0.0000000 0.00000000 0.00000000 0.0000000
+ [7,] 0.00000000 0.000000000 0.0000000 0.0000000 0.00000000 0.00000000 0.0000000
+ [8,] 0.00000000 0.000000000 0.0000000 0.0000000 0.00000000 0.00000000 0.0000000
+ [9,] 0.00000000 0.000000000 0.0000000 0.0000000 0.00000000 0.00000000 0.0000000
+[10,] 0.00000000 0.000000000 0.0000000 0.0000000 0.00000000 0.00000000 0.0000000
+[11,] 0.65185185 0.000000000 0.0000000 0.0000000 0.00000000 0.00000000 0.0000000
+[12,] 0.00000000 0.637149028 0.0000000 0.0000000 0.00000000 0.00000000 0.0000000
+[13,] 0.00000000 0.000000000 0.6621491 0.0000000 0.00000000 0.00000000 0.0000000
+[14,] 0.00000000 0.000000000 0.0000000 0.6258352 0.00000000 0.00000000 0.0000000
+[15,] 0.00000000 0.000000000 0.0000000 0.0000000 0.62903226 0.00000000 0.0000000
+[16,] 0.00000000 0.000000000 0.0000000 0.0000000 0.00000000 0.61866667 0.0000000
+[17,] 0.04396843 0.006200676 0.0000000 0.0000000 0.00000000 0.00000000 0.7056088
+[18,] 0.00000000 0.011377246 0.4419162 0.0000000 0.09520958 0.00000000 0.4029940
+[19,] 0.07684426 0.020491803 0.4477459 0.0000000 0.00000000 0.00000000 0.4211066
+[20,] 0.08564815 0.009259259 0.0000000 0.2106481 0.00000000 0.00000000 0.4513889
+[21,] 0.00000000 0.008075370 0.0000000 0.0000000 0.04374159 0.21601615 0.7072678
+[22,] 0.00000000 0.006033183 0.1674208 0.0000000 0.04374057 0.06184012 0.6968326
+[23,] 0.03137255 0.003921569 0.0000000 0.2490196 0.00000000 0.00000000 0.6921569
+[24,] 0.00000000 0.005660377 0.0000000 0.0000000 0.02641509 0.23584906 0.7207547
+[25,]        NaN         NaN       NaN       NaN        NaN        NaN       NaN</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucm93X3N1bXMgPC0gcm93U3VtcyhmaW5hbF9iYXNlYmFsbF9tYXRyaXgpXG5gYGAifQ== -->
+<pre class="r"><code>row_sums &lt;- rowSums(final_baseball_matrix)</code></pre>
+<!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucm93X3N1bXNcbmBgYCJ9 -->
+<pre class="r"><code>row_sums</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiIFsxXSAgIDEgICAxICAgMSAgIDEgICAxICAgMSAgIDEgICAxICAgMSAgIDEgICAxICAgMSAgIDEgICAxICAgMSAgIDEgICAxICAgMSAgIDEgICAxICAgMSAgIDEgICAxICAgMSBOYU5cbiJ9 -->
+<pre><code> [1]   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1 NaN</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>Simulating the baseball game</p>
@@ -2012,18 +2667,163 @@ base</p>
 \]</span></p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxub3V0c19ydW5uZXJzIDwtIGZ1bmN0aW9uKHN0YXRlKSB7XG4gIGlmKHN0YXRlID09IDEpe1xuICAgIHJldHVybihjKDAsIDAsIDAsIDApKVxuICB9XG4gIGlmKHN0YXRlID09IDIpe1xuICAgIHJldHVybihjKDAsIDEsIDAsIDApKVxuICB9XG4gIGlmKHN0YXRlID09IDMpe1xuICAgIHJldHVybihjKDAsIDAsIDEsIDApKVxuICB9XG4gIGlmKHN0YXRlID09IDQpe1xuICAgIHJldHVybihjKDAsIDAsIDAsIDEpKVxuICB9XG4gIGlmKHN0YXRlID09IDUpe1xuICAgIHJldHVybihjKDAsIDEsIDEsIDApKVxuICB9XG4gIGlmKHN0YXRlID09IDYpe1xuICAgIHJldHVybihjKDAsIDEsIDAsIDEpKVxuICB9XG4gIGlmKHN0YXRlID09IDcpe1xuICAgIHJldHVybihjKDAsIDAsIDEsIDEpKVxuICB9XG4gIGlmKHN0YXRlID09IDgpe1xuICAgIHJldHVybihjKDAsIDEsIDEsIDEpKVxuICB9XG4gIGlmKHN0YXRlID09IDkpe1xuICAgIHJldHVybihjKDEsIDAsIDAsIDApKVxuICB9XG4gIGlmKHN0YXRlID09IDEwKXtcbiAgIHJldHVybihjKDEsIDEsIDAsIDApKVxuICB9XG4gIGlmKHN0YXRlID09IDExKXtcbiAgIHJldHVybihjKDEsIDAsIDEsIDApKVxuICB9XG4gIGlmKHN0YXRlID09IDEyKXtcbiAgIHJldHVybihjKDEsIDAsIDAsIDEpKVxuICB9XG4gIGlmKHN0YXRlID09IDEzKXtcbiAgIHJldHVybihjKDEsIDEsIDEsIDApKSBcbiAgfVxuICBpZihzdGF0ZSA9PSAxNCl7XG4gICByZXR1cm4oYygxLCAxLCAwLCAxKSlcbiAgfVxuICBpZihzdGF0ZSA9PSAxNSl7XG4gICByZXR1cm4oYygxLCAwLCAxLCAxKSkgXG4gIH1cbiAgaWYoc3RhdGUgPT0gMTYpe1xuICAgcmV0dXJuKGMoMSwgMSwgMSwgMSkpICBcbiAgfVxuICBpZihzdGF0ZSA9PSAxNyl7XG4gICAgcmV0dXJuKGMoMiwgMCwgMCwgMCkpXG4gIH1cbiAgaWYoc3RhdGUgPT0gMTgpe1xuICAgIHJldHVybihjKDIsIDEsIDAsIDApKVxuICB9XG4gIGlmKHN0YXRlID09IDE5KXtcbiAgICByZXR1cm4oYygyLCAwLCAxLCAwKSlcbiAgfVxuICBpZihzdGF0ZSA9PSAyMCl7XG4gICAgcmV0dXJuKGMoMiwgMCwgMCwgMSkpXG4gIH1cbiAgaWYoc3RhdGUgPT0gMjEpe1xuICAgIHJldHVybihjKDIsIDEsIDEsIDApKVxuICB9XG4gIGlmKHN0YXRlID09IDIyKXtcbiAgICByZXR1cm4oYygyLCAxLCAwLCAxKSlcbiAgfVxuICBpZihzdGF0ZSA9PSAyMyl7XG4gICAgcmV0dXJuKGMoMiwgMCwgMSwgMSkpXG4gIH1cbiAgaWYoc3RhdGUgPT0gMjQpe1xuICAgIHJldHVybihjKDIsIDEsIDEsIDEpKVxuICB9XG4gIGlmKHN0YXRlID09IDI1KXtcbiAgICByZXR1cm4oYygzLCAwLCAwLCAwKSlcbiAgfVxufVxuYGBgIn0= -->
+<pre class="r"><code>outs_runners &lt;- function(state) {
+  if(state == 1){
+    return(c(0, 0, 0, 0))
+  }
+  if(state == 2){
+    return(c(0, 1, 0, 0))
+  }
+  if(state == 3){
+    return(c(0, 0, 1, 0))
+  }
+  if(state == 4){
+    return(c(0, 0, 0, 1))
+  }
+  if(state == 5){
+    return(c(0, 1, 1, 0))
+  }
+  if(state == 6){
+    return(c(0, 1, 0, 1))
+  }
+  if(state == 7){
+    return(c(0, 0, 1, 1))
+  }
+  if(state == 8){
+    return(c(0, 1, 1, 1))
+  }
+  if(state == 9){
+    return(c(1, 0, 0, 0))
+  }
+  if(state == 10){
+   return(c(1, 1, 0, 0))
+  }
+  if(state == 11){
+   return(c(1, 0, 1, 0))
+  }
+  if(state == 12){
+   return(c(1, 0, 0, 1))
+  }
+  if(state == 13){
+   return(c(1, 1, 1, 0)) 
+  }
+  if(state == 14){
+   return(c(1, 1, 0, 1))
+  }
+  if(state == 15){
+   return(c(1, 0, 1, 1)) 
+  }
+  if(state == 16){
+   return(c(1, 1, 1, 1))  
+  }
+  if(state == 17){
+    return(c(2, 0, 0, 0))
+  }
+  if(state == 18){
+    return(c(2, 1, 0, 0))
+  }
+  if(state == 19){
+    return(c(2, 0, 1, 0))
+  }
+  if(state == 20){
+    return(c(2, 0, 0, 1))
+  }
+  if(state == 21){
+    return(c(2, 1, 1, 0))
+  }
+  if(state == 22){
+    return(c(2, 1, 0, 1))
+  }
+  if(state == 23){
+    return(c(2, 0, 1, 1))
+  }
+  if(state == 24){
+    return(c(2, 1, 1, 1))
+  }
+  if(state == 25){
+    return(c(3, 0, 0, 0))
+  }
+}</code></pre>
+<!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc2ltdS5nYW1lID0gZnVuY3Rpb24oc3RhcnQsIHNlZWQpe1xuICBzZXQuc2VlZChzZWVkKVxuICBzID0gc3RhcnRcbiAgbmdhbWUgPSAwXG4gIHJ1bnMgPSAwXG4gIHdoaWxlIChzICE9IDI1KSB7XG4gICAgIyBnZXQgcHJldmlvdXMgc3RhdGUgXG4gICAgcHJldl9zID0gc1xuICAgICMgZ2V0IG5leHQgc3RhdGVcbiAgICBzID0gc2FtcGxlLmludCgyNSwgc2l6ZSA9IDEsIHByb2IgPSBiYXNlYmFsbF9tYXRyaXhbcywgXSlcbiAgICAjIEJyZWFrIGlmIG91dHMgPT0gMyAocyA9PSAyNSlcbiAgICBpZihzID09IDI1KXtcbiAgICAgIGJyZWFrXG4gICAgfVxuICAgICMgQ291bnQgcnVucyBmb3IgYWxsIHJ1bm5lcnMgaW4gcHJldmlvdXMgc3RhdGUgaWYgY3VycmVudCBzdGF0ZSBpbmRpY2F0ZXMgYSBob21lcnVuXG4gICAgaWYocyA9PSAxIHx8IHMgPT0gOSB8fCBzID09IDE3KXtcbiAgICAgIHNjb3Jpbmdfc3RhdGUgPSBvdXRzX3J1bm5lcnMocHJldl9zKVxuICAgICAgcnVucyA8LSBydW5zICsgc2NvcmluZ19zdGF0ZVsyXSArIHNjb3Jpbmdfc3RhdGVbM10gKyBzY29yaW5nX3N0YXRlWzRdXG4gICAgfVxuICAgICMgQ291bnQgcnVucyB3aGVuIG5vdCBhIGhvbWVydW4gXG4gICAgZWxzZXtcbiAgICAgIGRpZmZlcmVuY2Vfc3RhdGVzID0gb3V0c19ydW5uZXJzKHByZXZfcykgLSBvdXRzX3J1bm5lcnMocylcbiAgICAgIHJ1bm5lcnNfc3VtID0gZGlmZmVyZW5jZV9zdGF0ZXNbMl0gKyBkaWZmZXJlbmNlX3N0YXRlc1szXSArIGRpZmZlcmVuY2Vfc3RhdGVzWzRdXG4gICAgICBpZihkaWZmZXJlbmNlX3N0YXRlc1sxXSA9PSAwICYmIHJ1bm5lcnNfc3VtID4gMCl7XG4gICAgICAgIHJ1bnMgPC0gcnVucyArIHJ1bm5lcnNfc3VtXG4gICAgICB9XG4gICAgfVxuICB9XG4gIG5nYW1lID0gbmdhbWUgKyAxXG4gIHJldHVybiAoYyhzLCBuZ2FtZSwgcnVucykpXG59XG5gYGAifQ== -->
+<pre class="r"><code>simu.game = function(start, seed){
+  set.seed(seed)
+  s = start
+  ngame = 0
+  runs = 0
+  while (s != 25) {
+    # get previous state 
+    prev_s = s
+    # get next state
+    s = sample.int(25, size = 1, prob = baseball_matrix[s, ])
+    # Break if outs == 3 (s == 25)
+    if(s == 25){
+      break
+    }
+    # Count runs for all runners in previous state if current state indicates a homerun
+    if(s == 1 || s == 9 || s == 17){
+      scoring_state = outs_runners(prev_s)
+      runs &lt;- runs + scoring_state[2] + scoring_state[3] + scoring_state[4]
+    }
+    # Count runs when not a homerun 
+    else{
+      difference_states = outs_runners(prev_s) - outs_runners(s)
+      runners_sum = difference_states[2] + difference_states[3] + difference_states[4]
+      if(difference_states[1] == 0 &amp;&amp; runners_sum &gt; 0){
+        runs &lt;- runs + runners_sum
+      }
+    }
+  }
+  ngame = ngame + 1
+  return (c(s, ngame, runs))
+}</code></pre>
+<!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3RhcnQgPSAxXG50b3RhbF9ydW5zID0gMFxudG90YWxfZ2FtZXMgPSAwXG5zZWVkX251bSA9IDEwMDBcbmZvciAoc2VlZCBpbiAxOnNlZWRfbnVtKXtcbiAgdG90YWxfcnVucyA8LSB0b3RhbF9ydW5zICsgc2ltdS5nYW1lKHN0YXJ0LCBzZWVkKVszXVxuICB0b3RhbF9nYW1lcyA8LSB0b3RhbF9nYW1lcyArIHNpbXUuZ2FtZShzdGFydCwgc2VlZClbMl1cbn1cbmBgYCJ9 -->
+<pre class="r"><code>start = 1
+total_runs = 0
+total_games = 0
+seed_num = 1000
+for (seed in 1:seed_num){
+  total_runs &lt;- total_runs + simu.game(start, seed)[3]
+  total_games &lt;- total_games + simu.game(start, seed)[2]
+}</code></pre>
+<!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBQYXJhbWV0ZXJzXG5zdGFydCA8LSAxXG5zZWVkX251bSA8LSAxMDAwXG50b3RhbF9ydW5zIDwtIG51bWVyaWMoc2VlZF9udW0gKyAxKVxudG90YWxfZ2FtZXMgPC0gbnVtZXJpYyhzZWVkX251bSArIDEpXG5cbiMgU2ltdWxhdGlvbiBsb29wXG5mb3IgKHNlZWQgaW4gMTpzZWVkX251bSl7XG4gIHRvdGFsX3J1bnNbc2VlZCArIDFdIDwtIHRvdGFsX3J1bnNbc2VlZF0gKyBzaW11LmdhbWUoc3RhcnQsIHNlZWQpWzNdXG4gIHRvdGFsX2dhbWVzW3NlZWQgKyAxXSA8LSB0b3RhbF9nYW1lc1tzZWVkXSArIHNpbXUuZ2FtZShzdGFydCwgc2VlZClbMl1cbn1cblxuIyBDYWxjdWxhdGUgYXZlcmFnZSBmb3IgZWFjaCBzZWVkXG5hdmVyYWdlX3Blcl9zZWVkIDwtIHRvdGFsX3J1bnMgLyB0b3RhbF9nYW1lc1xuXG4jIENyZWF0ZSBhIGxpbmUgcGxvdFxucGxvdCgxOnNlZWRfbnVtLCBhdmVyYWdlX3Blcl9zZWVkWy0xXSwgdHlwZSA9IFwibFwiLCBjb2wgPSBcImJsdWVcIiwgeGxhYiA9IFwiTnVtYmVyIG9mIElubmluZ3NcIiwgeWxhYiA9IFwiQXZlcmFnZSBSdW5zIHBlciBJbm5pbmdcIiwgbWFpbiA9IFwiQXZlcmFnZSBSdW5zIHBlciBJbm5pbmcgdnMgTnVtYmVyIG9mIElubmluZ3NcIilcblxuYGBgIn0= -->
+<pre class="r"><code># Parameters
+start &lt;- 1
+seed_num &lt;- 1000
+total_runs &lt;- numeric(seed_num + 1)
+total_games &lt;- numeric(seed_num + 1)
+
+# Simulation loop
+for (seed in 1:seed_num){
+  total_runs[seed + 1] &lt;- total_runs[seed] + simu.game(start, seed)[3]
+  total_games[seed + 1] &lt;- total_games[seed] + simu.game(start, seed)[2]
+}
+
+# Calculate average for each seed
+average_per_seed &lt;- total_runs / total_games
+
+# Create a line plot
+plot(1:seed_num, average_per_seed[-1], type = &quot;l&quot;, col = &quot;blue&quot;, xlab = &quot;Number of Innings&quot;, ylab = &quot;Average Runs per Inning&quot;, main = &quot;Average Runs per Inning vs Number of Innings&quot;)
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-plot-begin eyJoZWlnaHQiOjQzMi42MzI5LCJ3aWR0aCI6NzAwLCJzaXplX2JlaGF2aW9yIjowLCJjb25kaXRpb25zIjpbXX0= -->
+<p><img src="data:image/png;base64,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ByAAAQhAAAIQgAAEqpoAgreqm5eDgwAEIAABCEAAAhBA8HIONBmBp59+2vbZZx//OeSQQ2zFihVNVpes7Pj999/PMYvY6f++++5rBxxwgA0ZMsQuvvhi03pY/Qicc845OcYffPBB/Qqp41aXXHJJbp/N5Xdw9dVX54556tSpqxB7/vnnc8sff/zxVZY31oz//Oc/uXo88MADjbXbsu1H59PPf/5z22677axjx46266672pQpUwqWz7lfEAszq4TAalVyHBxGBglce+219sgjj+Rq/ve//90GDhyY+87EqgSWLl1ag9mqa5j9+c9/tj/+8Y92//332xZbbFFoFebVQuDf//53jrF4N4b997//ze0zCILG2GWT7+Pll1/OHfMbb7xhEpZt27bN1UsPG9H14Wc/+1lufmNPfPjhh7l6/PCHP2zs3Td4f7/+9a9Nn8ieeeYZa9euXfS1xn/O/Ro4+FJlBBC8VdagWTkc3UTuvvvuGtW94YYbELw1iNT+pVu3bjle8uJInMkDtWjRInvllVfs9NNP96K39lJYmgYC22+/vS1ZssRXpUWLFmmoUqPW4dVXX7WLLrrIzj333Ebdb3PY2VNPPeUPc7XVVrMZM2bYOuusYxtttFFqDr25n/upaYhmUBFCGppBI6fxEOWF/Pzzz33VOnfu7P9LrL355ptlq+5HH31k8hyVagsWLFhl1a+++srX6aWXXvJCcpUV8ma8++67VuprcHny5s6da5999lleKaV91SvK3/72t/4jb/kf/vAHL3TXXnttX4C8Y+X0UIrnW2+9VWvlli9fbvPmzbPXX3+93scV7eCdd96xjz/+OPpa8H99GBZq54KFJ8zUvnWspTKujd///d//2X333ec/LVsWvyyXus+6nIcJh5m4uFxtLi+khG+lTdedQtcZtc97771X0u6//PJL3/Zqj9qsrtcgOQKSzvn4/nR9mjNnjul/MVu4cKFf9K1vfcuHNWy66abWunXrYquXNL/U8zAqrBznfm1lRPvR/7qc++L9v//9z3StaS6hRHFWzW7anbgYBBqdwI477qg7ReA8DcGdd97pp/X9/PPPr1GX5557LvjGN77hPy4OrcYyJzSCjTfe2C/r379/btmTTz4ZfOc73wmcp8yX6zwawcknnxx88cUXNdaJynVCO3A3A7+uylu8eLFf77zzzgu0reoVfbp27Rq4eMNcOdHEY489livDCZbAxckFTvQFLmbO1+/CCy+MVvX1OOWUU4K11lrLl6v1nXgNVO8ke/vtt3N1cXHPBVffaaedcuu4i79fx70uznG84ooramz3ve99zy/baqutcvOPO+44P693796Be90e7LLLLoHqKQ7uhhlMnjw5t64mVK+jjz46cF6k3L7Fv1+/fsH8+fNrrFvoy6BBg/z+VJd//OMfwTbbbOPL0T733HPPwD0Y1NhMbVkKQzFNaucaBbsvBx98cO4YnLfcL37ttddy5bhQkcDFOvq2FY82bdoEw4cPDz755JNcUXXlN2LEiFz5TkDWa5/aqC7nYa6yX08cdthhvg7rrrtu4LzNNRa7eNtc/Vw8rV/W0DY/8cQTc5yj35faP7JHH300t3zChAl+dl3PY/cQkau3e10ffP/73w+c2PPlbrbZZoF7vR84QRjsvffeQatWrfw149vf/nYwe/bsqBr+fIzqd9lll/nzXG2uebo+XHrppYETS7n1NVHKNUjrubh7Xz/9ll0ct6+D6he/Xmi9fPvb3/4WDBgwIHcNcaEg/rfmxFtuVRen68uOfrf6r9+Cfk/FLC3nfl1/Pzqeupz7t99+e+DekOXOL7XlN7/5zeDKK68shob5VUDAquAYOISMEZg5c2buQuNeuwfOWxJ06NDBz5OYct6KGkfUs2dPv0ziOL7s3nvvzZVz6623+m2mTZvmbxrRDap9+/a5dfr27ZsrV6IqWkcXumhaYlEmURPNW2ONNXL10zzdkJzHN1eW63xXY5/Ow+q33WCDDXLzR48enVvfdTDLlS3RG92QJBbzhWRuo68nahO8Ekp/+ctfcqJT4jwy3cCj4xk3blw02//XDVDLxD6yo446ys/r1KlTIAGkY47aSOuKSSSmtU1Uho5BDxvxBw6JiXxBEO0n+n/ggQf6/YmZyo44R3Vef/31A9cRL1o9KJVhUjvnCoxNFLrpO8+jr5PqEz0ciU3Udpp/5pln5kqpKz8J5uhYI8Fb133W9TzMVfbrifjv6frrr6+xOPoN9ujRI9eWDW3zuOB1sfu549cDsKyQ4K3reazfQ8R1ww039O0V/73r3HZvmLzQjV8runTpErg3L74e8XNIwlLlRb/xqGw9HEdW6jVI6+uBUGXoXIoe0PVdD+HF7KGHHvIPWdG+4/9XX331IHogcX0icsceX2fnnXcuVnTBh726noflOPfrWkZdzn09CESsxX333XfPOTY0X+2HVSeB4u/O3C8Eg0AlCOjVe2TOK2jOW2JRZxC9Ilbntbg575f/qteQ8d7Ft9xyi5/vblrmPIT+tZ5eDev1nhNOPl5NryidR9Ov5zwABWNaFfOqdfRK2XmY/brupmtO4JnzOPkQBZXjnv79smXLltn06dP9tP6cccYZuVeKv/vd7/xrUefhMXcDzc13lw+//l133WVRj3TnofQhAoq33XbbbU2vhs8+++xcuUkTCgFRHfVxwtl3+Dn00EN9OYrXi447qZzaluv1oHp1678+w4YN86srDEM8ZQpziHrRX3PNNeZEif+MHz/eFJ/nhLQP3fArJ/xxgt6cuPJtp3PhRz/6kd9CrxwV4ymrL8NC7ewLrOMfhWs8+OCD/jWoMgk4keFLcEJklZJK4bfKRgVmlLLPupyHBXbhs3xE4UXRb0vrqT1nzZrlN1F7OFFQ1jZXwQrNiTieeuqpdXqt7ytWwh/VWyFEOsd++tOf+i2UzUThCQql0PwjjzzSz1fYi/Pqr1KqXnvfcccdPt7aPZyaeyPk11FmFJ2juvbU5xqk86RXr16mMpWxw72xWmXfmqEQLf3GFUajfd90000+1Er7X3PNNX2YmPOO+v/ugcTc2xVzHmtf1pZbbum/qzNrfa2U8zAquxznfqll1OXc1/VD12PFMeua4B5ofNvvtdde5rzm9uKLL0aHwP9qI1CdOp6jSisBFz+Xe5p2Ii9XTT2hu9+W/+i1Y9xc7FbgLuZ+mUu75Rc5AZp7NeluMH6eXr1HZZx00km5IpxADdZbbz2/7Ac/+IGfH/fa7L///rl18ycUNiHTa8/f/OY3ufL1GlMm73Tk5XMZEfy86I+LScyt7zrj+NlHHHGEn6fXp+4GGa3qX6VFdXcX3Nz8/Im4hzdaP/5fXir38BCIZ9zq6hmLPCwqO+7Nfvjhh3PHdN111/ldqH10PFpXHuuhQ4cGTjAFTgjHq1DrdOThVRnyrkemtpMHTvPlZZTVhWGp7RztT/+TPLziGzd5iFQ/eQ4jqws/bZPk4U3aZ13Pw6ie+f91nupY9HFZFPzi0047zX+Xl1/nn6wcbR738KrMsWPH5vatEKRye3jjbzbiYVTxUCn3kJarQ3Qexs8hJ4pU1ZwpPCjiJa9sXa5BKiTy8KqMf/3rX7lyi03ceOONuf1dfvnlNVbT7y6qy6RJk3LLIu+83rokWVrO/br8fup67jtxnOOk0LoxY8b4sJXozUoSI5ZnlwAeXneFwBqPwMSJE3OdutzrJO+FlCdSHlEXX+YrIu9ZvFOJvJeDBw/2y+655x7v/VGnN3laZccff7z/L09pZNqPiwP1H3kMow5yhTqxuVd80WY1/ssTIk/QJptsYvJ8KetBZO4n7yflMYo6O7ibV7TY/5d3ON+iOjqRbO5Vf66OcW9soTrml6Pvffr08VkZ3I3PxDIyectdzG30dZX/Ud2jBVH9o+/5/11oRG5W1CFOM+QZk6l93AOGn1aHGxde4j3B8qDIO/zXv/7VLyvlj7z9yiscmTzVakdZ5HGrL8Ni7Rztq9T/cR7aJmIS8cgvJ75+tK7WKbZ+/vb6Hi9D36NyojLqeh6qjEIm76B7ePGL1I566yBPveyggw4yJ+r9dDnb3Bfo/uj3FXkj5fF1oU/RooL/63oeuzCFXDmRN1kzIi+tpqNrkKYjtpqOLP83HdVXy+X9jM5Nfa/LNUjnua5TSeYeAnKrOMdAbloT8e9KL1YJSzoP8/cZXz86Z7VOIbb520bfk8qo67n/4x//OHe9fPbZZ31mEF1LXdiUv47Jq4xVJwEEb3W2a2qPKh7OoFf7en0ZfT799FNfb91klUc2blFYg16lK/QgugnrNWAkiCJRq+1cHKh/xafXfPpoHYkvF8cXL9ZPK01Pvinvp27wqofzbJnzOJle10cmwSrTa9LIdNOKm+v8Fv/qp6M6SlREddN/XWxVP330WrQUk8h13mlTaIQyMuiY1etYg3jkp3yLlye+cavt5qPji+dGjcRQfHtNu848fp/f/e53c+tLkCjnp27ErtNR/iZFv8fFSHyliHl9GRZq53j5pU7n5zAtxkTllcovad9J+6zreVhsfxJ/++23n1/sOvb4ECK99pVJKMStnG2ucvU7c28N/C70G3De5vjuVpmuy3msjeMM47wUElSqxcvQNtE5qWnVPzo39b0u1yBdA/KvHyoj3+K/jfzzLn5M+duV63v+8efXIb6fcpz7pZQRP+58hoWuwS4O3YdMKQwiLqaVFlAPWrqG5Z9b8eNiOrsEELzZbbvM1VxxclHcpzxEiu3M/0Q3EAnjuOdxhx12MNehzB+zRmhyr+z9dPwm7Hpd55ho1DHln4w+Esmaltcl3+RVjJvS+CjNl0wxi/IsygPrMhbkVovqKe9vdNFXLFjcFGObb1EddUHV8qh+it2TaNX3+gy+sfXWW5sLufC7k9CU1ztKR6SZ8RulyyZQo1pJqcZqrFzkiwSKe2VqruOT9+DrYSaKk9QminssxRSbqJjRyHQOKCWcrHv37v5/fRnmt7MvrB5/4jfYemxer02S9lnX87C2SkQPlzrvR48e7VcVcwmBuJWrzeNlKu70mGOO8bOUhiqyyJtbifM4iW1UB/2XRzBuL7zwQu6r8mJH56ZmNuQalCs0b0IP+JHpmha3+JsU/RYrYXVhVYn9FyqzPue+PPk/+clPfEo3eeZdJ83cID2Ky9dAMFj1EUDwVl+bpvaIXPyZ7yygCuoCo1dR+R8Xy+nrr84WLg6txrFEN2J5DWXqFOZicnPr6JWgLn4yCazoouV63fpObPLwRUI2t5GbiARrNE8jQEWmoTgji3unI9Eo76dL5+RX0c1Q0xKuo0aNWsVLrZWi144SvC6m0L/ak6jTfHl51MkrfqOP9l3KfwnMSJTI0xsXnPJkRIJPnaskLCUirrrqKmtoXlo9REiIqFOMi4fznjSFJagDYLTPunhX1elHnYmUz9hlPvD5TnX80evk+jLMb+dSmGZlnbqeh7Udlx64ot9R9GCpUIe42Cl3m8fro05b8d9dfFklz+P4fopNq8OTy/zgF+uhLnrI1PmtMKJyXYOK7V+v3qOHbT2E602Owoj09imqlzyYenBoLlbXc1/OE9enw/RfD/t6SNG9RW/LIlNHaKz6CCB4q69NU3lEEng333yzr5u8u65zRMF6Hnvssbn5GnktbupBHY8Dcx3Y/GvDaB29UlRPfgkb9bhWfJ0+kQhUTOnw4cOj1Yv+101LYlqmm69LZ+ZffemmEt3043FeEnZRqIRuOhJ72i4e3xdtp/1L1EZl6xWy6qXYPAlfhU7Ej9GvWIc/EuXR9opBjm6CetUXeYfU416xmIpLVjhE3CtVh13lVtWNwuXw9d913BIluuHq2CSsJXrjnvjchgUm1Hb//Oc/fYiH6uc6B/q1FPJx1lln+elKMyxQrUzMqst5WNsBSVBF2TG0ns6d+O9S88rZ5iovbhIjOo8KWSXP40L7y5+n36oeaiVwFbMfxdv/8pe/9PPKdQ3K32/0XW85lEFDvxN5JvXAL3HmOgD6B2WJP4VhxT3h0bbV/L8u577rhOmv43IKRNcqeecVoiPTvSke713N3JrbsSF4m1uLN9HxyqsYvTpXWh3FtxUyxQ8qpZhMr/zjr+X1GkoiN7JCIkqiWJ5hjSokkSkvr24I6silONJi+43K1H+tL0+Obm7ygirlll7f6hVi1KEqnoJK+1I4w+GHH+7rru8SZ7fddluu2MjTqf9aV+m9JPwlnPVRuIZu8hJzDTF55iKRqHLkLY08xvIG7bbbbp6LvKe6aSr9WuRVr+9+FdcnL7peReuGq3RiTzzxhI9n1MODWNXWiS6+XzGR50yCPBqBTnHNEsHRQ0ilGcbrk6XpupyHScclj24UD6lX89EDXbRdOds8KjP+X+fSHnvsEZ+Vm67UeZzbQS0T6sinVIpRrK6uSRJKI0eOzG1VjmtQrrACEy6Dgb+WKcRKvwVdm/RblvfXDdTTrLy7EZ66nPvip+ueHtL1QK5rlUar0zmt/iRqY6w6CbRwN/Swu3l1Hh9H1YwJ6FWfXte7dGG514B1wSGvtLwoEnGKNS5m8s7qFazWibyrWlchDlHcsUIp4iEGWq6fnuIk5S2SV6uxTB05JIIb6tktVF83AppnLrEq8V1qKIM6CMojrfUVziBTzLdEbjwDRf4+m4phfj3S8L2+52FD617fNm/ofit5HifVTee3HuwktCQ2i1lDr0HFyo3mi71+J/L8NjevbsRA/+t77it3sjIC6bojr270kBcvm+kqIiDBi0EAAvUn4DxRemj0H+X6dNkmApeeKIjnkpwxY0b9d9AMtozy8LobTzM42socIudhZbhSavoJcO6nv43SUEM8vFX08MKhNA0BpW+K8gQXqoHShEWxtIWWMy/M8Zrv4YVL3QhwHtaNF2tXDwHO/eppy0oeSSuXdmZ0JXdA2RCodgJKAeRG7PEd5fSqUx/FoiqUQp3QlI1BnVmw4gQU/qFYRHUicSNGFV+RJUUJcB4WRcOCKifAuV/lDVymw8PDWyaQFAOBiEDUiST6zn8INAUBzsOmoM4+00CAcz8NrZC+OiB409cm1AgCEIAABCAAAQhAoIwESEtWRpgUBQEIQAACEIAABCCQPgII3vS1CTWCAAQgAAEIQAACECgjAQRvGWFSFAQgAAEIQAACEIBA+gggeNPXJtQIAhCAAAQgAAEIQKCMBBC8ZYRJURCAAAQgAAEIQAAC6SOA4E1fm1AjCEAAAhCAAAQgAIEyEkDwlhEmRUEAAhCAAAQgAAEIpI8Agjd9bUKNIAABCEAAAhCAAATKSADBW0aYFAUBCEAAAhCAAAQgkD4CCN70tQk1ggAEIAABCEAAAhAoIwEEbxlhUhQEIAABCEAAAhCAQPoIIHjT1ybUCAIQgAAEIAABCECgjAQQvGWESVEQgAAEIAABCEAAAukjgOBNX5tQIwhAAAIQgAAEIACBMhJA8JYRJkVBAAIQgAAEIAABCKSPAII3fW1CjSAAAQhAAAIQgAAEykgAwVtGmBQFAQhAAAIQgAAEIJA+Agje9LUJNYIABCAAAQhAAAIQKCMBBG8ZYVIUBCAAAQhAAAIQgED6CCB409cm1AgCEIAABCAAAQhAoIwEELxlhElREIAABCAAAQhAAALpI4DgTV+bUCMIQAACEIAABCAAgTISQPCWESZFQQACEIAABCAAAQikjwCCN31tQo0gAAEIQAACEIAABMpIAMFbRpgUBQEIQAACEIAABCCQPgKrpa9K2ajRG2+8Yffff382KkstIQABCEAAAhCAQIUIdOvWzQYMGFCh0stTbIvAWXmKal6lqHE7depkO+64Y/M6cI4WAhCAAAQgAAEIxAhcd9119sILL9i3v/3t2Nx0TeLhrWd7fPOb37TLLrvMevXqVc8S2AwCEIAABCAAAQhkn8D06dNt2bJlqT4QYnhT3TxUDgIQgAAEIAABCECgoQQQvA0lyPYQgAAEIAABCEAAAqkmgOBNdfNQOQhAAAIQgAAEIACBhhJA8DaUINtDAAIQgAAEIAABCKSaAII31c1D5SAAAQhAAAIQgAAEGkoAwdtQgmwPAQhAAAIQgAAEIJBqAgjeVDcPlYMABCAAAQhAAAIQaCgBBG9DCVZo+/PPN/vTnypUOMVCAAIQgAAEIACBZkQAwZvSxn7iCbPnnktp5agWBCAAAQhAAAIQyBABBG9KG6tFC7Ply1NaOaoFAQhAAAIQgAAEMkQAwZvixkLwprhxqBoEIAABCEAAApkhgOBNcVMheFPcOFQNAhCAAAQgAIHMEEDwprSpCGlIacNQLQhAAAIQgAAEMkcAwZviJsPDm+LGoWoQgAAEIAABCGSGAII3pU2FhzelDUO1IAABCEAAAhDIHAEEb4qb7KuvUlw5qgYBCEAAAhCAAAQyQiDzgjcIAnv33XdtyZIlGUFeWjXx8JbGibUgAAEIQAACEIBAEoFMCt6FCxfaqFGjrGvXrtamTRtbf/31rWPHjta+fXvbbrvtbOTIkfbJJ58kHXvqlxPDm/omooIQgAAEIAABCGSAwGoZqGONKs6bN8/69OljLZwLdNCgQdatWzfr0KGD/y4v75w5c2zChAk2ceJEmzp1qnXv3r3G9ln5goc3Ky1FPSEAAQhAAAIQSDuBzAnecePGec/ulClTrG3btgX5jh071gYOHGi33nqrjRkzpuA6WZiJhzcLrUQdIQABCEAAAhBIO4HMhTTMmjXLhg4dWlTsCnjr1q1t+PDhNmnSpLTzr7V+CN5a8bAQAhCAAAQgAAEIlEQgc4K3d+/eNn369MSDmzZtmnXu3DlxvbSuQEhDWluGekEAAhCAAAQgkDUCmQtpGDx4sEn0Llq0yIYMGeJjdNVhrWXLlj5Tw9y5c238+PH20EMPmcIesmykJcty61F3CEAAAhCAAATSQiBzgrdnz542e/ZsGzFihA0bNsxWrFixCst+/frZ5MmTrW/fvqssy8oMPLxZaSnqCQEIQAACEIBA2glkTvAKaI8ePXwGhqVLl9r8+fNNXt1ly5bZRhttZF26dPEpytIOvpT6EcNbCiXWgQAEIAABCEAAArUTyKTgjQ5JOXglfvWRfeViAN5+++1ocab/4+HNdPNReQhAAAIQgAAEUkQgc53WxE6i9uqrr/Ypx1566SWP89xzz7UNNtjAe3jl6b3vvvtShLl+VcHDWz9ubAUBCEAAAhCAAATiBDLn4ZXY3X333X0ogzy8V155pV188cV2ySWX2GGHHWY777yz3XbbbX76qaeesp122il+vJmaRvBmqrmoLAQgAAEIQAACKSWQOQ/vpZdeamuvvbZpxDXF72qAiR//+Md25plneqF78skn27/+9S8vfDVIRVaNkIasthz1hgAEIAABCEAgbQQyJ3ifeeYZP6iEwhaUjuznP/+5Z3rEEUfUYKsMDv/9739rzMvaF9KSZa3FqC8EIAABCEAAAmkkkLmQhu22286ef/75HMutt97a5Mlt3759bp4mZs6caeuvv36NeaV8eeedd+zVV19NXPXdd9+1xYsXJ65X3xXw8NaXHNtBAAIQgAAEIACBmgQyJ3jlyd17770tCAI777zzbOONN7bTTz89d1QLFizwMb0333yzXXfddbn5pU7MmDHDLrzwwsTV58yZY88++6wdcMABievWdwVieOtLju0gAAEIQAACEIDASgKZE7zqsHbXXXfZL37xC3vllVe84F15OOZHWbvmmmvstNNOs2OOOSa+qKTp/fbbz/RJsrXWWsvn/U1ar77L8fDWlxzbQQACEIAABCAAgZoEMid4Vf2DDz7YDjzwQJ93t+bhmB111FF+BDalKMu64eHNegtSfwhAAAIQgAAE0kAgk4JX4Fq1auU/+RA7d+7sZ3388ce22mqr2eqrr56/Sia+4+HNRDNRSQhAAAIQgAAEMkAgc1kaSmW6ySabeE9vqeuncT08vGlsFeoEAQhAAAIQgEDWCGTWw5sE+qSTTrLNN988abVULyctWaqbh8pBAAIQgAAEIJARAlUreJXBIctGSEOWW4+6QwACEIAABCCQJgKZD2lQejLlxF2yZEmauFIXCEAAAhCAAAQgAIGUEEj08D7++ON2wgknFKxuC+eGVKewTp062f777190vYIbN2DmwoUL7aqrrrI777zTNL3862BXDTnctWtX69evn40ZM8bWXHPNBuylaTeVhxeDAAQgAAEIQAACEGg4gUTBq6wHGrHskUce8TGxAwYM8HudOnWqvfjii3bkkUeaMiIoZlZ5cS+//PKG16qWEubNm2d9+vQxie1BgwZZt27drEOHDv67vLwaEGLChAk2ceJEUx27d+9eS2ksggAEIAABCEAAAhCodgKJglfpv55++mm7++677fDDD8/xWLFihe2zzz62zjrr+MEe/v73v/sBG0aPHr3KML+5jcowoWGE5cWdMmWKtW3btmCJY8eOtYEDB9qtt97qPb0FV0r5TDqspbyBqB4EIAABCEAAApkhkBjDK2EpgRkXuzq6li1b2qmnnuq9qfrev39/H9rwzDPP6GvFbNasWTZ06NCiYlc7bt26tQ0fPtwmTZpUsXpUumB3CBgEIAABCEAAAhCAQBkIJApexefOnz/f3n///VV2N3PmzNzADl85l+QXX3xh66677irrlXNG7969bfr06YlFTps2zaJBKBJXTuEKri+eN3LxprBxqBIEIAABCEAAApkikBjSsO+++5rCF44++mg7/vjjTd+VGUGe36uvvtoP5bts2TJTKIM8qzvssENFAQwePNgkehctWmRDhgzxMbodO3b0HmfF8M6dO9eHWDz00EO+jhWtTCMUvnSpuRHj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" /></p>
+<!-- rnb-plot-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
@@ -2076,7 +2876,7 @@ $(document).ready(function () {
 <!-- code folding -->
 <script>
 $(document).ready(function () {
-  window.initializeSourceEmbed("Untitled.Rmd");
+  window.initializeSourceEmbed("WiiSports_Baseball.Rmd");
   window.initializeCodeFolding("show" === "show");
 });
 </script>
