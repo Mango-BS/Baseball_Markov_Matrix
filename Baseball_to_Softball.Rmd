@@ -1,0 +1,1476 @@
+---
+title: "Baseball to Softball"
+output: html_notebook
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Cmd+Shift+Enter*. 
+
+```{r}
+#in order to run this code, you will need to install these packages. You can do so by going to the install button, or by going to the console and typing, for example, install.packages("knitr")
+suppressPackageStartupMessages(library(knitr)) #makes pdfs
+suppressPackageStartupMessages(library(latex2exp))
+suppressPackageStartupMessages(library(tidyverse)) #good library for data manipulation, includes dplyr and ggplot
+suppressPackageStartupMessages(library(retrosheet))
+suppressPackageStartupMessages(library(Lahman))
+
+# you can read more about the tidyverse at: https://r4ds.had.co.nz/
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Cmd+Option+I*.
+
+When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Cmd+Shift+K* to preview the HTML file). 
+
+The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
+
+Read in CSV
+
+```{r}
+retro_sheet_column_names <- c(
+  "game_id", "visiting_team_df", "inning", "batting_team_df", "outs", "balls", 
+  "strikes", "pitch_sequence", "vis_score", "home_score", "batter", 
+  "batter_hand", "res_batter", "res_batter_hand", "pitcher", "pitcher_hand", 
+  "res_pitcher", "res_pitcher_hand", "catcher", "first_base", "second_base", 
+  "third_base", "shortstop", "left_field", "center_field", "right_field", 
+  "first_runner", "second_runner", "third_runner", "event_text", 
+  "leadoff_flag", "pinchhit_flag", "defensive_position", "lineup_position", 
+  "event_type", "batter_event_flag", "ab_flag", "hit_value", "SH_flag", 
+  "SF_flag", "outs_on_play", "double_play_flag", "triple_play_flag", 
+  "RBI_on_play", "wild_pitch_flag", "passed_ball_flag", "fielded_by", 
+  "batted_ball_type", "bunt_flag", "foul_flag", "hit_location", "num_errors", 
+  "1st_error_player", "1st_error_type", "2nd_error_player", "2nd_error_type", 
+  "3rd_error_player", "3rd_error_type", "batter_dest", 
+  "runner_on_1st_dest", "runner_on_2nd_dest", "runner_on_3rd_dest", 
+  "play_on_batter", "play_on_runner_on_1st", "play_on_runner_on_2nd", 
+  "play_on_runner_on_3rd", "SB_for_runner_on_1st_flag", 
+  "SB_for_runner_on_2nd_flag", "SB_for_runner_on_3rd_flag", 
+  "CS_for_runner_on_1st_flag", "CS_for_runner_on_2nd_flag", 
+  "CS_for_runner_on_3rd_flag", "PO_for_runner_on_1st_flag", 
+  "PO_for_runner_on_2nd_flag", "PO_for_runner_on_3rd_flag", 
+  "Responsible_pitcher_for_runner_on_1st", 
+  "Responsible_pitcher_for_runner_on_2nd", 
+  "Responsible_pitcher_for_runner_on_3rd", "New_Game_Flag", 
+  "End_Game_Flag", "Pinch_runner_on_1st", "Pinch_runner_on_2nd", 
+  "Pinch_runner_on_3rd", "Runner_removed_for_pinch_runner_on_1st", 
+  "Runner_removed_for_pinch_runner_on_2nd", 
+  "Runner_removed_for_pinch_runner_on_3rd", 
+  "Batter_removed_for_pinch_hitter", 
+  "Position_of_batter_removed_for_pinch_hitter", 
+  "Fielder_with_First_Putout", "Fielder_with_Second_Putout", 
+  "Fielder_with_Third_Putout", "Fielder_with_First_Assist", 
+  "Fielder_with_Second_Assist", "Fielder_with_Third_Assist", 
+  "Fielder_with_Fourth_Assist", "Fielder_with_Fifth_Assist", "event_num"
+)
+```
+
+## Let's load in the Data
+
+```{r}
+# team_df = read.csv("/Users/bryanmongeserrano/Downloads/Baseball_Markov_Matrix-main/Mets/Mets_2015_2023.csv", header = FALSE )
+# team_df = read.csv("/Users/bryanmongeserrano/Downloads/Baseball_Markov_Matrix-main/Dodgers/Dodgers_2015_2023.csv", header = FALSE )
+```
+
+```{r}
+team_df = read.csv("/Users/bryanmongeserrano/Downloads/Baseball_Markov_Matrix-main/Giants/Giants_2015_2023.csv", header = FALSE )
+colnames(team_df) <- retro_sheet_column_names
+team_df <- team_df[-1,] #RBIND ADDITION
+team_df$outs <- as.integer(team_df$outs)#RBIND ADDITION
+team_df$event_type <- as.integer(team_df$event_type)#RBIND ADDITION
+
+total_events = nrow(team_df) 
+```
+
+```{r}
+teamB_df = read.csv("/Users/bryanmongeserrano/Downloads/Baseball_Markov_Matrix-main/Yankees/Yankees_2015_2023.csv", header = FALSE )
+colnames(teamB_df) <- retro_sheet_column_names
+teamB_df <- teamB_df[-1,] #RBIND ADDITION
+teamB_df$outs <- as.integer(teamB_df$outs)#RBIND ADDITION
+teamB_df$event_type <- as.integer(teamB_df$event_type)#RBIND ADDITION
+
+total_events = nrow(teamB_df) 
+```
+
+## Let's Add in Our Assumptions:
+```{r}
+# Remove All Double Plays and Triple Plays
+team_df = team_df[team_df$outs_on_play < 2,]
+# Only Have Walks, Single, Doubles, Triples, and Homeruns, General Outs, Strikeouts
+team_df <- subset(
+  team_df, 
+  team_df$event_type == 2 | 
+  team_df$event_type == 3 | 
+  team_df$event_type == 14| 
+  team_df$event_type == 20| 
+  team_df$event_type == 21| 
+  team_df$event_type == 22| 
+  team_df$event_type == 23
+  )
+```
+
+```{r}
+# Remove All Double Plays and Triple Plays
+teamB_df = team_df[teamB_df$outs_on_play < 2,]
+# Only Have Walks, Single, Doubles, Triples, and Homeruns, General Outs, Strikeouts
+teamB_df <- subset(
+  teamB_df, 
+  teamB_df$event_type == 2 | 
+  teamB_df$event_type == 3 | 
+  teamB_df$event_type == 14| 
+  teamB_df$event_type == 20| 
+  teamB_df$event_type == 21| 
+  teamB_df$event_type == 22| 
+  teamB_df$event_type == 23
+  )
+```
+
+
+```{r}
+# Calculate The Total Number of Homeruns
+total_hrs = 0
+for (i in 1:nrow(team_df)) {
+  if (team_df$event_type[i] == 23) {
+    total_hrs <- total_hrs + 1
+  }
+}
+total_hrs
+```
+
+```{r}
+# Calculate The Total Number of Homeruns
+total_hrs = 0
+for (i in 1:nrow(teamB_df)) {
+  if (teamB_df$event_type[i] == 23) {
+    total_hrs <- total_hrs + 1
+  }
+}
+total_hrs
+```
+
+
+## Print Number of Total Events: This is basically going to be the denominator
+```{r}
+# Updated total events
+total_events = nrow(team_df)
+total_events
+```
+
+```{r}
+total_events = nrow(teamB_df)
+total_events
+```
+
+
+## Let's Set Up the Baseball Matrix
+```{r}
+# Because we add row 25 for "3 outs" absorbing state
+teamA_matrix<- matrix(0, nrow = 25, ncol = 25)
+teamB_matrix<- matrix(0, nrow = 25, ncol = 25)
+teamA_matrix
+```
+
+## Helper Functions to Populate Baseball Matrix
+This function will return a list that will contain the row and col index values so
+we can index into the baseball matrix (24 x 24) (with an additional row and column for the absorbing state) when iterating through the dataframe on the next cell.
+This function will handle all the events where there are no runners on base
+
+
+```{r}
+no_runners_on <- function(outs, event, outs_on_play) {
+  # Event For Homerun
+  from_index = 1 + (8 * outs)
+  # Event For Single
+  if (event == 20 || event == 14) {
+    return (c(from_index, from_index + 1))
+  }
+  # Event For Double
+  if (event == 21) {
+    return (c(from_index, from_index + 2))
+  }
+  # Event For Triple
+  if (event == 22) {
+    return (c(from_index, from_index + 3))
+  }
+  # Event For Homerun
+  if (event == 23) {
+    return (c(from_index, from_index))
+  }
+  # 0 Outs -> 1 Out
+  if (event == 2 || event == 3 && outs == 0 && outs_on_play == 1) {
+    return(c(from_index, from_index + 8))
+  }
+  # 1 Out -> 2 Outs
+  if (event == 2 || event == 3 && outs == 1 && outs_on_play == 1) {
+    return(c(from_index, from_index + 8))
+  }
+    # Will Handle 2 Outs -> 3 Outs Later  {WOULD  RECCOMEND PUTTING THE 2 OUTS -> 3 OUTS STATEMENT ABOVE}
+  # 2 Outs -> 3 Outs
+  if ((event == 2 || event == 3) && outs == 2 && outs_on_play == 1) {
+    return(c(17, 25))
+  }
+
+  #Edge Case -> There are Outs_on_Play = 0 Just Return [0, 0]
+  return(c(0, 0))
+}
+```
+
+
+This function will return a list that will contain the row and col index values so
+we can index into the baseball matrix (24 x 24) when iterating through the 
+dataframe on the next cell.
+This function will handle all the events where there are runners on first base
+```{r}
+runner_on_first <- function(outs, event, outs_on_play) {
+  # Event For Homerun
+  from_index = 2 + (8 * outs)
+  # Event For Single
+  if (event == 20 || event == 14) {
+    return (c(from_index, from_index + 3))
+  }
+  # Event For Double
+  if (event == 21) {
+    return (c(from_index, from_index + 5))
+  }
+  # Event For Triple
+  if (event == 22) {
+    return (c(from_index, from_index + 2))
+  }
+  # Event For Homerun
+  if (event == 23) {
+    return (c(from_index, from_index - 1))
+  }
+  # 0 Outs -> 1 Out
+  if (event == 2 || event == 3 && outs == 0 && outs_on_play == 1) {
+    return(c(from_index, from_index + 8))
+  }
+  # 1 Out -> 2 Outs
+  if (event == 2 || event == 3 && outs == 1 && outs_on_play == 1) {
+    return(c(from_index, from_index + 8))
+  }
+  # Will Handle 2 Outs -> 3 Outs Later  {WOULD  RECCOMEND PUTTING THE 2 OUTS -> 3 OUTS STATEMENT ABOVE}
+  # 2 Outs -> 3 Outs
+  if ((event == 2 || event == 3) && outs == 2 && outs_on_play == 1) {
+    return(c(18, 25))
+  }
+  #Edge Case -> There are Outs_on_Play = 0 Just Return [0, 0]
+  return(c(0, 0))
+}
+```
+
+
+This function will return a list that will contain the row and col index values so
+we can index into the baseball matrix (24 x 24) when iterating through the 
+dataframe on the next cell.
+
+This function will handle all the events where there are runners on second base
+
+```{r}
+runner_on_second <- function(outs, event, outs_on_play) {
+  from_index = 3 + (8 * outs)
+  # Event For Single
+  if (event == 20 || event == 14) {
+    return (c(from_index, from_index + 2))
+  }
+  # Event For Double
+  if (event == 21) {
+    return (c(from_index, from_index))
+  }
+  # Event For Triple
+  if (event == 22) {
+    return (c(from_index, from_index + 1))
+  }
+  # Event For Homerun
+  if (event == 23) {
+    return (c(from_index, from_index - 2))
+  }
+  # 0 Outs -> 1 Out
+  if (event == 2 || event == 3 && outs == 0 && outs_on_play == 1) {
+    return(c(from_index, from_index + 8))
+  }
+  # 1 Out -> 2 Outs
+  if (event == 2 || event == 3 && outs == 1 && outs_on_play == 1) {
+    return(c(from_index, from_index + 8))
+  }
+  # Will Handle 2 Outs -> 3 Outs Later  {WOULD  RECCOMEND PUTTING THE 2 OUTS -> 3 OUTS STATEMENT ABOVE}
+  # 2 Outs -> 3 Outs
+  if ((event == 2 || event == 3) && outs == 2 && outs_on_play == 1) {
+    return(c(19, 25))
+  }
+  #Edge Case -> There are Outs_on_Play = 0 Just Return [0, 0]
+  return(c(0, 0))
+}
+```
+
+This function will return a list that will contain the row and col index values so
+we can index into the baseball matrix (24 x 24) when iterating through the 
+dataframe on the next cell.
+This function will handle all the events where there are runners on third base
+```{r}
+runner_on_third <- function(outs, event, outs_on_play) {
+  from_index = 4 + (8 * outs)
+  # Event For a Walk
+  if (event == 14) {
+    return (c(from_index, from_index + 2))
+  }
+  # Event For a Single
+  if (event == 20) {
+    return (c(from_index, from_index - 2))
+  }
+
+  # Event For Double
+  if (event == 21) {
+    return (c(from_index, from_index - 1))
+  }
+  # Event For Triple
+  if (event == 22) {
+    return (c(from_index, from_index))
+  }
+  # Event For Homerun
+  if (event == 23) {
+    return (c(from_index, from_index - 3))
+  }
+  # 0 Outs -> 1 Out
+  if (event == 2 || event == 3 && outs == 0 && outs_on_play == 1) {
+    return(c(from_index, from_index + 8))
+  }
+  # 1 Out -> 2 Outs
+  if (event == 2 || event == 3 && outs == 1 && outs_on_play == 1) {
+    return(c(from_index, from_index + 8))
+  }
+  # Will Handle 2 Outs -> 3 Outs Later  {WOULD  RECCOMEND PUTTING THE 2 OUTS -> 3 OUTS STATEMENT ABOVE}
+  # 2 Outs -> 3 Outs
+  if ((event == 2 || event == 3) && outs == 2 && outs_on_play == 1) {
+    return(c(20, 25))
+  }
+  #Edge Case -> There are Outs_on_Play = 0 Just Return [0, 0]
+  return(c(0, 0))
+}
+```
+
+This function will return a list that will contain the row and col index values so
+we can index into the baseball matrix (24 x 24) when iterating through the 
+dataframe on the next cell.
+
+This function will handle all the events where there are runners on first and second base
+
+```{r}
+runner_on_first_second <- function(outs, event, outs_on_play) {
+  # Event For Homerun
+  from_index = 5 + (8 * outs)
+  # Event For Single
+  if (event == 20 || event == 14) {
+    return (c(from_index, from_index + 3))
+  }
+  # Event For Double
+  if (event == 21) {
+    return (c(from_index, from_index + 2))
+  }
+  # Event For Triple
+  if (event == 22) {
+    return (c(from_index, from_index - 1))
+  }
+  # Event For Homerun
+  if (event == 23) {
+    return (c(from_index, from_index - 4))
+  }
+  # I RECCOMEND IT HERE!
+  # 0 Outs -> 1 Out
+  if ((event == 2 || event == 3) && outs == 0 && outs_on_play == 1) {
+    return(c(from_index, from_index + 8))
+  }
+  # 1 Outs -> 2 Outs
+  if ((event == 2 || event == 3) && outs == 1 && outs_on_play == 1) {
+    return(c(from_index, from_index + 8))
+  }
+  
+  # Will Handle 2 Outs -> 3 Outs Later  {WOULD  RECCOMEND PUTTING THE 2 OUTS -> 3 OUTS STATEMENT ABOVE}
+  # 2 Outs -> 3 Outs
+  if ((event == 2 || event == 3) && outs == 2 && outs_on_play == 1) {
+    return(c(21, 25))
+  }
+  #Edge Case -> There are Outs_on_Play = 0 Just Return [0, 0]
+  return(c(0, 0))
+}
+```
+
+This function will return a list that will contain the row and col index values so
+we can index into the baseball matrix (24 x 24) when iterating through the 
+dataframe on the next cell.
+
+This function will handle all the events where there are runners on first and third base
+
+```{r}
+runner_on_first_third <- function(outs, event, outs_on_play) {
+  # Event For Homerun
+  from_index = 6 + (8 * outs)
+  # Event For Walk
+  if (event == 14) {
+    return (c(from_index, from_index + 2))
+  }
+  # Event For Single
+  if (event == 20) {
+    return (c(from_index, from_index - 1))
+  }
+  # Event For Double
+  if (event == 21) {
+    return (c(from_index, from_index + 1))
+  }
+  # Event For Triple
+  if (event == 22) {
+    return (c(from_index, from_index - 2))
+  }
+  # Event For Homerun
+  if (event == 23) {
+    return (c(from_index, from_index - 5))
+  }
+  # 0 Outs -> 1 Out
+  if ((event == 2 || event == 3) && outs == 0 && outs_on_play == 1) {
+    return(c(from_index, from_index + 8))
+  }
+  # 1 Out -> 2 Outs
+  if ((event == 2 || event == 3) && outs == 1 && outs_on_play == 1) {
+    return(c(from_index, from_index + 8))
+  }
+  
+  # Will Handle 2 Outs -> 3 Outs Later 
+  if ((event == 2 || event == 3) && outs == 2 && outs_on_play == 1) {
+    return(c(22, 25))
+  }
+
+  #Edge Case -> There are Outs_on_Play = 0 Just Return [0, 0]
+  return(c(0, 0))
+}
+```
+
+
+This function will return a list that will contain the row and col index values so
+we can index into the baseball matrix (24 x 24) when iterating through the 
+dataframe on the next cell.
+
+This function will handle all the events where there are runners on second and third base
+
+```{r}
+runner_on_second_third <- function(outs, event, outs_on_play) {
+  from_index = 7 + (8 * outs)
+  # Event For Single or Walk
+  if (event == 20 || event == 14) {
+    return (c(from_index, from_index - 1))
+  }
+  # Event For Double
+  if (event == 21) {
+    return (c(from_index, from_index - 4))
+  }
+  # Event For Triple
+  if (event == 22) {
+    return (c(from_index, from_index - 3))
+  }
+  # Event For Homerun
+  if (event == 23) {
+    return (c(from_index, from_index - 6))
+  }
+  # 0 Outs -> 1 Out
+  if ((event == 2 || event == 3) && outs == 0 && outs_on_play == 1) {
+    return(c(from_index, from_index + 8))
+  }
+  # 1 Out -> 2 Outs
+  if ((event == 2 || event == 3) && outs == 1 && outs_on_play == 1) {
+    return(c(from_index, from_index + 8))
+  }
+  
+  # Will Handle 2 Outs -> 3 Outs Later
+  if ((event == 2 || event == 3) && outs == 2 && outs_on_play == 1) {
+    return(c(23, 25))
+  }
+
+  #Edge Case -> There are Outs_on_Play = 0 Just Return [0, 0]
+  return(c(0, 0))
+}
+```
+
+This function will return a list that will contain the row and col index values so
+we can index into the baseball matrix (24 x 24) when iterating through the 
+dataframe on the next cell.
+This function will handle all the events where there are runners on first, second, and third base
+
+```{r}
+runner_on_first_second_third <- function(outs, event, outs_on_play) {
+  # Event For Homerun
+  from_index = 8 + (8 * outs)
+  # Event For Single
+  if (event == 20 || event == 14) {
+    return (c(from_index, from_index))
+  }
+  # Event For Double
+  if (event == 21) {
+    return (c(from_index, from_index - 1))
+  }
+  # Event For Triple
+  if (event == 22) {
+    return (c(from_index, from_index - 4))
+  }
+  # Event For Homerun
+  if (event == 23) {
+    return (c(from_index, from_index - 7))
+  }
+  # 0 Outs -> 1 Out
+  if ((event == 2 || event == 3) && outs == 0 && outs_on_play == 1) {
+    return(c(from_index, from_index + 8))
+  }
+  # 1 Out -> 2 Outs
+  if ((event == 2 || event == 3) && outs == 1 && outs_on_play == 1) {
+    return(c(from_index, from_index + 8))
+  }
+  # 2 Outs -> 3 Outs Later
+  if ((event == 2 || event == 3) && outs == 2 && outs_on_play == 1) {
+    return(c(24, 25))
+  }
+  #Edge Case -> There are Outs_on_Play = 0 Just Return [0, 0]
+  return(c(0, 0))
+}
+```
+
+This function will return a list that will contain the row and col index values so
+we can index into the baseball matrix (24 x 24) when iterating through the 
+dataframe on the next cell.
+This function will handle all the events where there are runners on first
+and second base
+
+
+## Populate Baseball Matrix
+```{r}
+for (i in 1:nrow(team_df)) {
+  # No Runners on Base
+  if (team_df$first_runner[i] == '' &&
+      team_df$second_runner[i] == '' &&
+      team_df$third_runner[i] == '') {
+    row_col = no_runners_on(team_df$outs[i], 
+                            team_df$event_type[i], 
+                            team_df$outs_on_play[i])
+    row = row_col[1]
+    col = row_col[2]
+    if (row != 0 && col != 0 && row <= nrow(teamA_matrix) && col <= ncol(teamA_matrix)) {
+      teamA_matrix[row, col] <- teamA_matrix[row, col] + 1
+    }
+  }
+  
+  # Runner on First Base
+  if (team_df$first_runner[i] != '' &&
+      team_df$second_runner[i] == '' &&
+      team_df$third_runner[i] == '') {
+    row_col = runner_on_first(team_df$outs[i],
+                              team_df$event_type[i],
+                              team_df$outs_on_play[i])
+    row = row_col[1]
+    col = row_col[2]
+    if (row != 0 && col != 0 && row <= nrow(teamA_matrix) && col <= ncol(teamA_matrix)) {
+      teamA_matrix[row, col] <- teamA_matrix[row, col] + 1
+    }
+  }
+  
+  # Runner on Second Base
+  if (team_df$first_runner[i] == '' &&
+      team_df$second_runner[i] != '' &&
+      team_df$third_runner[i] == '') {
+    row_col = runner_on_second(team_df$outs[i],
+                               team_df$event_type[i],
+                               team_df$outs_on_play[i])
+    row = row_col[1]
+    col = row_col[2]
+    if (row != 0 && col != 0 && row <= nrow(teamA_matrix) && col <= ncol(teamA_matrix)) {
+      teamA_matrix[row, col] <- teamA_matrix[row, col] + 1
+    }
+  }
+  
+  # Runner on Third
+  if (team_df$first_runner[i] == '' &&
+      team_df$second_runner[i] == '' &&
+      team_df$third_runner[i] != '') {
+    row_col = runner_on_third(team_df$outs[i],
+                              team_df$event_type[i],
+                              team_df$outs_on_play[i])
+    row = row_col[1]
+    col = row_col[2]
+    if (row != 0 && col != 0 && row <= nrow(teamA_matrix) && col <= ncol(teamA_matrix)) {
+      teamA_matrix[row, col] <- teamA_matrix[row, col] + 1
+    }
+  }
+  
+  # Runner on First & Second
+  if (team_df$first_runner[i] != '' &&
+      team_df$second_runner[i] != '' &&
+      team_df$third_runner[i] == '') {
+    row_col = runner_on_first_second(team_df$outs[i],
+                                     team_df$event_type[i],
+                                     team_df$outs_on_play[i])
+    row = row_col[1]
+    col = row_col[2]
+    if (row != 0 && col != 0 && row <= nrow(teamA_matrix) && col <= ncol(teamA_matrix)) {
+      teamA_matrix[row, col] <- teamA_matrix[row, col] + 1
+    }
+  }
+  
+  # Runner on First & Third
+  if (team_df$first_runner[i] != '' &&
+      team_df$second_runner[i] == '' &&
+      team_df$third_runner[i] != '') {
+    row_col = runner_on_first_third(team_df$outs[i],
+                                    team_df$event_type[i],
+                                    team_df$outs_on_play[i])
+    row = row_col[1]
+    col = row_col[2]
+    if (row != 0 && col != 0 && row <= nrow(teamA_matrix) && col <= ncol(teamA_matrix)) {
+      teamA_matrix[row, col] <- teamA_matrix[row, col] + 1
+    }
+  }
+  
+  # Runner on Second & Third
+  if (team_df$first_runner[i] == '' &&
+      team_df$second_runner[i] != '' &&
+      team_df$third_runner[i] != '') {
+    row_col = runner_on_second_third(team_df$outs[i],
+                                     team_df$event_type[i],
+                                     team_df$outs_on_play[i])
+    row = row_col[1]
+    col = row_col[2]
+    if (row != 0 && col != 0 && row <= nrow(teamA_matrix) && col <= ncol(teamA_matrix)) {
+      teamA_matrix[row, col] <- teamA_matrix[row, col] + 1
+    }
+  }
+  
+  # Runner on First, Second, & Third
+  if (team_df$first_runner[i] != '' &&
+      team_df$second_runner[i] != '' &&
+      team_df$third_runner[i] != '') {
+    row_col = runner_on_first_second_third(team_df$outs[i],
+                                           team_df$event_type[i],
+                                           team_df$outs_on_play[i])
+    row = row_col[1]
+    col = row_col[2]
+    if (row != 0 && col != 0 && row <= nrow(teamA_matrix) && col <= ncol(teamA_matrix)) {
+      teamA_matrix[row, col] <- teamA_matrix[row, col] + 1
+    }
+  }
+}
+```
+
+```{r}
+for (i in 1:nrow(teamB_df)) {
+  # No Runners on Base
+  if (teamB_df$first_runner[i] == '' &&
+      teamB_df$second_runner[i] == '' &&
+      teamB_df$third_runner[i] == '') {
+    row_col = no_runners_on(teamB_df$outs[i], 
+                            teamB_df$event_type[i],
+                            teamB_df$outs_on_play[i])
+    row = row_col[1]
+    col = row_col[2]
+    if (row != 0 && col != 0 && row <= nrow(teamB_matrix) && col <= ncol(teamB_matrix)) {
+      teamB_matrix[row, col] <- teamB_matrix[row, col] + 1
+    }
+  }
+  
+  # Runner on First Base
+  if (teamB_df$first_runner[i] != '' &&
+      teamB_df$second_runner[i] == '' &&
+      teamB_df$third_runner[i] == '') {
+    row_col = runner_on_first(teamB_df$outs[i],
+                              teamB_df$event_type[i],
+                              teamB_df$outs_on_play[i])
+    row = row_col[1]
+    col = row_col[2]
+    if (row != 0 && col != 0 && row <= nrow(teamB_matrix) && col <= ncol(teamB_matrix)) {
+      teamB_matrix[row, col] <- teamB_matrix[row, col] + 1
+    }
+  }
+  
+  # Runner on Second Base
+  if (teamB_df$first_runner[i] == '' &&
+      teamB_df$second_runner[i] != '' &&
+      teamB_df$third_runner[i] == '') {
+    row_col = runner_on_second(teamB_df$outs[i],
+                               teamB_df$event_type[i],
+                               teamB_df$outs_on_play[i])
+    row = row_col[1]
+    col = row_col[2]
+    if (row != 0 && col != 0 && row <= nrow(teamB_matrix) && col <= ncol(teamB_matrix)) {
+      teamB_matrix[row, col] <- teamB_matrix[row, col] + 1
+    }
+  }
+  
+  # Runner on Third
+  if (teamB_df$first_runner[i] == '' &&
+      teamB_df$second_runner[i] == '' &&
+      teamB_df$third_runner[i] != '') {
+    row_col = runner_on_third(teamB_df$outs[i],
+                              teamB_df$event_type[i],
+                              teamB_df$outs_on_play[i])
+    row = row_col[1]
+    col = row_col[2]
+    if (row != 0 && col != 0 && row <= nrow(teamB_matrix) && col <= ncol(teamB_matrix)) {
+      teamB_matrix[row, col] <- teamB_matrix[row, col] + 1
+    }
+  }
+  
+  # Runner on First & Second
+  if (teamB_df$first_runner[i] != '' &&
+      teamB_df$second_runner[i] != '' &&
+      teamB_df$third_runner[i] == '') {
+    row_col = runner_on_first_second(teamB_df$outs[i],
+                                     teamB_df$event_type[i],
+                                     teamB_df$outs_on_play[i])
+    row = row_col[1]
+    col = row_col[2]
+    if (row != 0 && col != 0 && row <= nrow(teamB_matrix) && col <= ncol(teamB_matrix)) {
+      teamB_matrix[row, col] <- teamB_matrix[row, col] + 1
+    }
+  }
+  
+  # Runner on First & Third
+  if (teamB_df$first_runner[i] != '' &&
+      teamB_df$second_runner[i] == '' &&
+      teamB_df$third_runner[i] != '') {
+    row_col = runner_on_first_third(teamB_df$outs[i],
+                                    teamB_df$event_type[i],
+                                    teamB_df$outs_on_play[i])
+    row = row_col[1]
+    col = row_col[2]
+    if (row != 0 && col != 0 && row <= nrow(teamB_matrix) && col <= ncol(teamB_matrix)) {
+      teamB_matrix[row, col] <- teamB_matrix[row, col] + 1
+    }
+  }
+  
+  # Runner on Second & Third
+  if (teamB_df$first_runner[i] == '' &&
+      teamB_df$second_runner[i] != '' &&
+      teamB_df$third_runner[i] != '') {
+    row_col = runner_on_second_third(teamB_df$outs[i],
+                                     teamB_df$event_type[i],
+                                     teamB_df$outs_on_play[i])
+    row = row_col[1]
+    col = row_col[2]
+    if (row != 0 && col != 0 && row <= nrow(teamB_matrix) && col <= ncol(teamB_matrix)) {
+      teamB_matrix[row, col] <- teamB_matrix[row, col] + 1
+    }
+  }
+  
+  # Runner on First, Second, & Third
+  if (teamB_df$first_runner[i] != '' &&
+      teamB_df$second_runner[i] != '' &&
+      teamB_df$third_runner[i] != '') {
+    row_col = runner_on_first_second_third(teamB_df$outs[i],
+                                           teamB_df$event_type[i],
+                                           teamB_df$outs_on_play[i])
+    row = row_col[1]
+    col = row_col[2]
+    if (row != 0 && col != 0 && row <= nrow(teamB_matrix) && col <= ncol(teamB_matrix)) {
+      teamB_matrix[row, col] <- teamB_matrix[row, col] + 1
+    }
+  }
+}
+```
+
+
+## Display Matrix with Event Counts
+```{r}
+teamA_matrix
+```
+
+```{r}
+teamB_matrix
+```
+
+## Obtain Probabilites
+```{r}
+sum_row_1 <- rowSums(teamA_matrix[1, , drop = FALSE])
+```
+
+## Display Baseball Matrix With Probabilities
+```{r}
+# Convert to probabilities:
+final_teamA_matrix <- teamA_matrix
+for (i in 1:24) {
+  row_sum <- sum(final_teamA_matrix[i, ])
+  if (row_sum > 0) {
+    final_teamA_matrix[i, ] <- final_teamA_matrix[i, ] / row_sum
+  }
+}
+# Absorbing
+final_teamA_matrix[25, 25] <- 1
+final_teamA_matrix
+```
+
+```{r}
+# Convert to probabilities:
+final_teamB_matrix <- teamB_matrix
+for (i in 1:24) {
+  row_sum <- sum(final_teamB_matrix[i, ])
+  if (row_sum > 0) {
+    final_teamB_matrix[i, ] <- final_teamB_matrix[i, ] / row_sum
+  }
+}
+
+# Absorbing
+final_teamB_matrix[25, 25] <- 1
+final_teamB_matrix
+```
+
+
+```{r}
+# 1) Copy the final baseball-based matrix
+softballA_matrix <- final_teamA_matrix
+
+# 2) Define multipliers for your "softball environment"
+hr_multiplier        <- 0.50  # reduce HR by 50%
+single_multiplier    <- 1.20  # increase singles by 20%
+double_multiplier    <- 1.10
+triple_multiplier    <- 1.00
+walk_multiplier      <- 1.00
+strikeout_multiplier <- 1.05
+out_multiplier       <- 1.00
+
+# 3) Identify columns for each event (example only!)
+COL_HR        <- 1  # user must confirm correct column index for HR
+COL_SINGLE    <- 2
+COL_DOUBLE    <- 3
+COL_TRIPLE    <- 4
+COL_WALK      <- 5
+COL_STRIKEOUT <- 6
+COL_OUT       <- 7
+
+# 4) Scale rows 1..24, re-normalize
+for (state_idx in 1:24) {
+  # multiply columns
+  softballA_matrix[state_idx, COL_HR]        <- softballA_matrix[state_idx, COL_HR]        * hr_multiplier
+  softballA_matrix[state_idx, COL_SINGLE]    <- softballA_matrix[state_idx, COL_SINGLE]    * single_multiplier
+  softballA_matrix[state_idx, COL_DOUBLE]    <- softballA_matrix[state_idx, COL_DOUBLE]    * double_multiplier
+  softballA_matrix[state_idx, COL_TRIPLE]    <- softballA_matrix[state_idx, COL_TRIPLE]    * triple_multiplier
+  softballA_matrix[state_idx, COL_WALK]      <- softballA_matrix[state_idx, COL_WALK]      * walk_multiplier
+  softballA_matrix[state_idx, COL_STRIKEOUT] <- softballA_matrix[state_idx, COL_STRIKEOUT] * strikeout_multiplier
+  softballA_matrix[state_idx, COL_OUT]       <- softballA_matrix[state_idx, COL_OUT]       * out_multiplier
+  
+  # re-normalize each row
+  row_sum <- sum(softballA_matrix[state_idx, ])
+  if (row_sum > 0) {
+    softballA_matrix[state_idx, ] <- softballA_matrix[state_idx, ] / row_sum
+  }
+}
+
+# Keep row 25 absorbing
+softballA_matrix[25, 25] <- 1
+```
+
+```{r}
+# 1) Copy the final baseball-based matrix
+softballB_matrix <- final_teamB_matrix
+
+# 2) Define multipliers for your "softball environment"
+hr_multiplier        <- 0.50  # reduce HR by 50%
+single_multiplier    <- 1.20  # increase singles by 20%
+double_multiplier    <- 1.10
+triple_multiplier    <- 1.00
+walk_multiplier      <- 1.00
+strikeout_multiplier <- 1.05
+out_multiplier       <- 1.00
+
+# 3) Identify columns for each event (example only!)
+COL_HR        <- 1  # user must confirm correct column index for HR
+COL_SINGLE    <- 2
+COL_DOUBLE    <- 3
+COL_TRIPLE    <- 4
+COL_WALK      <- 5
+COL_STRIKEOUT <- 6
+COL_OUT       <- 7
+
+# 4) Scale rows 1..24, re-normalize
+for (state_idx in 1:24) {
+  # multiply columns
+  softballB_matrix[state_idx, COL_HR]        <- softballB_matrix[state_idx, COL_HR]        * hr_multiplier
+  softballB_matrix[state_idx, COL_SINGLE]    <- softballB_matrix[state_idx, COL_SINGLE]    * single_multiplier
+  softballB_matrix[state_idx, COL_DOUBLE]    <- softballB_matrix[state_idx, COL_DOUBLE]    * double_multiplier
+  softballB_matrix[state_idx, COL_TRIPLE]    <- softballB_matrix[state_idx, COL_TRIPLE]    * triple_multiplier
+  softballB_matrix[state_idx, COL_WALK]      <- softballB_matrix[state_idx, COL_WALK]      * walk_multiplier
+  softballB_matrix[state_idx, COL_STRIKEOUT] <- softballB_matrix[state_idx, COL_STRIKEOUT] * strikeout_multiplier
+  softballB_matrix[state_idx, COL_OUT]       <- softballB_matrix[state_idx, COL_OUT]       * out_multiplier
+  
+  # re-normalize each row
+  row_sum <- sum(softballB_matrix[state_idx, ])
+  if (row_sum > 0) {
+    softballB_matrix[state_idx, ] <- softballB_matrix[state_idx, ] / row_sum
+  }
+}
+
+# Keep row 25 absorbing
+softballB_matrix[25, 25] <- 1
+```
+
+
+```{r}
+row_sums <- rowSums(softballB_matrix)
+row_sums
+```
+
+Simulating the baseball game
+
+
+$$
+\begin{array}{|l|l|}
+\hline \text { State } & \text { Outs:Bases } \\
+\hline 1 & (0,0) \\
+2 & (0,1) \\
+3 & (0,2) \\
+4 & (0,3) \\
+5 & (0, 1+2) \\
+6 & (0, 1+3) \\
+7 & (0, 2+3) \\
+8 & (0, 1+2+3) \\
+9 & (1, 0) \\
+10 & (1,1) \\
+11 & (1,2) \\
+12 & (1,3) \\
+13 & (1,1+2) \\
+14 & (1,1+3) \\
+15 & (1,2+3) \\
+16 & (1,1+2+3) \\
+17 & (2,0) \\
+18 & (2,1) \\
+19 & (2,2) \\
+20 & (2,3) \\
+21 & (2,1+2) \\
+22 & (2,1+3) \\
+23 & (2,2+3) \\
+24 & (2,1+2+3) \\
+25 & 3 \text { outs / END STATE} \\
+\hline
+\end{array}
+$$
+
+
+```{r}
+outs_runners <- function(state) {
+  if(state == 1){
+    return(c(0, 0, 0, 0))
+  }
+  if(state == 2){
+    return(c(0, 1, 0, 0))
+  }
+  if(state == 3){
+    return(c(0, 0, 1, 0))
+  }
+  if(state == 4){
+    return(c(0, 0, 0, 1))
+  }
+  if(state == 5){
+    return(c(0, 1, 1, 0))
+  }
+  if(state == 6){
+    return(c(0, 1, 0, 1))
+  }
+  if(state == 7){
+    return(c(0, 0, 1, 1))
+  }
+  if(state == 8){
+    return(c(0, 1, 1, 1))
+  }
+  if(state == 9){
+    return(c(1, 0, 0, 0))
+  }
+  if(state == 10){
+   return(c(1, 1, 0, 0))
+  }
+  if(state == 11){
+   return(c(1, 0, 1, 0))
+  }
+  if(state == 12){
+   return(c(1, 0, 0, 1))
+  }
+  if(state == 13){
+   return(c(1, 1, 1, 0)) 
+  }
+  if(state == 14){
+   return(c(1, 1, 0, 1))
+  }
+  if(state == 15){
+   return(c(1, 0, 1, 1)) 
+  }
+  if(state == 16){
+   return(c(1, 1, 1, 1))  
+  }
+  if(state == 17){
+    return(c(2, 0, 0, 0))
+  }
+  if(state == 18){
+    return(c(2, 1, 0, 0))
+  }
+  if(state == 19){
+    return(c(2, 0, 1, 0))
+  }
+  if(state == 20){
+    return(c(2, 0, 0, 1))
+  }
+  if(state == 21){
+    return(c(2, 1, 1, 0))
+  }
+  if(state == 22){
+    return(c(2, 1, 0, 1))
+  }
+  if(state == 23){
+    return(c(2, 0, 1, 1))
+  }
+  if(state == 24){
+    return(c(2, 1, 1, 1))
+  }
+  if(state == 25){
+    return(c(3, 0, 0, 0))
+  }
+}
+```
+
+
+```{r}
+simulate_half_inning <- function(transition_matrix, start_state = 1) {
+  runs_scored <- 0
+  current_state <- start_state
+  
+  while (current_state != 25) {  # 25 => 3 outs state
+    next_state <- sample.int(25, 1, prob = transition_matrix[current_state, ])
+    
+    prev_runners <- outs_runners(current_state)  # (outs, 1B, 2B, 3B)
+    new_runners <- outs_runners(next_state)
+
+    # Runs scored = number of base runners who moved past home plate
+    new_outs <- new_runners[1]
+    prev_outs <- prev_runners[1]
+    runs_scored <- runs_scored + prev_runners[2] * (new_outs > prev_outs) +  # Runner on 1st
+                                  prev_runners[3] * (new_outs > prev_outs) +  # Runner on 2nd
+                                  prev_runners[4] * (new_outs > prev_outs)    # Runner on 3rd
+
+    current_state <- next_state
+  }
+  
+  return(runs_scored)
+}
+```
+
+
+```{r}
+simulate_game <- function(matrixA, matrixB, n_innings = 7, mercy_rule = TRUE, extra_innings = TRUE, max_extra_innings = 3) {
+  runsA <- 0
+  runsB <- 0
+  inning <- 1
+  extra_inning_count <- 0  
+
+  while (inning <= n_innings || (extra_innings && runsA == runsB)) {
+    # Top half (Team A batting)
+    runsA <- runsA + simulate_half_inning(matrixA, start_state=1)
+
+    # Mercy rule check (before extra innings)
+    if (mercy_rule && inning >= 4 && inning <= n_innings && runsA - runsB >= 10) {
+      return(list(Result = "Team A Wins (Mercy Rule)", RunsA = runsA, RunsB = runsB, InningsPlayed = inning))
+    }
+
+    # Bottom half (Team B batting)
+    runsB <- runsB + simulate_half_inning(matrixB, start_state=1)
+
+    # Mercy rule check (before extra innings)
+    if (mercy_rule && inning >= 4 && inning <= n_innings && runsB - runsA >= 10) {
+      return(list(Result = "Team B Wins (Mercy Rule)", RunsA = runsA, RunsB = runsB, InningsPlayed = inning))
+    }
+
+    # If still tied after regulation innings, enter extra innings
+    if (inning >= n_innings && runsA == runsB && extra_innings) {
+      if (extra_inning_count >= max_extra_innings) {
+        return(list(Result = "Tie (Max Extra Innings)", RunsA = runsA, RunsB = runsB, InningsPlayed = inning))
+      }
+      n_innings <- n_innings + 1  
+      extra_inning_count <- extra_inning_count + 1  
+    }
+
+    inning <- inning + 1
+  }
+
+  # Final game result
+  if (runsA > runsB) {
+    return(list(Result = "Team A Wins", RunsA = runsA, RunsB = runsB, InningsPlayed = inning))
+  } else if (runsB > runsA) {
+    return(list(Result = "Team B Wins", RunsA = runsA, RunsB = runsB, InningsPlayed = inning))
+  } else {
+    return(list(Result = "Tie", RunsA = runsA, RunsB = runsB, InningsPlayed = inning))
+  }
+}
+```
+
+```{r}
+set.seed(123)
+n_games <- 10000
+game_results <- replicate(n_games, simulate_game(final_teamA_matrix, final_teamB_matrix, n_innings=7, max_extra_innings=3), simplify = FALSE)
+
+# Convert list of results into a DataFrame
+game_results_df <- do.call(rbind, game_results) %>% as.data.frame()
+
+# Count Different Outcomes
+teamA_wins <- sum(game_results_df$Result == "Team A Wins" | game_results_df$Result == "Team A Wins (Mercy Rule)")
+teamB_wins <- sum(game_results_df$Result == "Team B Wins" | game_results_df$Result == "Team B Wins (Mercy Rule)")
+ties <- sum(game_results_df$Result == "Tie")
+extra_inning_ties <- sum(game_results_df$Result == "Tie (Max Extra Innings)")
+
+# Calculate Percentages
+teamA_win_percentage <- teamA_wins / n_games
+teamB_win_percentage <- teamB_wins / n_games
+tie_percentage <- ties / n_games
+extra_inning_tie_percentage <- extra_inning_ties / n_games
+
+# Print Summary
+cat("Giants Wins:", teamA_wins, "(", round(teamA_win_percentage * 100, 2), "%)\n")
+cat("Yankees Wins:", teamB_wins, "(", round(teamB_win_percentage * 100, 2), "%)\n")
+cat("Extra Inning Ties:", extra_inning_ties, "(", round(extra_inning_tie_percentage * 100, 2), "%)\n")
+```
+```{r}
+win_counts <- c(teamA_wins, teamB_wins, extra_inning_ties)
+barplot(win_counts, 
+        names.arg=c("Giants", "Yankees", "Extra Inn Ties"),
+        col=c("orange", "blue", "purple"), 
+        main="Game Outcomes with Extra Innings",
+        ylab="Number of Games")
+```
+
+```{r}
+# Convert to numeric if necessary
+game_results_df$RunsA <- as.numeric(game_results_df$RunsA)
+game_results_df$RunsB <- as.numeric(game_results_df$RunsB)
+
+# Histogram for Team A (Giants)
+hist(game_results_df$RunsA, 
+     col = "orange", 
+     main = "Run Distribution (Giants)", 
+     xlab = "Runs per Game", 
+     breaks = 20)
+
+# Histogram for Team B (Yankees)
+hist(game_results_df$RunsB, 
+     col = "blue", 
+     main = "Run Distribution (Yankees)", 
+     xlab = "Runs per Game", 
+     breaks = 20)
+```
+
+```{r}
+# Parameters
+start <- 1
+seed_num <- 200
+
+# Store Runs and Games Separately for Each Team
+total_runs_A <- numeric(seed_num + 1)
+total_games_A <- numeric(seed_num + 1)
+total_runs_B <- numeric(seed_num + 1)
+total_games_B <- numeric(seed_num + 1)
+
+# Simulation loop for Team A & Team B
+for (seed in 1:seed_num) {
+  set.seed(seed)  # Ensure reproducibility
+  
+  game_result <- simulate_game(final_teamA_matrix, final_teamB_matrix, n_innings=7)
+  
+  # Extract values correctly
+  total_runs_A[seed + 1] <- total_runs_A[seed] + game_result$RunsA
+  total_games_A[seed + 1] <- total_games_A[seed] + game_result$InningsPlayed
+  
+  total_runs_B[seed + 1] <- total_runs_B[seed] + game_result$RunsB
+  total_games_B[seed + 1] <- total_games_B[seed] + game_result$InningsPlayed
+}
+
+# Calculate average runs per inning safely
+average_per_seed_A <- ifelse(total_games_A > 0, total_runs_A / total_games_A, 0)
+average_per_seed_B <- ifelse(total_games_B > 0, total_runs_B / total_games_B, 0)
+
+# Create a line plot comparing both teams
+plot(1:seed_num, average_per_seed_A[-1], type = "l", col = "orange",
+     xlab = "Number of Games", ylab = "Average Runs per Inning",
+     main = "Average Runs per Inning (Giants vs. Yankees)")
+lines(1:seed_num, average_per_seed_B[-1], col = "blue")
+
+# Add legend
+legend("topright", legend = c("Giants", "Yankees"), col = c("orange", "blue"), lty = 1)
+
+```
+
+```{r}
+# Convert list-columns to numeric vectors
+game_results_df$RunsA <- unlist(game_results_df$RunsA)
+game_results_df$RunsB <- unlist(game_results_df$RunsB)
+
+# 1. Average runs per game
+mean_runs_teamA <- mean(game_results_df$RunsA)  
+mean_runs_teamB <- mean(game_results_df$RunsB)  
+
+# 2. Shutout percentages
+shutout_teamA <- sum(game_results_df$RunsA == 0) / nrow(game_results_df)  
+shutout_teamB <- sum(game_results_df$RunsB == 0) / nrow(game_results_df)  
+
+# Display results
+cat("Average Runs Scored by Giants:", mean_runs_teamA, "\n")
+cat("Average Runs Scored by Yankees:", mean_runs_teamB, "\n")
+cat("Percentage of Shutouts (Giants held scoreless):", shutout_teamA * 100, "%\n")
+cat("Percentage of Shutouts (Yankees held scoreless):", shutout_teamB * 100, "%\n")
+```
+```{r}
+# Convert 'Result' and 'InningsPlayed' from lists to character/numeric since we used lists
+game_results_df$Result <- sapply(game_results_df$Result, as.character)
+game_results_df$InningsPlayed <- sapply(game_results_df$InningsPlayed, as.numeric)
+
+# Standard deviation of runs scored
+sd_teamA <- sd(game_results_df$RunsA, na.rm = TRUE)
+sd_teamB <- sd(game_results_df$RunsB, na.rm = TRUE)
+
+# Close wins (winning by exactly 1 run)
+close_wins_A <- sum((game_results_df$RunsA - game_results_df$RunsB == 1) & 
+                     (game_results_df$Result == "Team A Wins"), na.rm = TRUE)
+
+close_wins_B <- sum((game_results_df$RunsB - game_results_df$RunsA == 1) & 
+                     (game_results_df$Result == "Team B Wins"), na.rm = TRUE)
+
+# Big wins (winning by more than 5 runs)
+big_wins_A <- sum(game_results_df$RunsA - game_results_df$RunsB > 5, na.rm = TRUE)
+big_wins_B <- sum(game_results_df$RunsB - game_results_df$RunsA > 5, na.rm = TRUE)
+
+# Display results
+cat("Standard deviation of Giants's runs:", sd_teamA, "\n")
+cat("Standard deviation of Yankees's runs:", sd_teamB, "\n")
+cat("Giants Close Wins:", close_wins_A, "\nYankees Close Wins:", close_wins_B, "\n")
+cat("Giants Big Wins:", big_wins_A, "\nYankees Big Wins:", big_wins_B, "\n")
+
+```
+
+
+# We now want to take a more in-depth appoaching after investigating game performance on the team level with Markov Chains to identify the best players from each team
+
+```{r}
+team_df = read.csv("/Users/bryanmongeserrano/Downloads/Baseball_Markov_Matrix-main/Giants/Giants_2015_2023.csv", header = FALSE )
+colnames(team_df) <- retro_sheet_column_names
+team_df <- team_df[-1,] #RBIND ADDITION
+team_df$outs <- as.integer(team_df$outs)#RBIND ADDITION
+team_df$event_type <- as.integer(team_df$event_type)#RBIND ADDITION
+
+teamB_df = read.csv("/Users/bryanmongeserrano/Downloads/Baseball_Markov_Matrix-main/Yankees/Yankees_2015_2023.csv", header = FALSE )
+colnames(teamB_df) <- retro_sheet_column_names
+teamB_df <- teamB_df[-1,] #RBIND ADDITION
+teamB_df$outs <- as.integer(teamB_df$outs)#RBIND ADDITION
+teamB_df$event_type <- as.integer(teamB_df$event_type)#RBIND ADDITION
+```
+
+
+
+# Filter for relevant batting events and start tracking stats
+```{r}
+library(dplyr)
+library(ggplot2)
+
+# Convert necessary columns to numeric
+numeric_cols <- c("ab_flag", "hit_value", "event_type", "outs_on_play", "RBI_on_play")
+team_df[numeric_cols] <- lapply(team_df[numeric_cols], as.numeric)
+teamB_df[numeric_cols] <- lapply(teamB_df[numeric_cols], as.numeric)
+
+# Re-run the summarization
+giants_offense <- team_df %>%
+  filter(event_type %in% c(20, 21, 22, 23, 14, 2, 3)) %>%  # Hits, walks, strikeouts, outs
+  group_by(batter) %>%
+  summarise(
+    at_bats = sum(ab_flag, na.rm = TRUE),
+    hits = sum(hit_value > 0, na.rm = TRUE),
+    total_bases = sum(hit_value, na.rm = TRUE),
+    walks = sum(event_type == 14, na.rm = TRUE),
+    plate_appearances = n(),
+    runs_scored = sum(RBI_on_play, na.rm = TRUE),
+    strikeouts = sum(event_type == 3, na.rm = TRUE),
+    outs_made = sum(outs_on_play, na.rm = TRUE)
+  ) %>%
+  mutate(
+    batting_avg = hits / at_bats,
+    on_base_pct = (hits + walks) / plate_appearances,
+    slugging_pct = total_bases / at_bats,
+    OPS = on_base_pct + slugging_pct
+  ) %>%
+  arrange(desc(OPS))
+
+# Repeat for Yankees
+yankees_offense <- teamB_df %>%
+  filter(event_type %in% c(20, 21, 22, 23, 14, 2, 3)) %>%
+  group_by(batter) %>%
+  summarise(
+    at_bats = sum(ab_flag, na.rm = TRUE),
+    hits = sum(hit_value > 0, na.rm = TRUE),
+    total_bases = sum(hit_value, na.rm = TRUE),
+    walks = sum(event_type == 14, na.rm = TRUE),
+    plate_appearances = n(),
+    runs_scored = sum(RBI_on_play, na.rm = TRUE),
+    strikeouts = sum(event_type == 3, na.rm = TRUE),
+    outs_made = sum(outs_on_play, na.rm = TRUE)
+  ) %>%
+  mutate(
+    batting_avg = hits / at_bats,
+    on_base_pct = (hits + walks) / plate_appearances,
+    slugging_pct = total_bases / at_bats,
+    OPS = on_base_pct + slugging_pct
+  ) %>%
+  arrange(desc(OPS))
+```
+
+# Redefine previous half-inning function to track stats on players
+```{r}
+simulate_half_inning <- function(transition_matrix, lineup, start_state = 1) {
+  runs_scored <- 0
+  current_state <- start_state
+  outs <- 0
+  player_index <- 1
+  batter_stats <- data.frame(Player = lineup, Hits = 0, At_Bats = 0, Runs = 0, Strikeouts = 0)
+
+  while (outs < 3) {
+    batter <- lineup[player_index]
+    
+    next_state <- sample.int(25, 1, prob = transition_matrix[current_state, ])
+    
+    if (next_state == 1 || next_state == 9 || next_state == 17) {
+      scoring_state <- outs_runners(current_state)
+      runs_scored <- runs_scored + scoring_state[2] + scoring_state[3] + scoring_state[4]
+      batter_stats$Runs[batter_stats$Player == batter] <- batter_stats$Runs[batter_stats$Player == batter] + scoring_state[2] + scoring_state[3] + scoring_state[4]
+    }
+
+    if (next_state >= 17) { 
+      outs <- outs + 1
+      batter_stats$Strikeouts[batter_stats$Player == batter] <- batter_stats$Strikeouts[batter_stats$Player == batter] + 1
+    } else {
+      batter_stats$Hits[batter_stats$Player == batter] <- batter_stats$Hits[batter_stats$Player == batter] + 1
+    }
+
+    batter_stats$At_Bats[batter_stats$Player == batter] <- batter_stats$At_Bats[batter_stats$Player == batter] + 1
+
+    current_state <- next_state
+    player_index <- (player_index %% length(lineup)) + 1
+  }
+
+  return(list(Runs = runs_scored, Stats = batter_stats))
+}
+```
+
+# Redefine previous simulate_game function to track stats on players
+```{r}
+simulate_game <- function(matrixA, matrixB, lineupA, lineupB, n_innings = 7) {
+  game_stats_A <- data.frame(Player = lineupA, Hits = 0, At_Bats = 0, Runs = 0, Strikeouts = 0)
+  game_stats_B <- data.frame(Player = lineupB, Hits = 0, At_Bats = 0, Runs = 0, Strikeouts = 0)
+  runsA <- 0
+  runsB <- 0
+
+  for (inn in 1:n_innings) {
+    half_inning_A <- simulate_half_inning(matrixA, lineupA, start_state=1)
+    half_inning_B <- simulate_half_inning(matrixB, lineupB, start_state=1)
+
+    runsA <- runsA + half_inning_A$Runs
+    runsB <- runsB + half_inning_B$Runs
+
+    game_stats_A$Hits <- game_stats_A$Hits + half_inning_A$Stats$Hits
+    game_stats_A$At_Bats <- game_stats_A$At_Bats + half_inning_A$Stats$At_Bats
+    game_stats_A$Runs <- game_stats_A$Runs + half_inning_A$Stats$Runs
+    game_stats_A$Strikeouts <- game_stats_A$Strikeouts + half_inning_A$Stats$Strikeouts
+
+    game_stats_B$Hits <- game_stats_B$Hits + half_inning_B$Stats$Hits
+    game_stats_B$At_Bats <- game_stats_B$At_Bats + half_inning_B$Stats$At_Bats
+    game_stats_B$Runs <- game_stats_B$Runs + half_inning_B$Stats$Runs
+    game_stats_B$Strikeouts <- game_stats_B$Strikeouts + half_inning_B$Stats$Strikeouts
+  }
+
+  return(list(RunsA = runsA, RunsB = runsB, StatsA = game_stats_A, StatsB = game_stats_B))
+}
+```
+
+# Run the simulation based off of Markov Chain while tracking team stats
+```{r}
+set.seed(123)
+n_games <- 1000
+lineup_giants <- unique(team_df$batter)[1:9]  # First 9 unique batters
+lineup_yankees <- unique(teamB_df$batter)[1:9]  # First 9 unique batters
+
+all_stats_giants <- data.frame(Player = lineup_giants, Hits = 0, At_Bats = 0, Runs = 0, Strikeouts = 0)
+all_stats_yankees <- data.frame(Player = lineup_yankees, Hits = 0, At_Bats = 0, Runs = 0, Strikeouts = 0)
+
+for (i in 1:n_games) {
+  game_result <- simulate_game(final_teamA_matrix, final_teamB_matrix, lineup_giants, lineup_yankees, n_innings=7)
+
+  all_stats_giants$Hits <- all_stats_giants$Hits + game_result$StatsA$Hits
+  all_stats_giants$At_Bats <- all_stats_giants$At_Bats + game_result$StatsA$At_Bats
+  all_stats_giants$Runs <- all_stats_giants$Runs + game_result$StatsA$Runs
+  all_stats_giants$Strikeouts <- all_stats_giants$Strikeouts + game_result$StatsA$Strikeouts
+
+  all_stats_yankees$Hits <- all_stats_yankees$Hits + game_result$StatsB$Hits
+  all_stats_yankees$At_Bats <- all_stats_yankees$At_Bats + game_result$StatsB$At_Bats
+  all_stats_yankees$Runs <- all_stats_yankees$Runs + game_result$StatsB$Runs
+  all_stats_yankees$Strikeouts <- all_stats_yankees$Strikeouts + game_result$StatsB$Strikeouts
+}
+```
+
+# Plot the top runners for each team
+```{r}
+# Add team labels
+all_stats_giants$Team <- "Giants"
+all_stats_yankees$Team <- "Yankees"
+
+# Combine both teams' stats
+all_stats_combined <- rbind(all_stats_giants, all_stats_yankees)
+
+# Plot with different colors per team
+ggplot(all_stats_combined, aes(x = reorder(Player, Runs), y = Runs, fill = Team)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(title = "Top Run Scorers: Giants vs Yankees", x = "Player", y = "Runs") +
+  theme_minimal() +
+  coord_flip() +
+  scale_fill_manual(values = c("Giants" = "#FF6600", "Yankees" = "#0033A0")) # Giants (orange), Yankees (blue)
+```
+# Plot the top batters for each team (Batting Average)
+```{r}
+# Compute batting average
+all_stats_giants$Batting_Avg <- all_stats_giants$Hits / all_stats_giants$At_Bats
+all_stats_yankees$Batting_Avg <- all_stats_yankees$Hits / all_stats_yankees$At_Bats
+
+# Combine datasets
+all_stats_combined <- rbind(all_stats_giants, all_stats_yankees)
+all_stats_combined$Team <- rep(c("Giants", "Yankees"), each = nrow(all_stats_giants))
+
+# Plot Batting Average per Player
+ggplot(all_stats_combined, aes(x = reorder(Player, Batting_Avg), y = Batting_Avg, fill = Team)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(title = "Batting Average Comparison: Giants vs Yankees", x = "Player", y = "Batting Average") +
+  theme_minimal() +
+  coord_flip() +
+  scale_fill_manual(values = c("Giants" = "#FF6600", "Yankees" = "#0033A0")) # Colors
+```
+# Plot the top strikeouts for each team (Who Strikes Out the Most?)
+```{r}
+# Combine datasets
+all_stats_combined <- rbind(all_stats_giants, all_stats_yankees)
+
+# Plot Strikeouts per Player
+ggplot(all_stats_combined, aes(x = reorder(Player, Strikeouts), y = Strikeouts, fill = Team)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(title = "Strikeouts by Player: Giants vs Yankees", x = "Player", y = "Total Strikeouts") +
+  theme_minimal() +
+  coord_flip() +
+  scale_fill_manual(values = c("Giants" = "#FF6600", "Yankees" = "#0033A0")) # Giants = Orange, Yankees = Blue
+
+```
+
+```{r}
+all_stats_giants$OPS <- (all_stats_giants$Hits / all_stats_giants$At_Bats)
+all_stats_yankees$OPS <- (all_stats_yankees$Hits / all_stats_yankees$At_Bats)
+
+combined_ops <- rbind(
+  data.frame(Player = all_stats_giants$Player, Team = "Giants", OPS = all_stats_giants$OPS),
+  data.frame(Player = all_stats_yankees$Player, Team = "Yankees", OPS = all_stats_yankees$OPS)
+)
+
+ggplot(combined_ops, aes(x = reorder(Player, OPS), y = OPS, fill = Team)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(title = "OPS (On-Base + Slugging) Comparison", x = "Player", y = "OPS") +
+  theme_minimal() +
+  coord_flip() +
+  scale_fill_manual(values = c("Giants" = "#FF6600", "Yankees" = "#0033A0")) # Colors
+```
+
